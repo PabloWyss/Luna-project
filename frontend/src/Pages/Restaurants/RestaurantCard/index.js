@@ -29,11 +29,6 @@ const RestAddress = styled.p`
   margin-bottom: 12px;
 `
 
-const ReviewCount = styled.p`
-  font-size: 20px;
-  font-weight: 300;
-`
-
 const RatingContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -44,6 +39,11 @@ const RatingContainer = styled.div`
   img {
     width: 27px;
   }
+`
+
+const ReviewCount = styled.p`
+  font-size: 20px;
+  font-weight: 300;
 `
 
 const RestaurantCard = () => {
