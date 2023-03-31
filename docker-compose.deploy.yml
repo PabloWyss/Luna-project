@@ -2,7 +2,7 @@ version: '3'
 
 services:
   backend:
-    image: wedontknowthename:main
+    image: registry.gitlab.propulsion-home.ch/full-stack/batch-23-feb-2023/group-project-luna/luna_team4:main
     env_file:
       - ./envs/prod.env
     command: "sh /scripts/prod.sh"
