@@ -2,6 +2,7 @@ import arrow from "../../Assets/arrow.svg";
 import RestaurantCard from './RestaurantCard/RestaurantCard';
 import ReviewCard from "./ReviewCard/ReviewCard";
 import { Grid, Main, MainMenu, SearchBar, SearchBarContainer, SearchCategory, Tab } from "./RestaurantsStyles";
+import UserCard from "./UserCard/UserCard";
 
 const Restaurants = () => {
   return (
@@ -35,6 +36,7 @@ const Restaurants = () => {
           <RestaurantCard />
           <RestaurantCard /> */}
 
+          {/* <ReviewCard />
           <ReviewCard />
           <ReviewCard />
           <ReviewCard />
@@ -45,8 +47,20 @@ const Restaurants = () => {
           <ReviewCard />
           <ReviewCard />
           <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
+          <ReviewCard /> */}
+
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
+          <UserCard />
         </Grid>
       </Main>
     </div >

@@ -35,7 +35,7 @@ export const TextOrangeBig = styled.p`
 `
 
 export const CardBody = styled.div`
-  padding: 15px 10px 0 10px;
+  padding: 14px 11px 22px 11px;
 `
 
 export const TextOrangeSmall = styled.p`

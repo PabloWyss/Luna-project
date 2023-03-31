@@ -1,6 +1,6 @@
 import avatar from "../../../Assets/temp/JohnSmith.jpeg"
 import { FaRegThumbsUp } from 'react-icons/fa'
-import { Buttons, Card, CardHeader, Comment, CommentButton, LatestComments, LikeButton, ReviewContainer, TextGreyBold, TextOrangeBig, TextOrangeSmall, UserAvatar, UserInfo } from "./ReviewCardStyles";
+import { Buttons, Card, CardHeader, Comment, CommentButton, LatestComments, LikeButton, CardBody, TextGreyBold, TextOrangeBig, TextOrangeSmall, UserAvatar, UserInfo } from "./ReviewCardStyles";
 
 const ReviewCard = () => {
   return (
@@ -14,7 +14,7 @@ const ReviewCard = () => {
           <TextGreyBold> 10 Reviews in total</TextGreyBold>
         </UserInfo>
       </CardHeader>
-      <ReviewContainer>
+      <CardBody>
         <TextOrangeBig>Restaurant name</TextOrangeBig>
         <TextGreyBold>Went there for the first time, we have a very spicy chicken wings Alabama style, I have to say I was very impressed about the quality of the chicken, the place looks great but...s</TextGreyBold>
         <TextOrangeSmall>read more</TextOrangeSmall>
@@ -34,7 +34,7 @@ const ReviewCard = () => {
         <Comment>Is good! but too expensive!</Comment>
         <TextOrangeSmall>Name</TextOrangeSmall>
         <Comment>I totally agree with you!</Comment>
-      </ReviewContainer>
+      </CardBody>
     </Card >
   );
 }
