@@ -7,6 +7,7 @@ import {
     HeaderRightDiv
 } from "./Header.style";
 import logo from "../../Assets/logo.svg"
+import { NavLink } from "react-router-dom"
 
 const Header = () => {
 

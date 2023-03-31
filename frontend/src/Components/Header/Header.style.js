@@ -31,7 +31,6 @@ export const HeaderLinksDiv = styled.div`
   width: 70%;
   font-weight: 700;
   font-size: 20px;
-  
 `
 
 export const HeaderButtonsDiv = styled.div`
