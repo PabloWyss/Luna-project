@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import RestaurantCard from './RestaurantCard'
 
 const SearchBarContainer = styled.div`
   width: 100%;
@@ -46,6 +47,13 @@ const Tab = styled.p`
   border-bottom: 3px solid #E47D31;
 `
 
+const Grid = styled.div`
+  padding: 60px 150px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 29px;
+`
+
 const Restaurants = () => {
   return (
     <div>
@@ -63,9 +71,20 @@ const Restaurants = () => {
           <Tab>Reviews</Tab>
           <Tab>Users</Tab>
         </MainMenu>
-        <div>
-          <h3> Grid </h3>
-        </div>
+        <Grid>
+          <RestaurantCard />
+          <RestaurantCard />
+          <RestaurantCard />
+          <RestaurantCard />
+          <RestaurantCard />
+          <RestaurantCard />
+          <RestaurantCard />
+          <RestaurantCard />
+          <RestaurantCard />
+          <RestaurantCard />
+          <RestaurantCard />
+          <RestaurantCard />
+        </Grid>
       </Main>
     </div >
   );
