@@ -18,4 +18,5 @@ from django.urls import path
 
 urlpatterns = [
     path('backend/api/admin/', admin.site.urls),
+    # path/
 ]
