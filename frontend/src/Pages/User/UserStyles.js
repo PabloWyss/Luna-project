@@ -32,13 +32,21 @@ export const Avatar = styled.label`
     display: none;
   }
 `;
-
+export const ProfileNav = styled.div`
+  background-color: mediumpurple;
+  position: absolute;
+  height: 500px;
+  width: 200px;
+  left: 100px;
+  top: 25%;
+  z-index: 5;
+`;
 export const Summary = styled.div`
   background-color: red;
   position: absolute;
   height: 100px;
   width: 30%;
-  left: 300px; /* the width of the coral box */
+  left: 300px; 
   top: 5%;
   z-index: 5;
 `;
@@ -71,8 +79,13 @@ export const Background = styled.label`
 export const About = styled.div`
   align-self: flex-end;
   background-color: lightseagreen;
-  height: 900px;
+  height: 300px;
   width: 25%;
   padding: 20px;
+  position: relative;
 `;
 
+export const ProfileNavButtons = styled.div`
+display: flex;
+flex-direction: column;
+`;
