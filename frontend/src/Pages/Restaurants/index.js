@@ -1,58 +1,7 @@
-import styled from 'styled-components'
-import RestaurantCard from './RestaurantCard'
-
-const SearchBarContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  color: #D8D8D8;
-  font-size: 20px;
-  font-weight: 700;
-  border: 1px solid #D8D8D8;
-`
-const SearchBar = styled.div`
-  width: 80%;
-  border-right: 1px solid #D8D8D8;
-  padding: 12px 32px;
-`
-
-const SearchCategory = styled.div`
-  width: 20%;
-  padding: 12px 32px;
-`
-
-const Main = styled.div`
-  background: #F2F2F2;
-  padding: 9px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const MainMenu = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 15px;
-  border-bottom: 1px solid #D8D8D8;
-`
-
-const Tab = styled.p`
-  width: 200px;
-  padding: 12px;
-  color: #4C4C4C;
-  text-align: center;
-  font-weight: 700;
-  text-transform: uppercase;
-  border-bottom: 3px solid #E47D31;
-`
-
-const Grid = styled.div`
-  padding: 60px 150px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 29px;
-`
+import arrow from "../../Assets/arrow.svg";
+import RestaurantCard from './RestaurantCard/RestaurantCard';
+import ReviewCard from "./ReviewCard/ReviewCard";
+import { Grid, Main, MainMenu, SearchBar, SearchBarContainer, SearchCategory, Tab } from "./RestaurantsStyles";
 
 const Restaurants = () => {
   return (
@@ -62,7 +11,8 @@ const Restaurants = () => {
           <p>Search</p>
         </SearchBar>
         <SearchCategory>
-          <p>Select a category</p>
+          <p>Select a category...</p>
+          <img src={arrow}></img>
         </SearchCategory>
       </SearchBarContainer>
       <Main>
@@ -72,6 +22,7 @@ const Restaurants = () => {
           <Tab>Users</Tab>
         </MainMenu>
         <Grid>
+          {/* <RestaurantCard />
           <RestaurantCard />
           <RestaurantCard />
           <RestaurantCard />
@@ -82,8 +33,20 @@ const Restaurants = () => {
           <RestaurantCard />
           <RestaurantCard />
           <RestaurantCard />
-          <RestaurantCard />
-          <RestaurantCard />
+          <RestaurantCard /> */}
+
+          <ReviewCard />
+          <ReviewCard />
+          <ReviewCard />
+          <ReviewCard />
+          <ReviewCard />
+          <ReviewCard />
+          <ReviewCard />
+          <ReviewCard />
+          <ReviewCard />
+          <ReviewCard />
+          <ReviewCard />
+          <ReviewCard />
         </Grid>
       </Main>
     </div >
