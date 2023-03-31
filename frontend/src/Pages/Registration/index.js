@@ -4,8 +4,16 @@ const Registration = () => {
     return (
         <div>
             <Header></Header>
-            <div></div>
-            <div></div>
+            <div>
+                <h1>
+                    Content
+                </h1>
+            </div>
+            <div>
+                <h1>
+                    Footer
+                </h1>
+            </div>
         </div>
     )
 
