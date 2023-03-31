@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     # third party apps
     'rest_framework',
     'drf_yasg',
-    "corsheaders"
+    "corsheaders",
+
+    'user'
 
 ]
 
@@ -155,7 +157,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=5)
 }
 
-# AUTH_USER_MODEL = "user.User"  # app_name.model_name
+AUTH_USER_MODEL = "user.User"  # app_name.model_name
 
 SWAGGER_SETTINGS = {
     'USE_SESSION_AUTH': True,  # Change settings to True to enable Django Login option
