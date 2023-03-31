@@ -50,6 +50,8 @@ export const HeaderButtonLeft = styled.button`
   color: white;
   width: 50%;
   border-right: 1px solid white;
+  font-weight: 400;
+  font-size: 16px;
 `
 
 export const HeaderButtonRight = styled.button`
@@ -57,4 +59,6 @@ export const HeaderButtonRight = styled.button`
   border: none;
   color: white;
   width: 50%;
+  font-weight: 400;
+  font-size: 16px;
 `
