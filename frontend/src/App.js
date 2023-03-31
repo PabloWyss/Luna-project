@@ -2,7 +2,7 @@ import './App.css';
 import Restaurants from './Pages/Restaurants';
 import { Route, Routes } from "react-router-dom";
 import Registration from "./Pages/Registration";
-import UserProfile from "./Pages/User";
+import UserProfile from "./Pages/User/User";
 
 function App() {
   return (
