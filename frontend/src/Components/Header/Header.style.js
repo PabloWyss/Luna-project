@@ -60,5 +60,5 @@ export const HeaderButtonRight = styled.button`
   color: white;
   width: 50%;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 16px;  
 `
