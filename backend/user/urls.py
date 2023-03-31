@@ -7,6 +7,3 @@ urlpatterns = [
     path('users/', UserSearchView.as_view(), name='user-search'),
     path('users/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
 ]
-
-
-
