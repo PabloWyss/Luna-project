@@ -1,9 +1,18 @@
 import './App.css';
 import Restaurants from './Pages/Restaurants';
+import { Route, Routes } from "react-router-dom";
+import Registration from "./Pages/Registration";
+import UserProfile from "./Pages/User";
 
 function App() {
   return (
-    <Restaurants />
+      <div>
+          <Routes>
+              <Route path="/restaurants" element={<Restaurants />} />
+              <Route path="/registration" element={<Registration />} />
+              <Route path="/profile" element={<UserProfile />} />
+          </Routes>
+      </div>
   );
 }
 
