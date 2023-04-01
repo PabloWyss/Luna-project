@@ -7,7 +7,7 @@ const Search = () => {
     <div>
       <SearchBarContainer>
         <SearchBar>
-          <p>Search</p>
+          <input placeholder="Search..." />
         </SearchBar>
         <SearchCategory>
           <p>Select a category...</p>

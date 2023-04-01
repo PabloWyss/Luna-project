@@ -14,6 +14,18 @@ export const SearchBar = styled.div`
   width: 80%;
   border-right: 1px solid #D8D8D8;
   padding: 12px 32px;
+
+  input{
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    font-weight: 700;
+
+    ::placeholder{
+      color: #D8D8D8;
+    }
+  }
 `
 
 export const SearchCategory = styled.div`
