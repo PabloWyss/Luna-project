@@ -1,5 +1,5 @@
-import starIcon from "../../../Assets/star.svg"
-import restaurantImg from "../../../Assets/temp/restaurant-pic.jpg"
+import starIcon from "../../../../Assets/star.svg"
+import restaurantImg from "../../../../Assets/temp/restaurant-pic.jpg"
 import { Card, Details, RatingContainer, RestAddress, RestName, ReviewCount } from "./RestaurantCardStyles";
 
 const RestaurantCard = () => {

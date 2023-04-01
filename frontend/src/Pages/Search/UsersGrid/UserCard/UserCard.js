@@ -1,4 +1,4 @@
-import avatar from "../../../Assets/temp/JohnSmith.jpeg"
+import avatar from "../../../../Assets/temp/JohnSmith.jpeg"
 import { Card, CardHeader, CardBody, TextGreyBold, TextOrangeBig, TextOrangeSmall, UserAvatar, UserInfo } from "./UserCardStyles";
 
 const UserCard = () => {

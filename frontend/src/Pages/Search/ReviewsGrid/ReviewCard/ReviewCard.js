@@ -1,4 +1,4 @@
-import avatar from "../../../Assets/temp/JohnSmith.jpeg"
+import avatar from "../../../../Assets/temp/JohnSmith.jpeg"
 import { FaRegThumbsUp } from 'react-icons/fa'
 import { Buttons, Card, CardHeader, Comment, CommentButton, LatestComments, LikeButton, CardBody, TextGreyBold, TextOrangeBig, TextOrangeSmall, UserAvatar, UserInfo } from "./ReviewCardStyles";
 
