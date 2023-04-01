@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link, Outlet } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const SearchBarContainer = styled.div`
   width: 100%;
@@ -44,15 +44,18 @@ export const MainMenu = styled.div`
   border-bottom: 1px solid #D8D8D8;
 `
 
-export const Tab = styled(Link)`
+export const Tab = styled(NavLink)`
   width: 200px;
   padding: 12px;
   color: #4C4C4C;
   text-align: center;
   font-weight: 700;
   text-transform: uppercase;
-  border-bottom: 3px solid #E47D31;
   text-decoration: none;
+
+  &.active{
+    border-bottom: 3px solid #E47D31;
+  }
 `
 
 export const Grid = styled.div`
