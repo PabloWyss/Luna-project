@@ -1,9 +1,11 @@
 from rest_framework import generics, permissions, status
+from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import User
-from .serializer import UserSerializer
 from .permissions import IsOwnerOrReadOnly
+from .serializer import UserSerializer
 
 
 class MyProfileView(APIView):
@@ -42,8 +44,11 @@ class UserSearchView(generics.ListAPIView):
 
     def get_queryset(self):
         search_string = self.request.query_params.get('search')
-        queryset = User.objects.filter(username__icontains=search_string) | User.objects.filter(
-            email__icontains=search_string)
+        if search_string:
+            queryset = User.objects.filter(username__icontains=search_string) | User.objects.filter(
+                email__icontains=search_string)
+        else:
+            queryset = User.objects.none()
         return queryset
 
 
@@ -54,3 +59,33 @@ class UserDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class UserSearchByUsernameView(ListAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        """
+        This view should return a user based on the query param in url
+        """
+        queryset = User.objects.none()
+        username = self.request.query_params.get("search")
+        if username:
+            queryset = User.objects.filter(username__icontains=username)
+        return queryset
+
+
+class UserSearchByEmailView(ListAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        """
+        This view should return a user based on the query param in url
+        """
+        queryset = User.objects.none()
+        email = self.request.query_params.get("search")
+        if email:
+            queryset = User.objects.filter(email__icontains=email)
+        return queryset
