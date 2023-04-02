@@ -31,4 +31,7 @@ export const InputSignInStyle = styled.input`
   color: #979797;
   line-height: 23px;
   padding-left: 30px;
+  ::placeholder {
+       color: #979797;
+   }
 `
