@@ -14,21 +14,76 @@ const Header = () => {
     return (
         <HeaderDiv>
             <HeaderLeftDiv >
-                <h1>
-                    <img src={logo}/>
-                </h1>
+                <img src={logo}/>
             </HeaderLeftDiv >
             <HeaderRightDiv>
                 <HeaderLinksDiv>
-                    <h2>
-                        <a>Home</a>
-                    </h2>
-                    <h2>
-                        <a>Search</a>
-                    </h2>
-                    <h2>
-                        <a>Profile</a>
-                    </h2>
+                    <NavLink
+                        to="/home_page"
+                        style={({ isActive }) =>
+                        isActive
+                        ? {
+                          fontWeight: 700,
+                            color: "black",
+                          textDecoration: "none",
+                          display: "flex",
+                          alignItems: "center",
+                          borderBottom: "2px solid #E47D31",
+                          height: "100%",
+                        }
+                      : { textDecoration: "none",
+                            color: "black",
+                          display: "flex",
+                          alignItems: "center",
+                          height: "100%",}
+                      }
+                        >
+                        <p>Home</p>
+                    </NavLink>
+                    <NavLink
+                        to="/restaurants"
+                        style={({ isActive }) =>
+                        isActive
+                        ? {
+                          fontWeight: 700,
+                            color: "black",
+                          textDecoration: "none",
+                          display: "flex",
+                          alignItems: "center",
+                          borderBottom: "2px solid #E47D31",
+                          height: "100%",
+                        }
+                      : { textDecoration: "none",
+                            color: "black",
+                          display: "flex",
+                          alignItems: "center",
+                          height: "100%",}
+                      }
+                        >
+                        <p>Search</p>
+                    </NavLink>
+                    <NavLink
+                        to="/profile"
+                        style={({ isActive }) =>
+                        isActive
+                        ? {
+                          fontWeight: 700,
+                            color: "black",
+                          textDecoration: "none",
+                          display: "flex",
+                          alignItems: "center",
+                          borderBottom: "2px solid #E47D31",
+                          height: "100%",
+                        }
+                      : { textDecoration: "none",
+                            color: "black",
+                          display: "flex",
+                          alignItems: "center",
+                          height: "100%",}
+                      }
+                        >
+                        <p>Profile</p>
+                    </NavLink>
                 </HeaderLinksDiv>
                 <HeaderButtonsDiv>
                     <HeaderButtonLeft>
