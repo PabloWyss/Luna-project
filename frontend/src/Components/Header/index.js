@@ -37,7 +37,7 @@ const Header = () => {
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
-                          borderBottom: "2px solid #E47D31",
+                          borderBottom: "3px solid #E47D31",
                           height: "100%",
                         }
                       : { textDecoration: "none",
@@ -59,7 +59,7 @@ const Header = () => {
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
-                          borderBottom: "2px solid #E47D31",
+                          borderBottom: "3px solid #E47D31",
                           height: "100%",
                         }
                       : { textDecoration: "none",
@@ -81,7 +81,7 @@ const Header = () => {
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
-                          borderBottom: "2px solid #E47D31",
+                          borderBottom: "3px solid #E47D31",
                           height: "100%",
                         }
                       : { textDecoration: "none",

@@ -13,7 +13,6 @@ export const SignUpDiv = styled.div`
 export const RegistrationContentDiv = styled.div`
   display: flex;
   flex-direction: column;
-  height: 70vh;
   align-items: center;
   justify-content: flex-start;
   padding-top: 50px;
