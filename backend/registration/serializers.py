@@ -1,9 +1,15 @@
 from rest_framework import serializers
 
-from user.models import User
+
+class RegistrationSerializer(serializers.Serializer):
+    email = serializers.EmailField()
 
 
-class RegistrationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = '__all__'
+class RegistrationValidationSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    username = serializers.CharField(min_length=1)
+    password = serializers.CharField(min_length=1)
+    password_repeat = serializers.CharField(min_length=1)
+    first_name = serializers.CharField(min_length=1)
+    last_name = serializers.CharField(min_length=1)
+    validation_code = serializers.CharField(min_length=1)

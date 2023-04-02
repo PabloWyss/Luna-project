@@ -11,9 +11,9 @@ from registration.views import RegistrationView, RegistrationValidationView
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="APi Motion",
+        title="Luna API",
         default_version='v1',
-        description="Example",
+        description="Luna API from Team 4. Exercise for Constructor Academy",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="learn@propulsionacademy.com"),
         license=openapi.License(name="BSD License"),
@@ -25,9 +25,12 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('backend/api/admin/', admin.site.urls),
 
+    path('backend/api/users/', include('user.urls')),
+
     path('backend/api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('backend/api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('backend/api/auth/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+
     path('backend/api/auth/registration/', RegistrationView.as_view(), name='registration'),
     path('backend/api/auth/registration/validation/', RegistrationValidationView.as_view(), name='validation'),
 
@@ -35,5 +38,6 @@ urlpatterns = [
     path('backend/api/docs/redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
 
+# Add media files serving in debug mode
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

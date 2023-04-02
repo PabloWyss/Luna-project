@@ -1,19 +1,17 @@
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
-from django.utils.crypto import get_random_string
 from rest_framework import status
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from project import settings
-from registration.serializers import RegistrationSerializer
-from user.models import User
+from registration.models import Registration
+from registration.serializers import RegistrationSerializer, RegistrationValidationSerializer
+from user.admin import User
 
 
 class RegistrationView(APIView):
     serializer_class = RegistrationSerializer
-    authentication_classes = AllowAny
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -27,11 +25,21 @@ class RegistrationView(APIView):
         if User.objects.filter(email=email).exists():
             return Response({'error': 'User with this email already exists'}, status=status.HTTP_400_BAD_REQUEST)
 
-        validation_code = get_random_string(length=6)
+        user = User.objects.create(
+            email=email,
+            is_active=False,
+        )
+
+        registration = Registration.objects.create(
+            user=user,
+        )
+
+        validation_code = registration.generate_validation_code()
         message = f'Your validation code is {validation_code}'
         send_mail(
             'Luna Validation Code',
             message,
+            settings.EMAIL_HOST_USER,
             [email],
             fail_silently=False,
             auth_user=settings.EMAIL_HOST_USER,
@@ -42,7 +50,7 @@ class RegistrationView(APIView):
 
 
 class RegistrationValidationView(APIView):
-    serializer_class = RegistrationSerializer
+    serializer_class = RegistrationValidationSerializer
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
