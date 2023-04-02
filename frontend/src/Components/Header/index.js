@@ -7,9 +7,18 @@ import {
     HeaderRightDiv
 } from "./Header.style";
 import logo from "../../Assets/logo.svg"
-import { NavLink } from "react-router-dom"
+import {NavLink, useNavigate} from "react-router-dom"
 
 const Header = () => {
+
+    const navigate = useNavigate()
+
+    const handleClickSignUp = () => {
+        navigate(`/registration`)
+    }
+    const handleClickLogin = () => {
+        navigate(`/login`)
+    }
 
     return (
         <HeaderDiv>
@@ -86,10 +95,10 @@ const Header = () => {
                     </NavLink>
                 </HeaderLinksDiv>
                 <HeaderButtonsDiv>
-                    <HeaderButtonLeft>
+                    <HeaderButtonLeft onClick={handleClickSignUp}>
                         SIGNUP
                     </HeaderButtonLeft>
-                    <HeaderButtonRight>
+                    <HeaderButtonRight onClick={handleClickLogin}>
                         LOGIN
                     </HeaderButtonRight>
                 </HeaderButtonsDiv>
