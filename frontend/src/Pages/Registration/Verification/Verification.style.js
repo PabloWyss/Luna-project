@@ -17,6 +17,7 @@ export const VerificationForm = styled.form`
 `
 export const VerificationInnerDiv = styled.div`
   display: flex;
+  flex-direction: row;
 `
 export const VerificationLeftDiv = styled.div`
   display: flex;
