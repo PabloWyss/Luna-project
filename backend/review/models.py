@@ -1,9 +1,8 @@
 from django.db import models
 from django.conf import settings
+from restaurant.models import Restaurant
+from comment.models import Comment
 
-
-# from restaurant.models import Restaurant
-# from comment.models import Comment
 
 class RestaurantReview(models.Model):
     REVIEW_CHOICES = (

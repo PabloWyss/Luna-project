@@ -17,3 +17,4 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         read_only_fields = ['email']
 
 
+
