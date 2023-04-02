@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import RestaurantCard from './RestaurantCard'
+import Header from "../../Components/Header";
 
 const SearchBarContainer = styled.div`
   width: 100%;
@@ -57,6 +58,7 @@ const Grid = styled.div`
 const Restaurants = () => {
   return (
     <div>
+      <Header></Header>
       <SearchBarContainer>
         <SearchBar>
           <p>Search</p>
