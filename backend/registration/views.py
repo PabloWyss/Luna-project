@@ -2,16 +2,18 @@ from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 from django.utils.crypto import get_random_string
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from project import settings
 from registration.serializers import RegistrationSerializer
+from user.models import User
 
 
 class RegistrationView(APIView):
     serializer_class = RegistrationSerializer
-    authentication_classes = (AllowAny)
+    authentication_classes = AllowAny
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
@@ -22,21 +24,21 @@ class RegistrationView(APIView):
         if not email:
             return Response({'error': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if User.Objects.filter(email=email).exists():
+        if User.objects.filter(email=email).exists():
             return Response({'error': 'User with this email already exists'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # validation_code = get_random_string(length=6)
-        # message = f'Your validation code is {validation_code}'
-        # send_mail(
-        #     'Luna Validation Code',
-        #     message,
-        #     [email],
-        #     fail_silently=False,
-        #     auth_user=settings.EMAIL_HOST_USER,
-        #     auth_password=settings.EMAIL_HOST_PASSWORD,
-        # )
+        validation_code = get_random_string(length=6)
+        message = f'Your validation code is {validation_code}'
+        send_mail(
+            'Luna Validation Code',
+            message,
+            [email],
+            fail_silently=False,
+            auth_user=settings.EMAIL_HOST_USER,
+            auth_password=settings.EMAIL_HOST_PASSWORD,
+        )
 
-        # return Response({'success': 'Validation code was sent to your email'}, status=status.HTTP_200_OK)
+        return Response({'success': 'Validation code was sent to your email'}, status=status.HTTP_200_OK)
 
 
 class RegistrationValidationView(APIView):
@@ -48,6 +50,11 @@ class RegistrationValidationView(APIView):
 
         email = serializer.validated_data.get('email')
         validation_code = serializer.validated_data.get('validation_code')
+        username = serializer.validated_data.get('username')
+        password = serializer.validated_data.get('password')
+        password_repeat = serializer.validated_data.get('password_repeat')
+        first_name = serializer.validated_data.get('first_name')
+        last_name = serializer.validated_data.get('last_name')
 
         if not email:
             return Response({'error': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
@@ -60,7 +67,7 @@ class RegistrationValidationView(APIView):
         if not user.registration.is_validation_code_valid(validation_code):
             return Response({'error': 'Validation code is not valid'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if not all[username, password, password_repeat, first_name, last_name]:
+        if not all([username, password, password_repeat, first_name, last_name]):
             return Response({'error': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
 
         if password != password_repeat:
@@ -73,5 +80,4 @@ class RegistrationValidationView(APIView):
         user.is_active = True
         user.save()
 
-        return Response({'success': 'User was created'}, status=status.HTTP_200_OK)
-
+        return Response({'success': 'User was successfully created'}, status=status.HTTP_200_OK)
