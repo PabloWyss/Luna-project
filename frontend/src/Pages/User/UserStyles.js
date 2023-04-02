@@ -3,10 +3,11 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: #F8F8F8;
 `;
 
 export const Avatar = styled.label`
-  background-color: coral;
+  background-color: papayawhip;
   position: absolute;
   height: 200px;
   width: 200px;
@@ -33,26 +34,16 @@ export const Avatar = styled.label`
   }
 `;
 export const ProfileNav = styled.div`
-  background-color: mediumpurple;
   position: absolute;
   height: 500px;
   width: 200px;
   left: 100px;
-  top: 25%;
-  z-index: 5;
-`;
-export const Summary = styled.div`
-  background-color: red;
-  position: absolute;
-  height: 100px;
-  width: 30%;
-  left: 300px; 
-  top: 5%;
+  top: 26%;
   z-index: 5;
 `;
 
 export const Background = styled.label`
-  background-color: blue;
+  background-color: rosybrown;
   height: 15%;
   width: 100%;
   position: absolute;
@@ -79,8 +70,8 @@ export const Background = styled.label`
 export const About = styled.div`
   align-self: flex-end;
   justify-content: flex-end;
-  background-color: lightseagreen;
-  height: 300px;
+  background-color: #F8F8F8;
+  height: 600px;
   width: 20%;
   padding: 20px;
   position: absolute;

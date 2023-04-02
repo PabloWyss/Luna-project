@@ -29,7 +29,7 @@ const EditUserProfile = ({ onSave }) => {
 
   return (
     <Container>
-      <h2>Edit User Profile</h2>
+      <h1>Edit User Profile</h1>
       <Form onSubmit={handleSubmit}>
         <Label htmlFor="username">Username:</Label>
         <Input

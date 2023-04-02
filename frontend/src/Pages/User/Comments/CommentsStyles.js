@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  height: 380px;
+  height: 600px;
   width: 50%;
   left: 362px;
   margin-top: 150px;
   margin-left: 300px;
-  background-color: yellow;
+  background-color: lightgreen;
 `;
 
 const Title = styled.h2`

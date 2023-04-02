@@ -3,16 +3,18 @@ import {
   Container,
   Background,
   Avatar,
-  Summary,
   ProfileNav,
   ProfileNavButtons,
   About
 } from './UserStyles';
+import BannerText from "./BannerText";
 import Reviews from './Reviews/Reviews';
 import Comments from './Comments/CommentsStyles';
 import RestaurantStyles from "./Restaurants/RestaurantStyles";
 import EditUserProfile from "./EditUserProfile/EditUserProfie";
 import lunaAPI, {saveUserProfile} from "../../Axios/lunaApi";
+import Header from "../../Components/Header";
+import Footer from "../../Components/Footer";
 
 const UserProfile = () => {
   const [avatarImage, setAvatarImage] = useState('');
@@ -25,6 +27,7 @@ const UserProfile = () => {
   const [showComments, setShowComments] = useState(false);
   const [showRestaurants, setShowRestaurants] = useState(false);
   const [showEditProfile, setShowEditProfile] = useState(false);
+  const [bannerText, setBannerText] = useState('');
 
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
@@ -58,32 +61,33 @@ const UserProfile = () => {
     setShowEditProfile(false);
   };
 
-  const handleRestaurantsClick= () => {
+  const handleRestaurantsClick = () => {
     setShowReviews(false);
     setShowComments(false);
     setShowRestaurants(true);
     setShowEditProfile(false);
   };
 
-  const handleEditProfileClick= () => {
+  const handleEditProfileClick = () => {
     setShowReviews(false);
     setShowComments(false);
     setShowRestaurants(false);
     setShowEditProfile(true);
   };
 
-const handleProfileUpdate = (newProfileData) => {
-  setFirstName(newProfileData.firstName);
-  setLocation(newProfileData.location);
-  setThingsILove(newProfileData.thingsILove);
-  setDescription(newProfileData.description);
+  const handleProfileUpdate = (newProfileData) => {
+    setFirstName(newProfileData.firstName);
+    setLocation(newProfileData.location);
+    setThingsILove(newProfileData.thingsILove);
+    setDescription(newProfileData.description);
 
-  // Save the updated user profile data to the backend
-  saveUserProfile(newProfileData);
-};
-
+    // Save the updated user profile data to the backend
+    saveUserProfile(newProfileData);
+  };
 
   return (
+  <div>
+    <Header />
     <Container>
       <Background htmlFor="background-image" image={backgroundImage}>
         <input id="background-image" type="file" accept="image/*" onChange={handleBackgroundChange} />
@@ -91,7 +95,7 @@ const handleProfileUpdate = (newProfileData) => {
       <Avatar htmlFor="avatar-image" image={avatarImage}>
         <input id="avatar-image" type="file" accept="image/*" onChange={handleAvatarChange} />
       </Avatar>
-      <Summary />
+      <BannerText firstName={firstName} lastName={""} location={location} />
       <ProfileNav>
         <p>{firstName}'s Profile</p>
         <ProfileNavButtons>
@@ -106,18 +110,21 @@ const handleProfileUpdate = (newProfileData) => {
       {showRestaurants && <RestaurantStyles />}
       {showEditProfile && <EditUserProfile onSave={handleProfileUpdate} />} {/* Use onSave instead of onSubmit */}
       <About>
-<h1>About {firstName}</h1>
-<h3>Location:</h3>
-<p>{location}</p>
-<h3>Luna Member Since:</h3>
-<p> date! </p>
-<h3>Things I love:</h3>
-<p>{thingsILove}</p>
-<h3>Description:</h3>
-<p>{description}</p>
-</About>
-</Container>
+        <h1>About {firstName}</h1>
+        <h3>Location:</h3>
+        <p>{location}</p>
+        <h3>Luna Member Since:</h3>
+        <p> date! </p>
+        <h3>Things I love:</h3>
+        <p>{thingsILove}</p>
+        <h3>Description:</h3>
+        <p>{description}</p>
+      </About>
+    </Container>
+    <Footer />
+  </div>
 );
 };
+
 
 export default UserProfile;
