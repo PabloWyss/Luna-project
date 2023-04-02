@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
 import arrow from "../../Assets/arrow.svg";
+import Header from "../../Components/Header";
 import { Grid, Main, MainMenu, SearchBar, SearchBarContainer, SearchCategory, Tab } from "./SearchStyles";
 
 const Search = () => {
   return (
     <div>
+      <Header />
       <SearchBarContainer>
         <SearchBar>
           <input placeholder="Search..." />

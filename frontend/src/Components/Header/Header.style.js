@@ -4,7 +4,7 @@ export const HeaderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 10vh;
+  height: 8vh;
   border-bottom: 1px solid #D8D8D8;
 `
 
@@ -13,7 +13,6 @@ export const HeaderLeftDiv = styled.div`
   justify-content: flex-start;
   width: 50%;
   align-items: center;
-  font-size: 16px;
   padding-left: 2%;
 `
 
@@ -23,14 +22,14 @@ export const HeaderRightDiv = styled.div`
   width: 50%;
   align-items: center;
   padding-right: 2%;
+  height: 100%;
 `
 
 export const HeaderLinksDiv = styled.div`
   display: flex;
   justify-content: space-around;
   width: 70%;
-  font-weight: 700;
-  font-size: 20px;
+  height: 100%;
 `
 
 export const HeaderButtonsDiv = styled.div`
