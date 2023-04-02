@@ -7,7 +7,6 @@ export const Container = styled.div`
   left: 362px;
   margin-top: 150px;
   margin-left: 300px;
-  background-color: Brown;
 `;
 
 export const Form = styled.form`
@@ -38,17 +37,5 @@ export const TextArea = styled.textarea`
   padding: 5px;
   border-radius: 5px;
   border: 1px solid gray;
-`;
 
-export const Button = styled.button`
-  background-color: mediumpurple;
-  color: white;
-  font-size: 18px;
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
 `;

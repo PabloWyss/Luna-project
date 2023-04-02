@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import axios from "axios";
 import {
   Container,
   Form,
   Label,
   Input,
   TextArea,
-  Button
 } from './EditUserProfileStyles';
-import {saveUserProfile} from "../../../Axios/lunaApi";
-
 
 const EditUserProfile = ({ onSave }) => {
   const [username, setUsername] = useState('');
@@ -21,7 +17,6 @@ const EditUserProfile = ({ onSave }) => {
   const [thingsILove, setThingsILove] = useState('');
   const [description, setDescription] = useState('');
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
     onSave({
@@ -31,7 +26,6 @@ const EditUserProfile = ({ onSave }) => {
       description: description
     });
   };
-
 
   return (
     <Container>
@@ -100,11 +94,10 @@ const EditUserProfile = ({ onSave }) => {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <Button type="submit">Save</Button>
+        <button type="submit">Save</button>
       </Form>
     </Container>
   );
 };
 
 export default EditUserProfile;
-

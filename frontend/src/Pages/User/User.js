@@ -93,7 +93,7 @@ const handleProfileUpdate = (newProfileData) => {
       </Avatar>
       <Summary />
       <ProfileNav>
-        <p>Laurent's Profile</p>
+        <p>{firstName}'s Profile</p>
         <ProfileNavButtons>
           <button onClick={handleReviewsClick}>Reviews</button>
           <button onClick={handleCommentsClick}>Comments</button>
