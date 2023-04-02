@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Search from './Pages/Search/Search';
 import RestaurantsGrid from './Pages/Search/RestaurantsGrid/RestaurantsGrid'
 import ReviewsGrid from './Pages/Search/ReviewsGrid/ReviewsGrid'
@@ -14,7 +14,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/search" element={<Search />}>
-                    <Route index element={<RestaurantsGrid />} />
+                    <Route index element={<Navigate to="/search/restaurants" replace />} />
                     <Route path="restaurants" element={<RestaurantsGrid />} />
                     <Route path="reviews" element={<ReviewsGrid />} />
                     <Route path="users" element={<UsersGrid />} />
