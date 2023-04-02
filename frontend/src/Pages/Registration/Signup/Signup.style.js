@@ -4,7 +4,7 @@ export const SignUpDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 80vh;
+  height: 82vh;
   justify-content: flex-start;
   background: #F2F2F2;
   
@@ -21,7 +21,7 @@ export const RegistrationContentDiv = styled.div`
   width: 100%;
 `
 export const InputSignInStyle = styled.input`
-  width: 400px;
+  width: 340px;
   height: 50px;
   border-radius: 3px;
   border: 1px solid #EBEBEB;

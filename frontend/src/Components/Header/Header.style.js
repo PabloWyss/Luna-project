@@ -4,7 +4,7 @@ export const HeaderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 7vh;
+  height: 8vh;
   border-bottom: 1px solid #D8D8D8;
 `
 
