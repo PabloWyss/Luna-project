@@ -4,7 +4,7 @@ import OrangeButton from "../../../Components/Button";
 import {VerificationDiv, VerificationInnerDiv, VerificationLeftDiv, VerificationRightDiv} from "./Verification.style";
 import Header from "../../../Components/Header";
 import Footer from "../../../Components/Footer";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 const Verification = () => {
@@ -47,6 +47,18 @@ const Verification = () => {
         setUserLocation(e.target.value);
     };
 
+    //check if passwords match
+    useEffect(() => {
+        checkPasswordMatch();
+        }, [repeatPassword, userPassword]);
+
+    const checkPasswordMatch = () => {
+        if (repeatPassword !== "" && repeatPassword !== userPassword) {
+          setPasswordMatch(false);
+        } else {
+          setPasswordMatch(true);
+        }
+    };
 
 
 
@@ -96,6 +108,9 @@ const Verification = () => {
                                 />
                             </VerificationRightDiv>
                         </VerificationInnerDiv>
+                        <p>
+                            {passwordMatch ? "" : "The passwords don't match"}
+                        </p>
                     </form>
                     <OrangeButton textInput={'Finish registration'}/>
                 </VerificationDiv>
