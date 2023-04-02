@@ -1,9 +1,9 @@
 import {OrangeButtonStyle} from "./OrangeButton.style";
 
-const OrangeButton = ({textInput}) =>{
+const OrangeButton = ({textInput, onClickAction}) =>{
 
     return (
-        <OrangeButtonStyle>
+        <OrangeButtonStyle onClick={onClickAction}>
             {textInput}
         </OrangeButtonStyle>
     )

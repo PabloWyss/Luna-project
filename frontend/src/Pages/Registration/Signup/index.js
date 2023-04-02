@@ -5,12 +5,19 @@ import {SignUpDiv,
     } from "./Signup.style";
 import RegistrationTitle from "../RegistrationTitle";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 const Registration = () => {
+    const navigate = useNavigate();
     const [userEmail, setEmail] = useState("");
     const handleEmailInput = (e) => {
-    setEmail(e.target.value);
+        setEmail(e.target.value);
     };
+
+    const handleRegisterClick = () => {
+        navigate("/registration-message");
+    };
+
 
     return (
             <SignUpDiv>
@@ -24,7 +31,7 @@ const Registration = () => {
                             onChange={handleEmailInput}
                         ></InputSignInStyle >
                     </form>
-                    <OrangeButton textInput={'Register'}/>
+                    <OrangeButton textInput={'Register'} onClickAction={handleRegisterClick}/>
                 </RegistrationContentDiv>
             </SignUpDiv>
     )
