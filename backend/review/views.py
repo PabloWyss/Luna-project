@@ -42,8 +42,3 @@ class RestaurantReviewLikeView(APIView):
         else:
             review.likes_on_review.add(user)
             return Response(status=status.HTTP_201_CREATED)
-
-
-from django.shortcuts import render
-
-# Create your views here.
