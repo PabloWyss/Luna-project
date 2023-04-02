@@ -15,6 +15,3 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         model = User
         exclude = ('password', 'is_staff', 'is_active', 'date_joined', 'is_superuser', 'user_permissions')
         read_only_fields = ['email']
-
-
-
