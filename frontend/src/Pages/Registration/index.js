@@ -1,4 +1,5 @@
 import Header from "../../Components/Header";
+import Footer from "../../Components/Footer";
 
 const Registration = () => {
     return (
@@ -9,11 +10,7 @@ const Registration = () => {
                     Content
                 </h1>
             </div>
-            <div>
-                <h1>
-                    Footer
-                </h1>
-            </div>
+            <Footer></Footer>
         </div>
     )
 
