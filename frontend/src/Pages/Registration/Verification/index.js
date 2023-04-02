@@ -1,7 +1,13 @@
 import {InputSignInStyle, SignUpDiv} from "../Signup/Signup.style";
 import RegistrationTitle from "../RegistrationTitle";
 import OrangeButton from "../../../Components/Button";
-import {VerificationDiv, VerificationInnerDiv, VerificationLeftDiv, VerificationRightDiv} from "./Verification.style";
+import {
+    VerificationDiv,
+    VerificationForm,
+    VerificationInnerDiv,
+    VerificationLeftDiv,
+    VerificationRightDiv
+} from "./Verification.style";
 import Header from "../../../Components/Header";
 import Footer from "../../../Components/Footer";
 import {useEffect, useState} from "react";
@@ -60,60 +66,63 @@ const Verification = () => {
         }
     };
 
-
+     const handleSubmitButton = () => {
+        navigate("/login")
+    }
 
     return (
         <div>
             <Header/>
             <SignUpDiv>
                 <RegistrationTitle inputText={'VERIFICATION'}/>
-                <VerificationDiv>
-                    <form>
-                        <VerificationInnerDiv>
-                            <VerificationLeftDiv>
-                                <InputSignInStyle
-                                    placeholder="E-Mail Address"
-                                    type="email"
-                                    value={userEmail}
-                                    onChange={handleEmailInput}
-                                />
-                                <InputSignInStyle
-                                    placeholder="Username"
-                                    value={userName}
-                                    onChange={handleUserNameInput}
-                                />
-                                <InputSignInStyle
-                                    placeholder="Password"
-                                    type="password"
-                                    value={userPassword}
-                                    onChange={handlePasswordInput}
-                                />
-                            </VerificationLeftDiv>
-                            <VerificationRightDiv>
-                                <InputSignInStyle
-                                    placeholder="Validation code"
-                                    value={verificationCode}
-                                    onChange={handleVerificationCodeInput}
-                                />
-                                <InputSignInStyle
-                                    placeholder="Location"
-                                    value={userLocation}
-                                    onChange={handleLocationInput}
-                                />
-                                <InputSignInStyle
-                                    placeholder="Password repeat"
-                                    type="password"
-                                    value={repeatPassword}
-                                    onChange={handleRepeatPasswordInput}
-                                />
-                            </VerificationRightDiv>
-                        </VerificationInnerDiv>
-                        <p>
-                            {passwordMatch ? "" : "The passwords don't match"}
-                        </p>
-                    </form>
-                    <OrangeButton textInput={'Finish registration'}/>
-                </VerificationDiv>
+
+                    <VerificationForm onSubmit={handleSubmitButton}>
+                        <VerificationDiv>
+                            <VerificationInnerDiv>
+                                <VerificationLeftDiv>
+                                    <InputSignInStyle
+                                        placeholder="E-Mail Address"
+                                        type="email"
+                                        value={userEmail}
+                                        onChange={handleEmailInput}
+                                    />
+                                    <InputSignInStyle
+                                        placeholder="Username"
+                                        value={userName}
+                                        onChange={handleUserNameInput}
+                                    />
+                                    <InputSignInStyle
+                                        placeholder="Password"
+                                        type="password"
+                                        value={userPassword}
+                                        onChange={handlePasswordInput}
+                                    />
+                                </VerificationLeftDiv>
+                                <VerificationRightDiv>
+                                    <InputSignInStyle
+                                        placeholder="Validation code"
+                                        value={verificationCode}
+                                        onChange={handleVerificationCodeInput}
+                                    />
+                                    <InputSignInStyle
+                                        placeholder="Location"
+                                        value={userLocation}
+                                        onChange={handleLocationInput}
+                                    />
+                                    <InputSignInStyle
+                                        placeholder="Password repeat"
+                                        type="password"
+                                        value={repeatPassword}
+                                        onChange={handleRepeatPasswordInput}
+                                    />
+                                </VerificationRightDiv>
+                            </VerificationInnerDiv>
+                            <p>
+                                {passwordMatch ? "" : "The passwords don't match"}
+                            </p>
+                        </VerificationDiv>
+                        <OrangeButton textInput={'Finish registration'} type={"submit"}/>
+                    </VerificationForm>
             </SignUpDiv>
             <Footer/>
         </div>

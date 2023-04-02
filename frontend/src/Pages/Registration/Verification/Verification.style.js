@@ -9,6 +9,12 @@ export const VerificationDiv = styled.div`
   gap: 50px;
   padding-top: 50px;
 `
+
+export const VerificationForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 export const VerificationInnerDiv = styled.div`
   display: flex;
 `

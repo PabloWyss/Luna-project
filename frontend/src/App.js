@@ -1,6 +1,6 @@
 import './App.css';
 import Restaurants from './Pages/Restaurants';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Registration from "./Pages/Registration";
 import UserProfile from "./Pages/User";
 import RegistrationMessage from "./Pages/Registration/RegistrationMessage";
