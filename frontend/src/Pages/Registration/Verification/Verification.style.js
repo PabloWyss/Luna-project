@@ -7,10 +7,10 @@ export const VerificationDiv = styled.div`
   justify-content: flex-start;
   background: #F2F2F2;
   gap: 50px;
+  padding-top: 50px;
 `
 export const VerificationInnerDiv = styled.div`
   display: flex;
-  padding-top: 100px;
 `
 export const VerificationLeftDiv = styled.div`
   display: flex;

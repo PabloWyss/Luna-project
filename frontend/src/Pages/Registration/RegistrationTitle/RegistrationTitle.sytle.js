@@ -13,3 +13,4 @@ export const RegistrationTitleP = styled.p`
   text-transform: uppercase;
   border-bottom: 3px solid #E47D31;
 `
+

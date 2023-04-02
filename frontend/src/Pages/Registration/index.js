@@ -3,12 +3,13 @@ import Footer from "../../Components/Footer";
 import Signup from "./Signup";
 import RegistrationMessage from "./RegistrationMessage";
 import Verification from "./Verification";
+import Login from "./Login";
 
 const Registration = () => {
     return (
         <div>
             <Header/>
-            <Verification/>
+            <Login/>
             <Footer/>
         </div>
     )

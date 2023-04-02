@@ -16,7 +16,7 @@ export const RegistrationContentDiv = styled.div`
   height: 70vh;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 100px;
+  padding-top: 50px;
   gap: 50px;
   width: 100%;
 `
