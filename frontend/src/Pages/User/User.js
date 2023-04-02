@@ -11,11 +11,16 @@ import {
 import Reviews from './Reviews/Reviews';
 import Comments from './Comments/CommentsStyles';
 import RestaurantStyles from "./Restaurants/RestaurantStyles";
-import EditProfile from "./EditUserProfile/EditUserProfileStyles";
+import EditUserProfile from "./EditUserProfile/EditUserProfie";
+import lunaAPI, {saveUserProfile} from "../../Axios/lunaApi";
 
 const UserProfile = () => {
   const [avatarImage, setAvatarImage] = useState('');
   const [backgroundImage, setBackgroundImage] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [location, setLocation] = useState('');
+  const [thingsILove, setThingsILove] = useState('');
+  const [description, setDescription] = useState('');
   const [showReviews, setShowReviews] = useState(true);
   const [showComments, setShowComments] = useState(false);
   const [showRestaurants, setShowRestaurants] = useState(false);
@@ -67,6 +72,17 @@ const UserProfile = () => {
     setShowEditProfile(true);
   };
 
+const handleProfileUpdate = (newProfileData) => {
+  setFirstName(newProfileData.firstName);
+  setLocation(newProfileData.location);
+  setThingsILove(newProfileData.thingsILove);
+  setDescription(newProfileData.description);
+
+  // Save the updated user profile data to the backend
+  saveUserProfile(newProfileData);
+};
+
+
   return (
     <Container>
       <Background htmlFor="background-image" image={backgroundImage}>
@@ -88,13 +104,20 @@ const UserProfile = () => {
       {showReviews && <Reviews />}
       {showComments && <Comments />}
       {showRestaurants && <RestaurantStyles />}
-      {showEditProfile && <EditProfile />}
+      {showEditProfile && <EditUserProfile onSave={handleProfileUpdate} />} {/* Use onSave instead of onSubmit */}
       <About>
-        <h1>About Laurent</h1>
-        <h2>He's a cool guy</h2>
-      </About>
-    </Container>
-  );
+<h1>About {firstName}</h1>
+<h3>Location:</h3>
+<p>{location}</p>
+<h3>Luna Member Since:</h3>
+<p> date! </p>
+<h3>Things I love:</h3>
+<p>{thingsILove}</p>
+<h3>Description:</h3>
+<p>{description}</p>
+</About>
+</Container>
+);
 };
 
 export default UserProfile;

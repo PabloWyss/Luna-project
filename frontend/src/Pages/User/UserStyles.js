@@ -78,11 +78,14 @@ export const Background = styled.label`
 
 export const About = styled.div`
   align-self: flex-end;
+  justify-content: flex-end;
   background-color: lightseagreen;
   height: 300px;
-  width: 25%;
+  width: 20%;
   padding: 20px;
-  position: relative;
+  position: absolute;
+  margin-top: 150px;
+  
 `;
 
 export const ProfileNavButtons = styled.div`
