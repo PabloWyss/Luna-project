@@ -53,6 +53,7 @@ class RegistrationView(APIView):
 
 class RegistrationValidationView(APIView):
     serializer_class = RegistrationValidationSerializer
+    permission_classes = [AllowAny]
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
