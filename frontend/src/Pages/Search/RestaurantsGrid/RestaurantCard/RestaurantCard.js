@@ -1,5 +1,6 @@
 import starIcon from "../../../../Assets/star.svg"
 import restaurantImg from "../../../../Assets/temp/restaurant-pic.jpg"
+import RatingStars from "../../../../Components/RatingStars/RatingStars";
 import { Card, Details, RatingContainer, RestAddress, RestName, ReviewCount } from "./RestaurantCardStyles";
 
 const RestaurantCard = () => {
@@ -9,13 +10,7 @@ const RestaurantCard = () => {
         <RestName>Restaurant Name</RestName>
         <RestAddress>Address</RestAddress>
         <RatingContainer>
-          <div>
-            <img src={starIcon}></img>
-            <img src={starIcon}></img>
-            <img src={starIcon}></img>
-            <img src={starIcon}></img>
-            <img src={starIcon}></img>
-          </div>
+          <RatingStars />
           <ReviewCount>24</ReviewCount>
         </RatingContainer>
       </Details>

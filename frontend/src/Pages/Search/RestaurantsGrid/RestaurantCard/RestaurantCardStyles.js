@@ -33,10 +33,6 @@ export const RatingContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 2px;
-
-  img {
-    width: 27px;
-  }
 `
 
 export const ReviewCount = styled.p`
