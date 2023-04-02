@@ -5,8 +5,13 @@ import {
   Avatar,
   ProfileNav,
   ProfileNavButtons,
-  About
+  About,
+  svg
 } from './UserStyles';
+import { ReactComponent as CommentIcon } from '../../Assets/comment.svg';
+import { ReactComponent as RestaurantIcon } from '../../Assets/restaurant.svg';
+import { ReactComponent as EditIcon } from '../../Assets/edit.svg';
+import { ReactComponent as StarIcon } from '../../Assets/star.svg';
 import BannerText from "./BannerText";
 import Reviews from './Reviews/Reviews';
 import Comments from './Comments/CommentsStyles';
@@ -99,10 +104,10 @@ const UserProfile = () => {
       <ProfileNav>
         <p>{firstName}'s Profile</p>
         <ProfileNavButtons>
-          <button onClick={handleReviewsClick}>Reviews</button>
-          <button onClick={handleCommentsClick}>Comments</button>
-          <button onClick={handleRestaurantsClick}>Restaurants</button>
-          <button onClick={handleEditProfileClick}>Edit Profile</button>
+          <button onClick={handleReviewsClick}> <StarIcon />Reviews</button>
+          <button onClick={handleCommentsClick}> <CommentIcon />Comments</button>
+          <button onClick={handleRestaurantsClick}>  <RestaurantIcon />Restaurants</button>
+          <button onClick={handleEditProfileClick}>  <EditIcon />Edit Profile</button>
         </ProfileNavButtons>
       </ProfileNav>
       {showReviews && <Reviews />}
