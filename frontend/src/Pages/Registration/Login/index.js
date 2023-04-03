@@ -1,4 +1,4 @@
-import {InputSignInStyle, SignUpDiv} from "../Signup/Signup.style";
+import {ButtonRegistrationDiv, InputSignInStyle, SignUpDiv} from "../Signup/Signup.style";
 import RegistrationTitle from "../RegistrationTitle";
 import OrangeButton from "../../../Components/Button";
 import {LoginDiv, LoginInnerDiv} from "./Login.style";
@@ -44,7 +44,9 @@ const Login = () => {
                             />
                         </LoginInnerDiv>
                     </form>
-                    <OrangeButton textInput={'Login'}/>
+                    <ButtonRegistrationDiv>
+                        <OrangeButton textInput={'Login'}/>
+                    </ButtonRegistrationDiv>
                 </LoginDiv>
             </SignUpDiv>
             <Footer/>

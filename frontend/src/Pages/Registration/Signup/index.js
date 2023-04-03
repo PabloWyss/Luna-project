@@ -1,8 +1,9 @@
 import OrangeButton from "../../../Components/Button";
-import {SignUpDiv,
+import {
+    SignUpDiv,
     InputSignInStyle,
-    RegistrationContentDiv
-    } from "./Signup.style";
+    RegistrationContentDiv, ButtonRegistrationDiv
+} from "./Signup.style";
 import RegistrationTitle from "../RegistrationTitle";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
@@ -45,7 +46,9 @@ const Registration = () => {
                             onChange={handleEmailInput}
                         ></InputSignInStyle >
                     </form>
-                    <OrangeButton textInput={'Register'} onClickAction={handleRegisterClick}/>
+                    <ButtonRegistrationDiv>
+                        <OrangeButton textInput={'Register'} onClickAction={handleRegisterClick}/>
+                    </ButtonRegistrationDiv>
                 </RegistrationContentDiv>
             </SignUpDiv>
     )

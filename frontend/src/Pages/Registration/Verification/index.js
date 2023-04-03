@@ -1,4 +1,4 @@
-import {InputSignInStyle, SignUpDiv} from "../Signup/Signup.style";
+import {ButtonRegistrationDiv, InputSignInStyle, SignUpDiv} from "../Signup/Signup.style";
 import RegistrationTitle from "../RegistrationTitle";
 import OrangeButton from "../../../Components/Button";
 import {
@@ -139,7 +139,9 @@ const Verification = () => {
                                 {passwordMatch ? "" : "The passwords don't match"}
                             </p>
                         </VerificationDiv>
-                        <OrangeButton textInput={'Finish registration'} type={"submit"}/>
+                        <ButtonRegistrationDiv>
+                            <OrangeButton textInput={'Finish registration'} type={"submit"}/>
+                        </ButtonRegistrationDiv>
                     </VerificationForm>
             </SignUpDiv>
             <Footer/>

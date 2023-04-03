@@ -34,3 +34,7 @@ export const InputSignInStyle = styled.input`
        color: #979797;
    }
 `
+export const ButtonRegistrationDiv = styled.div`
+  height: 50px;
+  width: 200px;
+`
