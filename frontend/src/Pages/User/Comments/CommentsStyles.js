@@ -1,24 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
+import CommentComponent from "./Comment Component";
+import {ReviewsTitleDateDiv, Title, Container} from "../Reviews/ReviewStyles";
 
-const Container = styled.div`
-  height: 600px;
-  width: 50%;
-  left: 362px;
-  margin-top: 150px;
-  margin-left: 300px;
-  background-color: lightgreen;
-`;
-
-const Title = styled.h2`
-  font-size: 24px;
-  padding: 20px;
-`;
 
 const Comments = () => {
   return (
     <Container>
-      <Title>Comments</Title>
+        <ReviewsTitleDateDiv>
+            <Title>Comments</Title>
+        </ReviewsTitleDateDiv>
+        <CommentComponent/>
+        <CommentComponent/>
+        <CommentComponent/>
     </Container>
   );
 };

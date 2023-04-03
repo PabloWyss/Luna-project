@@ -9,11 +9,11 @@ class CommentCreateAPIView(generics.CreateAPIView):
     API endpoint to create a comment on a review.
     """
     serializer_class = CommentSerializer
-    permission_classes = [permissions.IsOwnerOrAdminOrReadOnly]
+    permission_classes = [IsOwnerOrAdminOrReadOnly]
 
     def perform_create(self, serializer):
         review_id = self.kwargs.get('review_id')
-        serializer.save(user=self.request.user, review_id=review_id)
+        serializer.save(user=self.request.user, comments_on_review=review_id)
 
 
 class CommentListAPIView(generics.ListAPIView):
@@ -24,8 +24,8 @@ class CommentListAPIView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        review_id = self.kwargs.get('review_id')
-        return Comment.objects.filter(review_id=review_id)
+        user_id = self.kwargs.get('user_id')
+        return Comment.objects.filter(comment_by_user=user_id)
 
 
 class CommentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
