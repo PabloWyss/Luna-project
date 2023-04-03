@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { EditTitle, Container, Form, Label, Input, TextArea } from './EditUserProfileStyles';
-
+import OrangeButton from "../../../Components/Button";
 const EditUserProfile = ({ onSave }) => {
   const [username, setUsername] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -92,7 +92,7 @@ const EditUserProfile = ({ onSave }) => {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <button type="submit">Save</button>
+        <OrangeButton textInput={'Save'} type="submit"></OrangeButton>
       </Form>
     </Container>
   );
