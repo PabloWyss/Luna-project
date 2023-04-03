@@ -81,4 +81,5 @@ class UserCommentedReviewListView(generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
+        # comment something
         return RestaurantReview.objects.filter(comments__comment_by_user=user).distinct()
