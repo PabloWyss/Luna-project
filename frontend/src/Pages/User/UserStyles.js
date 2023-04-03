@@ -37,7 +37,7 @@ export const Avatar = styled.label`
 export const ProfileNav = styled.div`
   position: absolute;
   height: 500px;
-  width: 200px;
+  width: 300px;
   left: 100px;
   top: 26%;
   z-index: 5;
