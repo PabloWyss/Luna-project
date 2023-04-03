@@ -7,8 +7,8 @@ def user_directory_path(instance, filename):
 
 
 class User(AbstractUser):
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []
 
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)

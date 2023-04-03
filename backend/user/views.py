@@ -3,9 +3,11 @@ from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 from .models import User
 from .permissions import IsOwnerOrReadOnly
-from .serializer import UserSerializer
+from .serializer import UserSerializer, CustomTokenObtainPairSerializer
 
 
 class MyProfileView(APIView):
@@ -89,3 +91,7 @@ class UserSearchByEmailView(ListAPIView):
         if email:
             queryset = User.objects.filter(email__icontains=email)
         return queryset
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
