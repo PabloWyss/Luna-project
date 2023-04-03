@@ -61,7 +61,7 @@ export const About = styled.div`
   padding: 20px;
   position: absolute;
   margin-top: 150px;
-  
+ line-height: 35px;
 `;
 
 export const ProfileNavButtons = styled.div`
