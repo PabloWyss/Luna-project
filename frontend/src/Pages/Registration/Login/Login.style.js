@@ -13,4 +13,5 @@ export const LoginInnerDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding-bottom: 50px;
 `

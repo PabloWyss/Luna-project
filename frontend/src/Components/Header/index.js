@@ -28,7 +28,7 @@ const Header = () => {
             <HeaderRightDiv>
                 <HeaderLinksDiv>
                     <NavLink
-                        to="/home_page"
+                        to="/"
                         style={({ isActive }) =>
                         isActive
                         ? {
@@ -37,8 +37,9 @@ const Header = () => {
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
-                          borderBottom: "2px solid #E47D31",
+                          borderBottom: "3px solid #E47D31",
                           height: "100%",
+                            boxSizing: "border-box",
                         }
                       : { textDecoration: "none",
                             color: "black",
@@ -50,7 +51,7 @@ const Header = () => {
                         <p>Home</p>
                     </NavLink>
                     <NavLink
-                        to="/restaurants"
+                        to="/search"
                         style={({ isActive }) =>
                         isActive
                         ? {
@@ -59,8 +60,9 @@ const Header = () => {
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
-                          borderBottom: "2px solid #E47D31",
+                          borderBottom: "3px solid #E47D31",
                           height: "100%",
+                            boxSizing: "border-box",
                         }
                       : { textDecoration: "none",
                             color: "black",
@@ -81,8 +83,9 @@ const Header = () => {
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
-                          borderBottom: "2px solid #E47D31",
+                          borderBottom: "3px solid #E47D31",
                           height: "100%",
+                            boxSizing: "border-box",
                         }
                       : { textDecoration: "none",
                             color: "black",

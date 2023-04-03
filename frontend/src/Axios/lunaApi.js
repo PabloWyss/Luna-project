@@ -5,7 +5,12 @@ const baseURL = isDev ? 'http://localhost:8001/backend/api' : 'https://luna-team
 
 
 const lunaAPI = axios.create({
-  baseURL: baseURL
+  baseURL: baseURL,
+  headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+    }
+
 })
 
 export const saveUserProfile = (newProfileData) => {
