@@ -8,6 +8,7 @@ import {useDispatch} from "react-redux";
 import {updateUserData} from "../../../Redux/Slices/user";
 import {useNavigate} from "react-router-dom";
 import {VerificationForm} from "../Verification/Verification.style";
+import header from "../../../Components/Header";
 
 const Login = () => {
 
@@ -33,18 +34,24 @@ const Login = () => {
 
     const registerUser = async () => {
         const data = {
-            "email": userUsername,
+            "username": userUsername,
             "password" : userPassword
         }
+
         let response = await lunaAPI.post('/auth/token/',data)
         try {
             localStorage.setItem("token", response.data.access);
         } catch (error) {
             console.log(error)
         }
-        let response2 = await lunaAPI.get('users/me/')
+        let response2 = await lunaAPI.get('users/me/',
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      '             Content-Type': 'application/json'
+                }
+            })
         try {
-            console.log(response2)
             dispatch(updateUserData(response2.data))
             navigate("/profile");
         } catch (error) {
