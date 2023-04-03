@@ -24,9 +24,7 @@ const HeaderRight = styled.div`
 `
 
 const ReviewBody = styled.div`
-  >p{
-    padding: 9px;
-  }
+  padding: 10px 10px 0 10px;
 `
 
 const Review = () => {

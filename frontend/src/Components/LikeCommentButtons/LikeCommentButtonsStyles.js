@@ -8,7 +8,7 @@ export const Buttons = styled.div`
   border-radius: 28px;
   color: #FFFFFF;
   background-color: rgba(145, 145, 145, 0.6);
-  margin: 8px 0 17px 0;
+  margin: 10px 0 17px 0;
   font-size: 16px;
   font-weight: 400;
   width: 249px;
