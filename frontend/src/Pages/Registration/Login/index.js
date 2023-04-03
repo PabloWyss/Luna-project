@@ -33,7 +33,7 @@ const Login = () => {
 
     const registerUser = async () => {
         const data = {
-            "email": userUsername,
+            "username": userUsername,
             "password" : userPassword
         }
         let response = await lunaAPI.post('/auth/token/',data)
