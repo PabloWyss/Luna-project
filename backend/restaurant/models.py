@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from review.models import RestaurantReview
+
 User = get_user_model()
 
 
@@ -32,9 +34,8 @@ class Restaurant(models.Model):
     opening_hours = models.CharField(max_length=100)
     price_range = models.CharField(max_length=100, choices=PRICE_RANGE_CHOICES)
     image = models.ImageField(upload_to='restaurant', blank=True)
-    loved_by_users = models.ManyToManyField(to=User, related_name='loved_restaurants')
     created_by_user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='created_restaurants', default=1)
-    # reviews = models.ManyToManyField('users.User', through='Review', related_name='reviews')
+    reviews = models.ManyToManyField(to=RestaurantReview, related_name='review_on_restaurant', blank=True)
 
     def __str__(self):
         return self.name

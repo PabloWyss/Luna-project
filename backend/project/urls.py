@@ -28,6 +28,7 @@ urlpatterns = [
 
     path('backend/api/users/', include('user.urls')),
     path('backend/api/restaurants/', include('restaurant.urls')),
+    path('backend/api/reviews/', include('review.urls')),
 
     path('backend/api/auth/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('backend/api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
@@ -38,6 +39,9 @@ urlpatterns = [
 
     path('backend/api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('backend/api/docs/redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
+    path('backend/api/comment/', include('comment.urls')),
+    path('backend/api/review/', include('review.urls')),
 ]
 
 # Add media files serving in debug mode
