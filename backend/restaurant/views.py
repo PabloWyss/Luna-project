@@ -58,4 +58,3 @@ class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
 class CategoryListView(generics.ListAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantCategorySerializer
-
