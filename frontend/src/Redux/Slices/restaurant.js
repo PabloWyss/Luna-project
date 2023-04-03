@@ -27,5 +27,5 @@ export const restaurantSlice = createSlice({
   }
 })
 
-export const { updateRestaurantData } = userSlice.actions;
+export const { updateRestaurantData } = restaurantSlice.actions;
 export default restaurantSlice.reducer;
