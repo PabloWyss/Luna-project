@@ -38,6 +38,9 @@ urlpatterns = [
 
     path('backend/api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('backend/api/docs/redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
+    path('backend/api/comment/', include('comment.urls')),
+    path('backend/api/review/', include('review.urls')),
 ]
 
 # Add media files serving in debug mode
