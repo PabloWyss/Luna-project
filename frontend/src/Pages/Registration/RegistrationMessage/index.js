@@ -3,22 +3,19 @@ import {SignUpDiv,
     } from "../Signup/Signup.style";
 import RegistrationTitle from "../RegistrationTitle";
 import {RegistrationMessageP} from "./ReguistrationMessage.style";
-import Header from "../../../Components/Header";
-import Footer from "../../../Components/Footer";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import OrangeButton from "../../../Components/Button";
+
 const RegistrationMessage = () => {
     const navigate = useNavigate()
     useEffect(() => {
         setTimeout(() => {
           navigate('/verification')
-        }, 10000)
+        }, 5000)
     }, [])
 
     return (
         <div>
-            <Header/>
             <SignUpDiv>
                 <RegistrationTitle inputText={'REGISTRATION'}/>
                 <RegistrationContentDiv>
@@ -30,7 +27,6 @@ const RegistrationMessage = () => {
                     </RegistrationMessageP>
                 </RegistrationContentDiv>
             </SignUpDiv>
-            <Footer/>
         </div>
 
 )

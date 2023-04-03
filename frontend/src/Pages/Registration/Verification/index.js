@@ -1,4 +1,4 @@
-import {InputSignInStyle, SignUpDiv} from "../Signup/Signup.style";
+import {ButtonRegistrationDiv, InputSignInStyle, SignUpDiv} from "../Signup/Signup.style";
 import RegistrationTitle from "../RegistrationTitle";
 import OrangeButton from "../../../Components/Button";
 import {
@@ -8,10 +8,9 @@ import {
     VerificationLeftDiv,
     VerificationRightDiv
 } from "./Verification.style";
-import Header from "../../../Components/Header";
-import Footer from "../../../Components/Footer";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import lunaAPI from "../../../Axios/lunaApi";
 
 const Verification = () => {
     const [userEmail, setEmail] = useState("");
@@ -43,7 +42,6 @@ const Verification = () => {
         setUserName(e.target.value);
     };
 
-
     //store typed verification code
     const handleVerificationCodeInput = (e) => {
         setVerificationCode(e.target.value);
@@ -66,16 +64,33 @@ const Verification = () => {
         }
     };
 
-     const handleSubmitButton = () => {
-        navigate("/login")
+     const handleSubmitButton = (e) => {
+         e.preventDefault();
+         verifyUser()
     }
+
+    const verifyUser = async () => {
+        const data = {
+            "email": userEmail,
+            "username": userName,
+            "password": userPassword,
+            "password_repeat": repeatPassword,
+            "validation_code": verificationCode,
+            "location": userLocation
+        }
+        let response = await lunaAPI.post('/auth/registration/validation/',data)
+        try {
+            navigate("/login");
+            console.log(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+      }
 
     return (
         <div>
-            <Header/>
             <SignUpDiv>
                 <RegistrationTitle inputText={'VERIFICATION'}/>
-
                     <VerificationForm onSubmit={handleSubmitButton}>
                         <VerificationDiv>
                             <VerificationInnerDiv>
@@ -121,10 +136,11 @@ const Verification = () => {
                                 {passwordMatch ? "" : "The passwords don't match"}
                             </p>
                         </VerificationDiv>
-                        <OrangeButton textInput={'Finish registration'} type={"submit"}/>
+                        <ButtonRegistrationDiv>
+                            <OrangeButton textInput={'Finish registration'} type={"submit"}/>
+                        </ButtonRegistrationDiv>
                     </VerificationForm>
             </SignUpDiv>
-            <Footer/>
         </div>
     )
 }
