@@ -1,31 +1,26 @@
-from requests import Response
+from rest_framework.response import Response
 from rest_framework import generics, permissions
 
 from restaurant.models import Restaurant
 from .models import RestaurantReview
 from .permissions import IsOwnerOrReadOnly
-from .serializers import RestaurantReviewSerializer
+from .serializers import RestaurantReviewSerializer, LikeReviewSerializer, UserCommentedReviewSerializer
 
 
 class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RestaurantReviewSerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+    lookup_field = 'id'
 
-    def get_object(self):
-        review_id = self.kwargs['review_id']
-        return RestaurantReview.objects.get(pk=review_id)
+    def get_queryset(self):
+        return RestaurantReview.objects.filter(pk=self.kwargs['id'])
 
-    def put(self, request, *args, **kwargs):
-        response = super().put(request, *args, **kwargs)
-        return Response(response.data)
+    def perform_update(self, serializer):
+        serializer.save(reviewed_by_user=self.request.user)
 
-    def patch(self, request, *args, **kwargs):
-        response = super().partial_update(request, *args, **kwargs)
-        return Response(response.data)
-
-    def delete(self, request, *args, **kwargs):
-        response = super().delete(request, *args, **kwargs)
-        return Response(response.data)
+    def perform_destroy(self, instance):
+        instance.delete()
+        return Response(status=204)
 
 
 class CreateRestaurantReviewView(generics.CreateAPIView):
@@ -52,3 +47,38 @@ class UserRestaurantReviewListView(generics.ListAPIView):
 
     def get_queryset(self):
         return RestaurantReview.objects.filter(reviewed_by_user=self.kwargs['user_id'])
+
+
+class LikeReviewView(generics.CreateAPIView):
+    serializer_class = LikeReviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        review = RestaurantReview.objects.get(pk=self.kwargs['review_id'])
+        if self.request.user in review.liked_by_user.all():
+            review.likes_on_review -= 1
+            review.liked_by_user.remove(self.request.user)
+            review.save()
+            return Response({'status': 'unliked'})
+        else:
+            review.likes_on_review += 1
+            review.liked_by_user.add(self.request.user)
+            review.save()
+            return Response({'status': 'liked'})
+
+
+class UserReviewLikesListView(generics.ListAPIView):
+    serializer_class = RestaurantReviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return RestaurantReview.objects.filter(liked_by_user=self.request.user)
+
+
+class UserCommentedReviewListView(generics.ListAPIView):
+    serializer_class = UserCommentedReviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return RestaurantReview.objects.filter(comments__comment_by_user=user).distinct()
