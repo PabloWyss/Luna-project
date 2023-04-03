@@ -35,3 +35,11 @@ class CommentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrAdminOrReadOnly]
+
+    class CommentRetrieveUpdateDestroyAPIView2(generics.RetrieveUpdateDestroyAPIView):
+        """
+        API endpoint to retrieve, update or delete a specific comment on a review.
+        """
+        queryset = Comment.objects.all()
+        serializer_class = CommentSerializer
+        permission_classes = [permissions.IsAuthenticated, IsOwnerOrAdminOrReadOnly]
