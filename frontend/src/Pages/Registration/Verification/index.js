@@ -12,6 +12,7 @@ import Header from "../../../Components/Header";
 import Footer from "../../../Components/Footer";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import lunaAPI from "../../../Axios/lunaApi";
 
 const Verification = () => {
     const [userEmail, setEmail] = useState("");
@@ -43,7 +44,6 @@ const Verification = () => {
         setUserName(e.target.value);
     };
 
-
     //store typed verification code
     const handleVerificationCodeInput = (e) => {
         setVerificationCode(e.target.value);
@@ -66,9 +66,28 @@ const Verification = () => {
         }
     };
 
-     const handleSubmitButton = () => {
-        navigate("/login")
+     const handleSubmitButton = (e) => {
+         e.preventDefault();
+         verifyUser()
     }
+
+    const verifyUser = async () => {
+        const data = {
+            "email": userEmail,
+            "username": userName,
+            "password": userPassword,
+            "password_repeat": repeatPassword,
+            "validation_code": verificationCode,
+            "location": userLocation
+        }
+        let response = await lunaAPI.post('/auth/registration/validation/',data)
+        try {
+            navigate("/login");
+            console.log(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+      }
 
     return (
         <div>
