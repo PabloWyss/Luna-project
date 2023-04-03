@@ -4,10 +4,11 @@ from django.urls import path, include
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 
 from project import settings
 from registration.views import RegistrationView, RegistrationValidationView
+from user.views import CustomTokenObtainPairView
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -26,9 +27,9 @@ urlpatterns = [
     path('backend/api/admin/', admin.site.urls),
 
     path('backend/api/users/', include('user.urls')),
-    # path('backend/api/restaurants/', include('restaurant.urls')),
+    path('backend/api/restaurants/', include('restaurant.urls')),
 
-    path('backend/api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('backend/api/auth/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('backend/api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('backend/api/auth/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 

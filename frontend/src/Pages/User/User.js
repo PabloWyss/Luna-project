@@ -6,7 +6,7 @@ import {
   ProfileNav,
   ProfileNavButtons,
   About,
-  svg
+  svg, AboutTitle
 } from './UserStyles';
 import { ReactComponent as CommentIcon } from '../../Assets/comment.svg';
 import { ReactComponent as RestaurantIcon } from '../../Assets/restaurant.svg';
@@ -18,13 +18,12 @@ import Comments from './Comments/CommentsStyles';
 import RestaurantStyles from "./Restaurants/RestaurantStyles";
 import EditUserProfile from "./EditUserProfile/EditUserProfie";
 import lunaAPI, {saveUserProfile} from "../../Axios/lunaApi";
-import Header from "../../Components/Header";
-import Footer from "../../Components/Footer";
 
 const UserProfile = () => {
   const [avatarImage, setAvatarImage] = useState('');
   const [backgroundImage, setBackgroundImage] = useState('');
   const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [location, setLocation] = useState('');
   const [thingsILove, setThingsILove] = useState('');
   const [description, setDescription] = useState('');
@@ -81,18 +80,18 @@ const UserProfile = () => {
   };
 
   const handleProfileUpdate = (newProfileData) => {
-    setFirstName(newProfileData.firstName);
-    setLocation(newProfileData.location);
-    setThingsILove(newProfileData.thingsILove);
-    setDescription(newProfileData.description);
+      setFirstName(newProfileData.firstName);
+      setLastName(newProfileData.lastName);
+      setLocation(newProfileData.location);
+      setThingsILove(newProfileData.thingsILove);
+      setDescription(newProfileData.description);
 
-    // Save the updated user profile data to the backend
+
     saveUserProfile(newProfileData);
   };
 
   return (
   <div>
-    <Header />
     <Container>
       <Background htmlFor="background-image" image={backgroundImage}>
         <input id="background-image" type="file" accept="image/*" onChange={handleBackgroundChange} />
@@ -100,7 +99,7 @@ const UserProfile = () => {
       <Avatar htmlFor="avatar-image" image={avatarImage}>
         <input id="avatar-image" type="file" accept="image/*" onChange={handleAvatarChange} />
       </Avatar>
-      <BannerText firstName={firstName} lastName={""} location={location} />
+      <BannerText name={firstName} lastName={lastName} location={location} />
       <ProfileNav>
         <p>{firstName}'s Profile</p>
         <ProfileNavButtons>
@@ -115,18 +114,17 @@ const UserProfile = () => {
       {showRestaurants && <RestaurantStyles />}
       {showEditProfile && <EditUserProfile onSave={handleProfileUpdate} />} {/* Use onSave instead of onSubmit */}
       <About>
-        <h1>About {firstName}</h1>
-        <h3>Location:</h3>
+        <AboutTitle>About {firstName}</AboutTitle>
+        <h3>Location</h3>
         <p>{location}</p>
-        <h3>Luna Member Since:</h3>
+        <h3>Luna Member Since</h3>
         <p> date! </p>
-        <h3>Things I love:</h3>
+        <h3>Things I love</h3>
         <p>{thingsILove}</p>
-        <h3>Description:</h3>
+        <h3>Description</h3>
         <p>{description}</p>
       </About>
     </Container>
-    <Footer />
   </div>
 );
 };

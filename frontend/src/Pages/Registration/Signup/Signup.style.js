@@ -13,7 +13,6 @@ export const SignUpDiv = styled.div`
 export const RegistrationContentDiv = styled.div`
   display: flex;
   flex-direction: column;
-  height: 70vh;
   align-items: center;
   justify-content: flex-start;
   padding-top: 50px;
@@ -31,4 +30,11 @@ export const InputSignInStyle = styled.input`
   color: #979797;
   line-height: 23px;
   padding-left: 30px;
+  ::placeholder {
+       color: #979797;
+   }
+`
+export const ButtonRegistrationDiv = styled.div`
+  height: 50px;
+  width: 200px;
 `

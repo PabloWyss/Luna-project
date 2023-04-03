@@ -31,8 +31,9 @@ class Restaurant(models.Model):
     email = models.CharField(max_length=100)
     opening_hours = models.CharField(max_length=100)
     price_range = models.CharField(max_length=100, choices=PRICE_RANGE_CHOICES)
-    image = models.ImageField(upload_to='restaurants', blank=True)
+    image = models.ImageField(upload_to='restaurant', blank=True)
     loved_by_users = models.ManyToManyField(to=User, related_name='loved_restaurants')
+    created_by_user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='created_restaurants', default=1)
     # reviews = models.ManyToManyField('users.User', through='Review', related_name='reviews')
 
     def __str__(self):
