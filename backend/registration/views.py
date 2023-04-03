@@ -64,8 +64,7 @@ class RegistrationValidationView(APIView):
         username = serializer.validated_data.get('username')
         password = serializer.validated_data.get('password')
         password_repeat = serializer.validated_data.get('password_repeat')
-        first_name = serializer.validated_data.get('first_name')
-        last_name = serializer.validated_data.get('last_name')
+        location = serializer.validated_data.get('location')
 
         if not email:
             return Response({'error': 'Email is required'}, status=status.HTTP_400_BAD_REQUEST)
@@ -86,8 +85,7 @@ class RegistrationValidationView(APIView):
 
         user.username = username
         user.set_password(password)
-        user.first_name = first_name
-        user.last_name = last_name
+        user.location = location
         user.is_active = True
         user.save()
 
