@@ -1,44 +1,54 @@
-from rest_framework import generics, permissions, status
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from requests import Response
+from rest_framework import generics, permissions
+
+from restaurant.models import Restaurant
 from .models import RestaurantReview
-from .serializers import RestaurantReviewSerializer
 from .permissions import IsOwnerOrReadOnly
+from .serializers import RestaurantReviewSerializer
 
 
-class RestaurantReviewListView(generics.ListCreateAPIView):
-    """
-    API endpoint to list all reviews and create a new review.
-    """
-    queryset = RestaurantReview.objects.all()
+class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RestaurantReviewSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
 
-    def perform_create(self, serializer):
-        serializer.save(reviewed_by_user=self.request.user)
+    def get_object(self):
+        review_id = self.kwargs['review_id']
+        return RestaurantReview.objects.get(pk=review_id)
+
+    def put(self, request, *args, **kwargs):
+        response = super().put(request, *args, **kwargs)
+        return Response(response.data)
+
+    def patch(self, request, *args, **kwargs):
+        response = super().partial_update(request, *args, **kwargs)
+        return Response(response.data)
+
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(request, *args, **kwargs)
+        return Response(response.data)
 
 
-class RestaurantReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
-    """
-    API endpoint to retrieve, update, or delete a specific review by ID.
-    """
-    queryset = RestaurantReview.objects.all()
+class CreateRestaurantReviewView(generics.CreateAPIView):
     serializer_class = RestaurantReviewSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-
-
-class RestaurantReviewLikeView(APIView):
-    """
-    API endpoint to like/unlike a review by ID.
-    """
     permission_classes = [permissions.IsAuthenticated]
 
-    def post(self, request, pk):
-        review = generics.get_object_or_404(RestaurantReview, pk=pk)
-        user = request.user
-        if user in review.likes_on_review.all():
-            review.likes_on_review.remove(user)
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        else:
-            review.likes_on_review.add(user)
-            return Response(status=status.HTTP_201_CREATED)
+    def perform_create(self, serializer):
+        restaurant = Restaurant.objects.get(pk=self.kwargs['pk'])
+        serializer.save(reviewed_by_user=self.request.user, review_on_restaurant=[restaurant])
+
+
+class RestaurantReviewListView(generics.ListAPIView):
+    serializer_class = RestaurantReviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        restaurant = Restaurant.objects.get(pk=self.kwargs['restaurant_id'])
+        return RestaurantReview.objects.filter(review_on_restaurant=restaurant)
+
+
+class UserRestaurantReviewListView(generics.ListAPIView):
+    serializer_class = RestaurantReviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return RestaurantReview.objects.filter(reviewed_by_user=self.kwargs['user_id'])
