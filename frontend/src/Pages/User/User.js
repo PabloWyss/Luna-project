@@ -104,8 +104,8 @@ const handleBackgroundChange = (event) => {
             <Background image={backgroundImage}>
               {activeView === 'edit'? <input id="background-image" type="file" accept="image/*" onChange={handleBackgroundChange}/> : ""}
             </Background>
-            <Avatar htmlFor="avatar-image" image={avatarImage}>
-              <input id="avatar-image" type="file" accept="image/*" onChange={handleAvatarChange}/>
+            <Avatar image={avatarImage}>
+              {activeView === 'edit'? <input id="avatar-image" type="file" accept="image/*" onChange={handleAvatarChange}/>: ""}
             </Avatar>
             <BannerText firstName={firstName} lastName={lastName} location={location}/>
             <ProfileNav>

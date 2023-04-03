@@ -21,16 +21,8 @@ export const Avatar = styled.div`
   &:hover {
     opacity: 0.8;
   }
-  &::before {
-    content: "Upload Avatar";
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  & input[type="file"] {
-    display: none;
+    & input[type="file"] {
+
   }
 `;
 export const ProfileNav = styled.div`
@@ -57,9 +49,6 @@ export const Background = styled.div`
 
   & input[type="file"] {
 
-  }
-  input {
-    border: 1px solid red;
   }
 `;
 
