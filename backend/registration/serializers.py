@@ -10,6 +10,5 @@ class RegistrationValidationSerializer(serializers.Serializer):
     username = serializers.CharField(min_length=1)
     password = serializers.CharField(min_length=1)
     password_repeat = serializers.CharField(min_length=1)
-    first_name = serializers.CharField(min_length=1)
-    last_name = serializers.CharField(min_length=1)
+    location = serializers.CharField(min_length=1)
     validation_code = serializers.CharField(min_length=1)
