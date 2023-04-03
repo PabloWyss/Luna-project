@@ -1,19 +1,19 @@
 import styled from "styled-components";
 
 const ReviewContainer = styled.div`
-  background-color: white;
+  background-color: lightblue;
 `
 
 const Review = () => {
   return (
-    <div>
+    <ReviewContainer>
       <div>
         Header
       </div>
       <div>
         Body
       </div>
-    </div>
+    </ReviewContainer>
   );
 }
 
