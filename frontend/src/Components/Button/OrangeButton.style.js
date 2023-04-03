@@ -8,7 +8,8 @@ export const OrangeButtonStyle = styled.button`
   border: none;
   color: white;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 16px;
+  padding: 10px 20px;
   :hover{
     cursor: pointer;
   }
