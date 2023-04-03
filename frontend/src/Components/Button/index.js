@@ -6,6 +6,7 @@ const OrangeButton = ({textInput, onClickAction, type}) =>{
         <OrangeButtonStyle onClick={onClickAction} type={type}>
             {textInput}
         </OrangeButtonStyle>
+
     )
 }
 

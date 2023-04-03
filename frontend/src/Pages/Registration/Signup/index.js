@@ -1,11 +1,13 @@
 import OrangeButton from "../../../Components/Button";
-import {SignUpDiv,
+import {
+    SignUpDiv,
     InputSignInStyle,
-    RegistrationContentDiv
-    } from "./Signup.style";
+    RegistrationContentDiv, ButtonRegistrationDiv
+} from "./Signup.style";
 import RegistrationTitle from "../RegistrationTitle";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import lunaAPI from "../../../Axios/lunaApi";
 
 const Registration = () => {
     const navigate = useNavigate();
@@ -14,9 +16,22 @@ const Registration = () => {
         setEmail(e.target.value);
     };
 
-    const handleRegisterClick = () => {
-        navigate("/registration-message");
+    const handleRegisterClick = (e) => {
+        e.preventDefault();
+        registerUser()
     };
+
+    const registerUser = async () => {
+        const data = {
+            "email": userEmail
+        }
+        let response = await lunaAPI.post('/auth/registration/',data)
+        try {
+            navigate("/registration-message");
+        } catch (error) {
+            console.log(error)
+        }
+      }
 
 
     return (
@@ -31,7 +46,9 @@ const Registration = () => {
                             onChange={handleEmailInput}
                         ></InputSignInStyle >
                     </form>
-                    <OrangeButton textInput={'Register'} onClickAction={handleRegisterClick}/>
+                    <ButtonRegistrationDiv>
+                        <OrangeButton textInput={'Register'} onClickAction={handleRegisterClick}/>
+                    </ButtonRegistrationDiv>
                 </RegistrationContentDiv>
             </SignUpDiv>
     )

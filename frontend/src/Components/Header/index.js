@@ -28,20 +28,21 @@ const Header = () => {
             <HeaderRightDiv>
                 <HeaderLinksDiv>
                     <NavLink
-                        to="/home_page"
+                        to="/"
                         style={({ isActive }) =>
                         isActive
                         ? {
                           fontWeight: 700,
-                            color: "black",
+                            color: "#646363",
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
-                          borderBottom: "2px solid #E47D31",
+                          borderBottom: "3px solid #E47D31",
                           height: "100%",
+                            boxSizing: "border-box",
                         }
                       : { textDecoration: "none",
-                            color: "black",
+                            color: "#646363",
                           display: "flex",
                           alignItems: "center",
                           height: "100%",}
@@ -50,20 +51,21 @@ const Header = () => {
                         <p>Home</p>
                     </NavLink>
                     <NavLink
-                        to="/restaurants"
+                        to="/search"
                         style={({ isActive }) =>
                         isActive
                         ? {
                           fontWeight: 700,
-                            color: "black",
+                            color: "#646363",
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
-                          borderBottom: "2px solid #E47D31",
+                          borderBottom: "3px solid #E47D31",
                           height: "100%",
+                            boxSizing: "border-box",
                         }
                       : { textDecoration: "none",
-                            color: "black",
+                            color: "#646363",
                           display: "flex",
                           alignItems: "center",
                           height: "100%",}
@@ -77,15 +79,16 @@ const Header = () => {
                         isActive
                         ? {
                           fontWeight: 700,
-                            color: "black",
+                            color: "#646363",
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
-                          borderBottom: "2px solid #E47D31",
+                          borderBottom: "3px solid #E47D31",
                           height: "100%",
+                            boxSizing: "border-box",
                         }
                       : { textDecoration: "none",
-                            color: "black",
+                            color: "#646363",
                           display: "flex",
                           alignItems: "center",
                           height: "100%",}

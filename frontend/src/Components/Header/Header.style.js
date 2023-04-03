@@ -51,6 +51,9 @@ export const HeaderButtonLeft = styled.button`
   border-right: 1px solid white;
   font-weight: 400;
   font-size: 16px;
+  :hover{
+    cursor: pointer;
+  }
 `
 
 export const HeaderButtonRight = styled.button`
@@ -60,4 +63,7 @@ export const HeaderButtonRight = styled.button`
   width: 50%;
   font-weight: 400;
   font-size: 16px;  
+  :hover{
+    cursor: pointer;
+  }
 `
