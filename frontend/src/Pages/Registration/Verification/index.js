@@ -8,8 +8,6 @@ import {
     VerificationLeftDiv,
     VerificationRightDiv
 } from "./Verification.style";
-import Header from "../../../Components/Header";
-import Footer from "../../../Components/Footer";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import lunaAPI from "../../../Axios/lunaApi";

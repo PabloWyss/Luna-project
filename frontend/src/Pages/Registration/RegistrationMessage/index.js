@@ -3,11 +3,9 @@ import {SignUpDiv,
     } from "../Signup/Signup.style";
 import RegistrationTitle from "../RegistrationTitle";
 import {RegistrationMessageP} from "./ReguistrationMessage.style";
-import Header from "../../../Components/Header";
-import Footer from "../../../Components/Footer";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import OrangeButton from "../../../Components/Button";
+
 const RegistrationMessage = () => {
     const navigate = useNavigate()
     useEffect(() => {

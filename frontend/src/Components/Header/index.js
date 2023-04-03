@@ -28,7 +28,7 @@ const Header = () => {
             <HeaderRightDiv>
                 <HeaderLinksDiv>
                     <NavLink
-                        to="/home_page"
+                        to="/"
                         style={({ isActive }) =>
                         isActive
                         ? {
@@ -39,6 +39,7 @@ const Header = () => {
                           alignItems: "center",
                           borderBottom: "3px solid #E47D31",
                           height: "100%",
+                            boxSizing: "border-box",
                         }
                       : { textDecoration: "none",
                             color: "black",
@@ -50,7 +51,7 @@ const Header = () => {
                         <p>Home</p>
                     </NavLink>
                     <NavLink
-                        to="/restaurants"
+                        to="/search"
                         style={({ isActive }) =>
                         isActive
                         ? {
@@ -61,6 +62,7 @@ const Header = () => {
                           alignItems: "center",
                           borderBottom: "3px solid #E47D31",
                           height: "100%",
+                            boxSizing: "border-box",
                         }
                       : { textDecoration: "none",
                             color: "black",
@@ -83,6 +85,7 @@ const Header = () => {
                           alignItems: "center",
                           borderBottom: "3px solid #E47D31",
                           height: "100%",
+                            boxSizing: "border-box",
                         }
                       : { textDecoration: "none",
                             color: "black",
