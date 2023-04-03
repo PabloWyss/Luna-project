@@ -13,7 +13,7 @@ export const Avatar = styled.label`
   height: 200px;
   width: 200px;
   left: 100px;
-  top: 5%;
+  top: 13%;
   z-index: 5;
   cursor: pointer;
   background-image: url(${props => props.image});
@@ -37,9 +37,9 @@ export const Avatar = styled.label`
 export const ProfileNav = styled.div`
   position: absolute;
   height: 500px;
-  width: 300px;
+  width: 200px;
   left: 100px;
-  top: 26%;
+  top: 35%;
   z-index: 5;
 `;
 
@@ -72,7 +72,7 @@ export const About = styled.div`
   align-self: flex-end;
   justify-content: flex-end;
   background-color: #F8F8F8;
-  height: 600px;
+  height: 1200px;
   width: 20%;
   padding: 20px;
   position: absolute;
@@ -116,4 +116,13 @@ export const ProfileNavButtons = styled.div`
       outline: none;
     }
   }
+`;
+export const AboutTitle = styled.h1`
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin-bottom: 20px;
 `;
