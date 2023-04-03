@@ -7,7 +7,8 @@ export const Container = styled.div`
   left: 362px;
   margin-top: 150px;
   margin-left: 300px;
-  background-color: pink;
+  font-weight: 700;
+  font-size: 20px;
 `;
 
 export const Title = styled.h2`
