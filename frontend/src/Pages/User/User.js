@@ -99,7 +99,7 @@ const UserProfile = () => {
       <Avatar htmlFor="avatar-image" image={avatarImage}>
         <input id="avatar-image" type="file" accept="image/*" onChange={handleAvatarChange} />
       </Avatar>
-      <BannerText name={firstName} lastName={lastName} location={location} />
+      <BannerText firstName={firstName} lastName={lastName} location={location} />
       <ProfileNav>
         <p>{firstName}'s Profile</p>
         <ProfileNavButtons>
