@@ -17,7 +17,6 @@ const Homepage = () => {
           <RestaurantCard />
           <RestaurantCard />
         </Grid>
-        <RatingStars />
       </HomeBody>
     </Main >
   );
