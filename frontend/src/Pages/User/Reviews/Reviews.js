@@ -1,6 +1,7 @@
 import React from "react";
 import {
     Container,
+    ReviewsTitleDateDiv,
     Title,
 } from './ReviewStyles';
 import ReviewComponent from "./ReviewComponent";
@@ -8,7 +9,11 @@ import ReviewComponent from "./ReviewComponent";
 const Reviews = () => {
   return (
     <Container>
-        <Title>Reviews</Title>
+        <ReviewsTitleDateDiv>
+            <Title>Reviews</Title>
+        </ReviewsTitleDateDiv>
+        <ReviewComponent/>
+        <ReviewComponent/>
         <ReviewComponent/>
         <ReviewComponent/>
     </Container>

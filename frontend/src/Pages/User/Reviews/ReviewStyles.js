@@ -8,13 +8,16 @@ export const Container = styled.div`
   margin-left: 300px;
   font-weight: 700;
   border: 1px solid #EBEBEB ;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   
 `;
 
 export const Title = styled.h2`
   font-size: 20px;
   margin: 0;
-  padding: 20px;
   font-weight: 700;
   background: white;
 `;
@@ -23,17 +26,36 @@ export const ReviewsDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border-bottom: 1px solid #EBEBEB;
   background: white;
   gap: 15px;
+  position: relative;
+  width: 95%;
 `
 export const ReviewsTitleDiv = styled.div`
   font-weight: 400;
   font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 `
 
 export const ReviewsDescriptionDiv = styled.div`
   font-weight: 300;
   font-size: 16px;
+`
+
+export const ReviewsTitleDateDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  width: 95%;
+  padding-top: 20px;
+`
+export const ReviewsDateP = styled.p`
+  font-weight: 300;
+  font-size: 12px;
 `

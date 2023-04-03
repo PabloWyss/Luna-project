@@ -1,4 +1,4 @@
-import {ReviewsDescriptionDiv, ReviewsDiv, ReviewsTitleDiv} from "../ReviewStyles";
+import {ReviewsDateP, ReviewsDescriptionDiv, ReviewsDiv, ReviewsTitleDiv} from "../ReviewStyles";
 import RatingStars from "../../../../Components/RatingStars/RatingStars";
 import React from "react";
 
@@ -10,6 +10,9 @@ const ReviewComponent = () => {
                 <p>
                     Läderach Chocolatier Suisse
                 </p>
+                <ReviewsDateP>
+                01.01.2018 15:22
+                </ReviewsDateP>
             </ReviewsTitleDiv>
             <div>
                 <RatingStars />
