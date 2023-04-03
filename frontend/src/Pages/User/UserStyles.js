@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #F8F8F8;
-  
+  height:1200px;
 `;
 
 export const Avatar = styled.label`
@@ -72,7 +72,7 @@ export const About = styled.div`
   align-self: flex-end;
   justify-content: flex-end;
   background-color: #F8F8F8;
-  height: 1200px;
+  height:1000px;
   width: 20%;
   padding: 20px;
   position: absolute;
