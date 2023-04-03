@@ -5,9 +5,7 @@ import Signup from "./Signup";
 const Registration = () => {
     return (
         <div>
-            <Header/>
             <Signup/>
-            <Footer/>
         </div>
     )
 

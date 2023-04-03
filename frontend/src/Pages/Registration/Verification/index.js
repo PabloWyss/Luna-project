@@ -91,7 +91,6 @@ const Verification = () => {
 
     return (
         <div>
-            <Header/>
             <SignUpDiv>
                 <RegistrationTitle inputText={'VERIFICATION'}/>
                     <VerificationForm onSubmit={handleSubmitButton}>
@@ -144,7 +143,6 @@ const Verification = () => {
                         </ButtonRegistrationDiv>
                     </VerificationForm>
             </SignUpDiv>
-            <Footer/>
         </div>
     )
 }

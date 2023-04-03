@@ -13,12 +13,11 @@ const RegistrationMessage = () => {
     useEffect(() => {
         setTimeout(() => {
           navigate('/verification')
-        }, 10000)
+        }, 5000)
     }, [])
 
     return (
         <div>
-            <Header/>
             <SignUpDiv>
                 <RegistrationTitle inputText={'REGISTRATION'}/>
                 <RegistrationContentDiv>
@@ -30,7 +29,6 @@ const RegistrationMessage = () => {
                     </RegistrationMessageP>
                 </RegistrationContentDiv>
             </SignUpDiv>
-            <Footer/>
         </div>
 
 )

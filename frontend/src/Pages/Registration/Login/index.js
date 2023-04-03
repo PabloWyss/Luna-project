@@ -2,14 +2,19 @@ import {ButtonRegistrationDiv, InputSignInStyle, SignUpDiv} from "../Signup/Sign
 import RegistrationTitle from "../RegistrationTitle";
 import OrangeButton from "../../../Components/Button";
 import {LoginDiv, LoginInnerDiv} from "./Login.style";
-import Header from "../../../Components/Header";
-import Footer from "../../../Components/Footer";
 import {useState} from "react";
+import lunaAPI from "../../../Axios/lunaApi";
+import {useDispatch} from "react-redux";
+import {updateUserData} from "../../../Redux/Slices/user";
+import {useNavigate} from "react-router-dom";
+import {VerificationForm} from "../Verification/Verification.style";
 
 const Login = () => {
 
     const [userUsername, setEmail] = useState("");
     const [userPassword, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
       //store typed email
     const handleUsernameInput = (e) => {
@@ -21,15 +26,32 @@ const Login = () => {
         setPassword(e.target.value);
     };
 
+    const handleSubmitButton = (e) => {
+         e.preventDefault();
+         registerUser()
+    }
 
+    const registerUser = async () => {
+        const data = {
+            "email": userUsername,
+            "password" : userPassword
+        }
+        let response = await lunaAPI.post('/auth/token/',data)
+        try {
+            localStorage.setItem("token", response.data.access);
+            dispatch(updateUserData(response.data))
+            navigate("/profile");
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div>
-            <Header/>
             <SignUpDiv>
                 <RegistrationTitle inputText={'LOGIN'}/>
                 <LoginDiv>
-                    <form>
+                    <VerificationForm onSubmit={handleSubmitButton}>
                         <LoginInnerDiv>
                             <InputSignInStyle
                                 placeholder="Username"
@@ -43,13 +65,12 @@ const Login = () => {
                                 onChange={handlePasswordInput}
                             />
                         </LoginInnerDiv>
-                    </form>
-                    <ButtonRegistrationDiv>
-                        <OrangeButton textInput={'Login'}/>
-                    </ButtonRegistrationDiv>
+                        <ButtonRegistrationDiv>
+                            <OrangeButton textInput={'Login'} type={"submit"}/>
+                        </ButtonRegistrationDiv>
+                    </VerificationForm>
                 </LoginDiv>
             </SignUpDiv>
-            <Footer/>
         </div>
     )
 }

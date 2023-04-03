@@ -16,7 +16,8 @@ const Registration = () => {
         setEmail(e.target.value);
     };
 
-    const handleRegisterClick = () => {
+    const handleRegisterClick = (e) => {
+        e.preventDefault();
         registerUser()
     };
 
@@ -26,7 +27,6 @@ const Registration = () => {
         }
         let response = await lunaAPI.post('/auth/registration/',data)
         try {
-            console.log(response.data)
             navigate("/registration-message");
         } catch (error) {
             console.log(error)
