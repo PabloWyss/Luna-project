@@ -23,6 +23,10 @@ const HeaderRight = styled.div`
   gap: 20px;
 `
 
+const DateContainer = styled.div`
+  padding: 13px 9px;
+`
+
 const ReviewBody = styled.div`
   padding: 10px 10px 0 10px;
 `
@@ -35,9 +39,9 @@ const Review = () => {
           <ReviewUser />
           <RatingStars />
         </HeaderRight>
-        <div>
+        <DateContainer>
           <p>Date</p>
-        </div>
+        </DateContainer>
       </ReviewHeader>
       <ReviewBody>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu fermentum lectus. Vestibulum vitae tempor metus. Fusce iaculis convallis sapien a elementum. Vestibulum fringilla luctus odio, id pharetra eros mollis.</p>

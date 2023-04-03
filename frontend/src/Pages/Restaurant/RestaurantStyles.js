@@ -58,13 +58,14 @@ export const ContactDetails = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
-  padding: 0 25px;
+  padding: 0 25px 0 5px;
 `
 
 export const IconTextContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 30px;
+  padding-left: 20px;
 
   img{
     width: 18px;
