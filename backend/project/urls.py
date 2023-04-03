@@ -26,6 +26,7 @@ urlpatterns = [
     path('backend/api/admin/', admin.site.urls),
 
     path('backend/api/users/', include('user.urls')),
+    # path('backend/api/restaurants/', include('restaurant.urls')),
 
     path('backend/api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('backend/api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
