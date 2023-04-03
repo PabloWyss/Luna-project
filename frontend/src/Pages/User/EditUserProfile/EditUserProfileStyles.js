@@ -17,7 +17,7 @@ export const Form = styled.form`
   justify-content: space-evenly;
   height: 80%;
   width: 80%;
-  margin: auto;
+  margin-left: 20px;
 `;
 
 export const Label = styled.label`
@@ -72,7 +72,7 @@ export const TextArea = styled.textarea`
   line-height: 23px;
   letter-spacing: 0px;
   text-align: left;
-  color: #303030;
+  color: #303030;fr
   padding: 10px;
   margin-bottom: 20px;
   box-sizing: border-box;
@@ -90,7 +90,12 @@ export const EditTitle = styled.h1`
   margin-bottom: 10px;
   line-height: 100%;
   letter-spacing: 0px;
-  margin-left: 50px ;
+  margin-left: 20px ;
   margin-bottom: 20px;
-  margin top: 10px;
+  margin-top: 20px;
+`;
+
+export const SaveButton = styled.div`
+  width: 200px;
+  height: 56px;
 `;
