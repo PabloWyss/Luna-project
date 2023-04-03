@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     # apps
     'registration',
     'user',
+    'restaurant',
+    'comment',
+    'review',
 
     # third party apps
     'rest_framework',
