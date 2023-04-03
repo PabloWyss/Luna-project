@@ -1,19 +1,21 @@
 from rest_framework import generics
+from rest_framework.exceptions import PermissionDenied
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from restaurant.models import Restaurant
-from restaurant.permissions import IsOnlyAuthenticatedUser
-from restaurant.serializers import RestaurantSerializer
+from restaurant.permissions import IsOnlyAuthenticatedUser, IsOnlyChangeableByUser
+from restaurant.serializers import RestaurantSerializer, CreateRestaurantSerializer, PatchRestaurantSerializer
 
 
 class RestaurantList(generics.ListCreateAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
-    authentication_classes = [IsOnlyAuthenticatedUser]
 
 
 class RestaurantCreate(generics.CreateAPIView):
     queryset = Restaurant.objects.all()
-    serializer_class = RestaurantSerializer
+    serializer_class = CreateRestaurantSerializer
+    permission_classes = [IsOnlyAuthenticatedUser]
 
 
 class RestaurantCategoryList(generics.ListAPIView):
@@ -21,17 +23,8 @@ class RestaurantCategoryList(generics.ListAPIView):
     serializer_class = RestaurantSerializer
 
     def get_queryset(self):
-        category_id = self.kwargs['category_id']
-        return Restaurant.objects.filter(category_id=category_id)
-
-
-class RestaurantCategoryDetail(generics.RetrieveAPIView):
-    queryset = Restaurant.objects.all()
-    serializer_class = RestaurantSerializer
-
-    def get_queryset(self):
-        category_id = self.kwargs['category_id']
-        return Restaurant.objects.filter(category_id=category_id)
+        category = self.kwargs['category']
+        return Restaurant.objects.filter(category=category)
 
 
 class RestaurantListByUser(generics.ListAPIView):
@@ -40,9 +33,24 @@ class RestaurantListByUser(generics.ListAPIView):
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
-        return Restaurant.objects.filter(user_id=user_id)
+        return Restaurant.objects.filter(created_by_user_id=user_id)
 
 
 class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Restaurant.objects.all()
-    serializer_class = RestaurantSerializer
+    serializer_class = PatchRestaurantSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def perform_update(self, serializer):
+        restaurant = self.get_object()
+        if restaurant.created_by_user == self.request.user:
+            serializer.save()
+        else:
+            raise PermissionDenied()
+
+    def perform_destroy(self, instance):
+        restaurant = self.get_object()
+        if restaurant.created_by_user == self.request.user:
+            instance.delete()
+        else:
+            raise PermissionDenied()
