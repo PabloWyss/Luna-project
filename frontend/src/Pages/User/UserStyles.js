@@ -8,14 +8,14 @@ export const Container = styled.div`
 `;
 
 export const Avatar = styled.label`
-  background-color: papayawhip;
+  background-color: orange;
   position: absolute;
   height: 200px;
   width: 200px;
   left: 100px;
   top: 13%;
   z-index: 5;
-  cursor: pointer;
+  cursor: ${props => (props.activeView === 'reviews' ? 'pointer' : 'default')};
   background-image: url(${props => props.image});
   background-size: cover;
   background-position: center;
@@ -44,7 +44,7 @@ export const ProfileNav = styled.div`
 `;
 
 export const Background = styled.label`
-  background-color: rosybrown;
+  background-color: darkgrey;
   height: 15%;
   width: 100%;
   position: absolute;
