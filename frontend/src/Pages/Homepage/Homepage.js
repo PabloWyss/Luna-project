@@ -1,4 +1,3 @@
-import RatingStars from "../../Components/RatingStars/RatingStars";
 import RestaurantCard from "../Search/RestaurantsGrid/RestaurantCard/RestaurantCard";
 import { Grid, HomeBanner, HomeBody, Main, Underline } from "./HomepageStyles";
 
