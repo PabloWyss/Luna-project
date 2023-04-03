@@ -7,7 +7,7 @@ export const Container = styled.div`
   height:1200px;
 `;
 
-export const Avatar = styled.label`
+export const Avatar = styled.div`
   background-color: orange;
   position: absolute;
   height: 200px;
@@ -15,7 +15,6 @@ export const Avatar = styled.label`
   left: 100px;
   top: 13%;
   z-index: 5;
-  cursor: ${props => (props.activeView === 'reviews' ? 'pointer' : 'default')};
   background-image: url(${props => props.image});
   background-size: cover;
   background-position: center;
@@ -43,7 +42,7 @@ export const ProfileNav = styled.div`
   z-index: 5;
 `;
 
-export const Background = styled.label`
+export const Background = styled.div`
   background-color: darkgrey;
   height: 15%;
   width: 100%;
@@ -55,16 +54,12 @@ export const Background = styled.label`
   &:hover {
     opacity: 0.8;
   }
-  &::before {
-    content: "Upload Background";
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+
   & input[type="file"] {
-    display: none;
+
+  }
+  input {
+    border: 1px solid red;
   }
 `;
 
