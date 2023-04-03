@@ -5,10 +5,10 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
-
 from project import settings
 from registration.views import RegistrationView, RegistrationValidationView
 from user.views import CustomTokenObtainPairView
+from restaurant.views import CategoryListView
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -42,6 +42,8 @@ urlpatterns = [
 
     path('backend/api/comment/', include('comment.urls')),
     path('backend/api/review/', include('review.urls')),
+
+    path('backend/api/category/list/', CategoryListView.as_view(), name='category_list'),
 ]
 
 # Add media files serving in debug mode
