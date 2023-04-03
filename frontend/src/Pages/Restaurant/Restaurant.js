@@ -8,8 +8,12 @@ import moneyImg from '../../Assets/money.svg';
 import clockImg from '../../Assets/clock.svg';
 import { BodyContainer, ButtonsContainer, ButtonWraper, ButtonWraperSmall, Category, ContactContainer, ContactDetails, FilterBar, HeaderContainer, IconTextContainer, Name, RatingContainer, ReviewsList, Separator, TitleContainer } from './RestaurantStyles.js';
 import Review from './Review/Review.js';
+import { useSelector } from 'react-redux';
 
 const Restaurant = () => {
+
+  const restaurantData = useSelector(state => state.restaurant.restaurantData)
+
   return (
     <div>
       <HeaderContainer>

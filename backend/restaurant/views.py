@@ -3,7 +3,7 @@ from rest_framework.exceptions import PermissionDenied
 
 from restaurant.models import Restaurant
 from restaurant.permissions import IsOnlyAuthenticatedUser, IsOnlyChangeableByUser
-from restaurant.serializers import RestaurantSerializer, CreateRestaurantSerializer, PatchRestaurantSerializer
+from restaurant.serializers import RestaurantSerializer, CreateRestaurantSerializer, PatchRestaurantSerializer, RestaurantCategorySerializer
 
 
 class RestaurantList(generics.ListCreateAPIView):
@@ -53,3 +53,8 @@ class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
             instance.delete()
         else:
             raise PermissionDenied()
+
+
+class CategoryListView(generics.ListAPIView):
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantCategorySerializer
