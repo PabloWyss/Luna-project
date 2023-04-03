@@ -20,6 +20,7 @@ export const Title = styled.h2`
   margin: 0;
   font-weight: 700;
   background: white;
+  color: #303030;
 `;
 
 export const ReviewsDiv = styled.div`
@@ -40,11 +41,13 @@ export const ReviewsTitleDiv = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  color: #4C4C4C;
 `
 
 export const ReviewsDescriptionDiv = styled.div`
   font-weight: 300;
   font-size: 16px;
+  color: #303030;
 `
 
 export const ReviewsTitleDateDiv = styled.div`
@@ -58,4 +61,5 @@ export const ReviewsTitleDateDiv = styled.div`
 export const ReviewsDateP = styled.p`
   font-weight: 300;
   font-size: 12px;
+  color: #303030;
 `
