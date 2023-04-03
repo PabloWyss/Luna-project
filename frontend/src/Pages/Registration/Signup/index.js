@@ -6,6 +6,7 @@ import {SignUpDiv,
 import RegistrationTitle from "../RegistrationTitle";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import lunaAPI from "../../../Axios/lunaApi";
 
 const Registration = () => {
     const navigate = useNavigate();
@@ -15,8 +16,21 @@ const Registration = () => {
     };
 
     const handleRegisterClick = () => {
-        navigate("/registration-message");
+        registerUser()
     };
+
+    const registerUser = async () => {
+        const data = {
+            "email": userEmail
+        }
+        let response = await lunaAPI.post('/auth/registration/',data)
+        try {
+            console.log(response.data)
+            navigate("/registration-message");
+        } catch (error) {
+            console.log(error)
+        }
+      }
 
 
     return (

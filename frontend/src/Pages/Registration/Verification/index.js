@@ -75,7 +75,6 @@ const Verification = () => {
             <Header/>
             <SignUpDiv>
                 <RegistrationTitle inputText={'VERIFICATION'}/>
-
                     <VerificationForm onSubmit={handleSubmitButton}>
                         <VerificationDiv>
                             <VerificationInnerDiv>
