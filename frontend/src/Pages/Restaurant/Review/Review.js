@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import LikeCommentButtons from "../../../Components/LikeCommentButtons/LikeCommentButtons";
 import RatingStars from "../../../Components/RatingStars/RatingStars";
 import ReviewUser from "../../../Components/UserCardHeader/UserCardHeader";
 
@@ -23,8 +24,7 @@ const HeaderRight = styled.div`
 `
 
 const ReviewBody = styled.div`
-
-  p{
+  >p{
     padding: 9px;
   }
 `
@@ -43,6 +43,7 @@ const Review = () => {
       </ReviewHeader>
       <ReviewBody>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu fermentum lectus. Vestibulum vitae tempor metus. Fusce iaculis convallis sapien a elementum. Vestibulum fringilla luctus odio, id pharetra eros mollis.</p>
+        <LikeCommentButtons />
       </ReviewBody>
     </ReviewContainer>
   );

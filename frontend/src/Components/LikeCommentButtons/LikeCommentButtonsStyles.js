@@ -11,6 +11,7 @@ export const Buttons = styled.div`
   margin: 8px 0 17px 0;
   font-size: 16px;
   font-weight: 400;
+  width: 249px;
 `
 
 export const LikeButton = styled.div`
