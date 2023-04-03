@@ -77,7 +77,7 @@ class RegistrationValidationView(APIView):
         if not user.registration.is_validation_code_valid(validation_code):
             return Response({'error': 'Validation code is not valid'}, status=status.HTTP_400_BAD_REQUEST)
 
-        if not all([username, password, password_repeat, first_name, last_name]):
+        if not all([username, password, password_repeat, location]):
             return Response({'error': 'All fields are required'}, status=status.HTTP_400_BAD_REQUEST)
 
         if password != password_repeat:
