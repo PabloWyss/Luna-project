@@ -6,7 +6,6 @@ import { Grid, Main, MainMenu, SearchBar, SearchBarContainer, SearchCategory, Ta
 const Search = () => {
   return (
     <div>
-      <Header />
       <SearchBarContainer>
         <SearchBar>
           <input placeholder="Search..." />
@@ -18,9 +17,9 @@ const Search = () => {
       </SearchBarContainer>
       <Main>
         <MainMenu>
-          <Tab to='restaurants' activeClassName="current">Restaurants</Tab>
-          <Tab to='reviews' activeClassName="current">Reviews</Tab>
-          <Tab to='users' activeClassName="current">Users</Tab>
+          <Tab to='restaurants'>Restaurants</Tab>
+          <Tab to='reviews'>Reviews</Tab>
+          <Tab to='users'>Users</Tab>
         </MainMenu>
         <Grid>
           <Outlet />
