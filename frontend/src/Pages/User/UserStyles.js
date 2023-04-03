@@ -111,12 +111,14 @@ export const ProfileNavButtons = styled.div`
       opacity: 0.8;
     }
   
-    &:focus {
-      background-color: ${({clicked}) => clicked ? '#00000015' : '#FFFFFF'};
-      outline: none;
-    }
-  }
+     &:focus {
+          outline: none;
+          background-color: ${({ activeView, view }) => activeView === view ? '#00000015' : '#FFFFFF'};
+          border-left: ${({ activeView, view }) => activeView === view ? '5px solid orange' : 'none'};
+        }
+      }
 `;
+
 export const AboutTitle = styled.h1`
   font-family: Roboto;
   font-size: 20px;

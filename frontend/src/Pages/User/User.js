@@ -32,7 +32,7 @@ const UserProfile = () => {
   const [showRestaurants, setShowRestaurants] = useState(false);
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [bannerText, setBannerText] = useState('');
-
+  const [activeView, setActiveView] = useState('reviews');
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -103,10 +103,13 @@ const UserProfile = () => {
       <ProfileNav>
         <p>{firstName}'s Profile</p>
         <ProfileNavButtons>
-          <button onClick={handleReviewsClick}> <StarIcon />Reviews</button>
-          <button onClick={handleCommentsClick}> <CommentIcon />Comments</button>
-          <button onClick={handleRestaurantsClick}>  <RestaurantIcon />Restaurants</button>
-          <button onClick={handleEditProfileClick}>  <EditIcon />Edit Profile</button>
+        <ProfileNavButtons>
+          <button onClick={handleReviewsClick} clicked={activeView === 'reviews'}> <StarIcon />Reviews</button>
+          <button onClick={handleCommentsClick} clicked={activeView === 'comments'}> <CommentIcon />Comments</button>
+          <button onClick={handleRestaurantsClick} clicked={activeView === 'restaurants'}>  <RestaurantIcon />Restaurants</button>
+          <button onClick={handleEditProfileClick} clicked={activeView === 'edit'}>  <EditIcon />Edit Profile</button>
+        </ProfileNavButtons>
+
         </ProfileNavButtons>
       </ProfileNav>
       {showReviews && <Reviews />}
