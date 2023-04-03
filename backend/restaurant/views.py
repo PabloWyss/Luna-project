@@ -1,6 +1,5 @@
 from rest_framework import generics
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from restaurant.models import Restaurant
 from restaurant.permissions import IsOnlyAuthenticatedUser, IsOnlyChangeableByUser
@@ -39,7 +38,7 @@ class RestaurantListByUser(generics.ListAPIView):
 class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = PatchRestaurantSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOnlyChangeableByUser]
 
     def perform_update(self, serializer):
         restaurant = self.get_object()
