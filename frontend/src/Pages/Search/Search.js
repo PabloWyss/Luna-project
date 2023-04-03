@@ -6,7 +6,6 @@ import { Grid, Main, MainMenu, SearchBar, SearchBarContainer, SearchCategory, Ta
 const Search = () => {
   return (
     <div>
-      <Header />
       <SearchBarContainer>
         <SearchBar>
           <input placeholder="Search..." />
