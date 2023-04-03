@@ -39,7 +39,13 @@ const Login = () => {
         let response = await lunaAPI.post('/auth/token/',data)
         try {
             localStorage.setItem("token", response.data.access);
-            dispatch(updateUserData(response.data))
+        } catch (error) {
+            console.log(error)
+        }
+        let response2 = await lunaAPI.get('users/me/')
+        try {
+            console.log(response2)
+            dispatch(updateUserData(response2.data))
             navigate("/profile");
         } catch (error) {
             console.log(error)
