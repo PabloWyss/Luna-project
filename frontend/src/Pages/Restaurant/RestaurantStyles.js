@@ -75,3 +75,55 @@ export const IconTextContainer = styled.div`
     color: #4C4C4C;
   }
 `
+export const BodyContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 22px;
+  background-color: #F2F2F2;
+  padding: 25px;
+`
+
+export const FilterBar = styled.div`
+  width: 650px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 25px;
+
+  input{
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #EBEBEB;
+    border-radius: 3px;
+    margin-right: 20px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+`
+
+export const ReviewsList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+`
+
+export const Separator = styled.div`
+  height: 1px;
+  background-color: #D8D8D8;
+  margin: 15px 0;
+`
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 75px;
+  margin: 30px 17px;
+`
+
+export const ButtonWraper = styled.div`
+  width: 200px;
+`
+
+export const ButtonWraperSmall = styled.div`
+  width: 120px;
+`

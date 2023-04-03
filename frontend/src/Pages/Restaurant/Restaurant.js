@@ -6,60 +6,8 @@ import webImg from '../../Assets/web.svg';
 import phoneImg from '../../Assets/phone.svg';
 import moneyImg from '../../Assets/money.svg';
 import clockImg from '../../Assets/clock.svg';
-import { Category, ContactContainer, ContactDetails, HeaderContainer, IconTextContainer, Name, RatingContainer, TitleContainer } from './RestaurantStyles.js';
-import styled from 'styled-components';
+import { BodyContainer, ButtonsContainer, ButtonWraper, ButtonWraperSmall, Category, ContactContainer, ContactDetails, FilterBar, HeaderContainer, IconTextContainer, Name, RatingContainer, ReviewsList, Separator, TitleContainer } from './RestaurantStyles.js';
 import Review from './Review/Review.js';
-
-const BodyContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 22px;
-  background-color: #F2F2F2;
-  padding: 25px;
-`
-
-const FilterBar = styled.div`
-  width: 650px;
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 25px;
-
-  input{
-    width: 100%;
-    background: #FFFFFF;
-    border: 1px solid #EBEBEB;
-    border-radius: 3px;
-    margin-right: 20px;
-  }
-`
-
-const ReviewsList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 15px; 
-`
-
-const Separator = styled.div`
-  height: 1px;
-  background-color: #D8D8D8;
-  margin: 15px 0;
-`
-
-const ButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 75px;
-  margin-top: 30px;
-`
-
-const ButtonWraper = styled.div`
-  width: 200px;
-`
-
-const ButtonWraperSmall = styled.div`
-  width: 120px;
-`
 
 const Restaurant = () => {
   return (
@@ -94,7 +42,7 @@ const Restaurant = () => {
       <BodyContainer>
         <div>
           <FilterBar>
-            <input></input>
+            <input placeholder='Filter list...'></input>
             <ButtonWraperSmall>
               <Button textInput={'FILTER'} />
             </ButtonWraperSmall>
