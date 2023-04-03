@@ -33,7 +33,7 @@ const Header = () => {
                         isActive
                         ? {
                           fontWeight: 700,
-                            color: "black",
+                            color: "#646363",
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
@@ -42,7 +42,7 @@ const Header = () => {
                             boxSizing: "border-box",
                         }
                       : { textDecoration: "none",
-                            color: "black",
+                            color: "#646363",
                           display: "flex",
                           alignItems: "center",
                           height: "100%",}
@@ -56,7 +56,7 @@ const Header = () => {
                         isActive
                         ? {
                           fontWeight: 700,
-                            color: "black",
+                            color: "#646363",
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
@@ -65,7 +65,7 @@ const Header = () => {
                             boxSizing: "border-box",
                         }
                       : { textDecoration: "none",
-                            color: "black",
+                            color: "#646363",
                           display: "flex",
                           alignItems: "center",
                           height: "100%",}
@@ -79,7 +79,7 @@ const Header = () => {
                         isActive
                         ? {
                           fontWeight: 700,
-                            color: "black",
+                            color: "#646363",
                           textDecoration: "none",
                           display: "flex",
                           alignItems: "center",
@@ -88,7 +88,7 @@ const Header = () => {
                             boxSizing: "border-box",
                         }
                       : { textDecoration: "none",
-                            color: "black",
+                            color: "#646363",
                           display: "flex",
                           alignItems: "center",
                           height: "100%",}

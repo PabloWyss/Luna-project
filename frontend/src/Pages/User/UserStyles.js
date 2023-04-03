@@ -8,14 +8,14 @@ export const Container = styled.div`
 `;
 
 export const Avatar = styled.label`
-  background-color: papayawhip;
+  background-color: orange;
   position: absolute;
   height: 200px;
   width: 200px;
   left: 100px;
   top: 13%;
   z-index: 5;
-  cursor: pointer;
+  cursor: ${props => (props.activeView === 'reviews' ? 'pointer' : 'default')};
   background-image: url(${props => props.image});
   background-size: cover;
   background-position: center;
@@ -44,7 +44,7 @@ export const ProfileNav = styled.div`
 `;
 
 export const Background = styled.label`
-  background-color: rosybrown;
+  background-color: darkgrey;
   height: 15%;
   width: 100%;
   position: absolute;
@@ -111,12 +111,14 @@ export const ProfileNavButtons = styled.div`
       opacity: 0.8;
     }
   
-    &:focus {
-      background-color: ${({clicked}) => clicked ? '#00000015' : '#FFFFFF'};
-      outline: none;
-    }
-  }
+     &:focus {
+          outline: none;
+          background-color: ${({ activeView, view }) => activeView === view ? '#00000015' : '#FFFFFF'};
+          border-left: ${({ activeView, view }) => activeView === view ? '5px solid orange' : 'none'};
+        }
+      }
 `;
+
 export const AboutTitle = styled.h1`
   font-family: Roboto;
   font-size: 20px;
