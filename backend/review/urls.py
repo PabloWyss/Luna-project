@@ -1,8 +1,12 @@
 from django.urls import path
-from .views import RestaurantReviewListView, RestaurantReviewDetailView, RestaurantReviewLikeView
+
+from review.views import CreateRestaurantReviewView, RestaurantReviewListView, UserRestaurantReviewListView, \
+    ReviewDetailView
 
 urlpatterns = [
-    path('', RestaurantReviewListView.as_view(), name='review-list'),
-    path('<int:pk>/', RestaurantReviewDetailView.as_view(), name='review-detail'),
-    path('<int:pk>/like/', RestaurantReviewLikeView.as_view(), name='review-like'),
+    path("<int:review_id>/", ReviewDetailView.as_view(), name="review_list"),
+    path('new/<int:pk>/', CreateRestaurantReviewView.as_view(), name='create_review'),
+    path('restaurant/<int:restaurant_id>/', RestaurantReviewListView.as_view(), name='restaurant_review_list'),
+    path('user/<int:user_id>/', UserRestaurantReviewListView.as_view(), name='user_review_list'),
+
 ]
