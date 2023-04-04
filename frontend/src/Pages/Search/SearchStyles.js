@@ -11,7 +11,7 @@ export const SearchBarContainer = styled.div`
   border: 1px solid #D8D8D8;
 `
 export const SearchBar = styled.div`
-  width: 80%;
+  width: 77%;
   border-right: 1px solid #D8D8D8;
   padding: 12px 32px;
 
@@ -29,7 +29,7 @@ export const SearchBar = styled.div`
 `
 
 export const SearchCategory = styled.div`
-  padding: 12px 0 12px 41px;
+  padding: 12px;
   display: flex;
   flex-direction: row;
   justify-content: center;
