@@ -11,13 +11,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReviewsList from './ReviewsList/ReviewsList.js';
 import lunaAPI from '../../Axios/lunaApi.js';
 import { updateRestaurantData } from '../../Redux/Slices/restaurant.js';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 
 
 const Restaurant = () => {
   const dispatch = useDispatch();
   const { restaurantID } = useParams();
+  const [restaurantData, setRestaurantData] = useState({})
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -34,7 +35,7 @@ const Restaurant = () => {
         };
 
         const response = await lunaAPI.get(`restaurants/${restaurantID}/`, config);
-        dispatch(updateRestaurantData(response.data));
+        setRestaurantData(response.data)
       } catch (error) {
         console.log(error);
       }
@@ -42,8 +43,7 @@ const Restaurant = () => {
     getRestaurantByID();
   }, []);
 
-  const restaurantData = useSelector(state => state.restaurant.restaurantData)
-  console.log(restaurantData.reviews)
+
 
   return (
     <div>
