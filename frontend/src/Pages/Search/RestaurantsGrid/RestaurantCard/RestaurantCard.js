@@ -23,17 +23,21 @@ const RestaurantCard = (prop) => {
         e.preventDefault()
         navigate(`/restaurant/${prop.restaurant.id}/`)
     }
+
+
+
+
   return (
-    <Card onClick={handleClickDivRestaurantCard}>
+    <Card>
       <Details>
-        <RestName>{prop.restaurant.name}</RestName>
-        <RestAddress>{prop.restaurant.street}</RestAddress>
+        <RestName onClick={handleClickDivRestaurantCard}>{prop.restaurant.name}</RestName>
+        <RestAddress onClick={handleClickDivRestaurantCard}>{prop.restaurant.street}</RestAddress>
         <RatingContainer>
           <RatingStars />
           <ReviewCount>{prop.restaurant.reviews.length}</ReviewCount>
         </RatingContainer>
       </Details>
-      <RestaurantImageContainer>
+      <RestaurantImageContainer onClick={handleClickDivRestaurantCard}>
         <RestaurantImg  src={baseURLImage+prop.restaurant.image}></RestaurantImg >
       </RestaurantImageContainer>
     </Card>

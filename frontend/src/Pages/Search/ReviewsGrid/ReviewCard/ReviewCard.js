@@ -3,6 +3,7 @@ import { Card, CardHeader, Comment, LatestComments, CardBody, TextGreyBold, Text
 import LikeCommentButtons from "../../../../Components/LikeCommentButtons/LikeCommentButtons";
 import lunaAPI from "../../../../Axios/lunaApi";
 import {useEffect, useState} from "react";
+import reviews from "../../../User/Reviews/Reviews";
 
 const ReviewCard = (props) => {
     const [userReview,setUserReview] = useState({})
