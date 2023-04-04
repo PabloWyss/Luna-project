@@ -2,8 +2,29 @@ import { Outlet } from "react-router-dom";
 import arrow from "../../Assets/arrow.svg";
 import Header from "../../Components/Header";
 import { Grid, Main, MainMenu, SearchBar, SearchBarContainer, SearchCategory, Tab } from "./SearchStyles";
+import {useEffect, useState} from "react";
+import lunaAPI from "../../Axios/lunaApi";
 
 const Search = () => {
+
+    const [listOfRestaurants,setListOfRestaurants] = useState([])
+    const [searchText, setSearchText] = useState('')
+
+    const obtainAllRestaurants = async (search) => {
+    let response = await lunaAPI.get(`/restaurants/${search}`)
+        try {
+            setListOfRestaurants(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        const search = '?search='+searchText
+        obtainAllRestaurants(search)
+    },[])
+
+
   return (
     <div>
       <SearchBarContainer>

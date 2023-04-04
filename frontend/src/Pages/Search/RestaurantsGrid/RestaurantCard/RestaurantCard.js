@@ -6,6 +6,7 @@ import {
     Details,
     RatingContainer,
     RestAddress,
+    RestaurantImageContainer,
     RestaurantImg,
     RestName,
     ReviewCount
@@ -13,8 +14,6 @@ import {
 
 const RestaurantCard = (prop) => {
 
-    console.log(prop.restaurant
-    )
   return (
     <Card>
       <Details>
@@ -25,9 +24,9 @@ const RestaurantCard = (prop) => {
           <ReviewCount>{prop.restaurant.reviews.length}</ReviewCount>
         </RatingContainer>
       </Details>
-      <div>
+      <RestaurantImageContainer>
         <RestaurantImg  src={prop.restaurant.image}></RestaurantImg >
-      </div>
+      </RestaurantImageContainer>
     </Card>
   );
 }
