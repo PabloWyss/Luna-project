@@ -5,10 +5,12 @@ from .models import RestaurantReview
 
 class RestaurantReviewSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
+    review_on_restaurant = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = RestaurantReview
-        fields = '__all__'
+        fields = ('id', 'comments', 'text_content', 'rating', 'date_created', 'date_modified',
+                  'likes_on_review', 'reviewed_by_user', 'liked_by_user', 'review_on_restaurant')
         read_only_fields = ('id', 'date_created', 'date_modified', 'reviewed_by_user', 'review_on_restaurant',
                             'comments')
 
