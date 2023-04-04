@@ -10,7 +10,6 @@ export const OrangeButtonStyle = styled.button`
   font-weight: 400;
   font-size: 16px;
   padding: 10px 20px;
-  flex-shrink: 0;
   :hover{
     cursor: pointer;
   }

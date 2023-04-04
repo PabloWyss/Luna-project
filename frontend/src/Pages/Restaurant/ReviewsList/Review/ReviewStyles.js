@@ -24,6 +24,25 @@ export const DateContainer = styled.div`
   padding: 13px 9px;
 `
 
-export const ReviewBody = styled.div`
-  padding: 10px 10px 0 10px;
+
+
+
+export const AddCommentWraper = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  input{
+    width: 400px;
+    background: #FFFFFF;
+    border: 1px solid #EBEBEB;
+    border-radius: 3px;
+    margin-right: 20px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+`
+
+export const ButtonWraperSmall = styled.div`
+  width: 120px;
+  flex-shrink: 0;
 `
