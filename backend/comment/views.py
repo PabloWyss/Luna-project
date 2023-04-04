@@ -2,6 +2,7 @@ from rest_framework import generics, permissions
 from .models import Comment
 from .serializers import CommentSerializer
 from .permissions import IsOwnerOrAdminOrReadOnly
+from review.models import RestaurantReview
 
 
 class CommentCreateAPIView(generics.CreateAPIView):
@@ -13,7 +14,8 @@ class CommentCreateAPIView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         review_id = self.kwargs.get('review_id')
-        serializer.save(user=self.request.user, comments_on_review=review_id)
+        review = RestaurantReview.objects.get(id=review_id)
+        serializer.save(comment_by_user=self.request.user, comments_on_review=review)
 
 
 class CommentListAPIView(generics.ListAPIView):
