@@ -13,6 +13,7 @@ import Verification from "./Pages/Registration/Verification";
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Restaurant from './Pages/Restaurant/Restaurant';
+import AddReview from './Pages/AddReview';
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/registration-message" element={<RegistrationMessage />} />
                 <Route path="/verification" element={<Verification />} />
                 <Route path="/restaurant" element={<Restaurant />} />
+                <Route path="addreview" element={<AddReview />} />
             </Routes>
             <Footer />
         </div>
