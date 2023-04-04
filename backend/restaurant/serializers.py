@@ -4,6 +4,7 @@ from restaurant.models import Restaurant
 
 class RestaurantSerializer(serializers.ModelSerializer):
     average_rating = serializers.SerializerMethodField()
+
     def get_average_rating(self, obj):
         return obj.get_average_rating()
 
