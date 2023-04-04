@@ -31,7 +31,7 @@ class PatchRestaurantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Restaurant
-        fields = ['name', 'category', 'street', 'city', 'zip_code', 'website', 'phone', 'email', 'opening_hours',
+        fields = ['name', 'reviews', 'category', 'street', 'city', 'zip_code', 'website', 'phone', 'email', 'opening_hours',
                   'price_range', 'image']
 
     def update(self, instance, validated_data):
