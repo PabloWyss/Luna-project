@@ -1,8 +1,9 @@
-from rest_framework import generics, permissions
 from .models import Comment
-from .serializers import CommentSerializer
+from .serializers import CommentSerializer, DeleteSerializer
 from .permissions import IsOwnerOrAdminOrReadOnly
 from review.models import RestaurantReview
+from rest_framework import generics, permissions
+from rest_framework.response import Response
 
 
 class CommentCreateAPIView(generics.CreateAPIView):
@@ -35,5 +36,10 @@ class CommentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
     API endpoint to retrieve, update or delete a specific comment on a review.
     """
     queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrAdminOrReadOnly]
+    serializer_class = DeleteSerializer
+
+    # permission_classes = [permissions.IsAuthenticated, IsOwnerOrAdminOrReadOnly]
+
+    def perform_destroy(self, instance):
+        instance.delete()
+        return Response(status=204)
