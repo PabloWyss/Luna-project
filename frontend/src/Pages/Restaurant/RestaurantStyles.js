@@ -102,12 +102,6 @@ export const FilterBar = styled.div`
   }
 `
 
-export const ReviewsList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 15px; 
-`
-
 export const Separator = styled.div`
   height: 1px;
   background-color: #D8D8D8;
