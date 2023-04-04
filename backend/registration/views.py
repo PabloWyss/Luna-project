@@ -28,6 +28,7 @@ class RegistrationView(APIView):
             return Response({'error': 'User with this email already exists'}, status=status.HTTP_400_BAD_REQUEST)
 
         user = User.objects.create(
+            username=email,
             email=email,
             is_active=False,
         )
