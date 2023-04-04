@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from comment.serializers import CommentSerializer
 from .models import RestaurantReview
 
@@ -29,4 +28,4 @@ class LikeReviewSerializer(serializers.ModelSerializer):
 class UserCommentedReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = RestaurantReview
-        fields = ('id', 'title', 'commented_by_user')
+        fields = ('id', 'text_content', 'reviewed_by_user')
