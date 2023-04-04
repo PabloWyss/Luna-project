@@ -7,7 +7,6 @@ from django.db.models import Q
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import RestaurantSerializer
 from user.serializer import UserSerializer
 from review.serializers import RestaurantReviewSerializer
 from review.models import RestaurantReview
