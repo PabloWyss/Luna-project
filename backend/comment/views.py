@@ -5,6 +5,7 @@ from review.models import RestaurantReview
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 
+
 class CommentCreateAPIView(generics.CreateAPIView):
     """
     API endpoint to create a comment on a review.
@@ -36,10 +37,9 @@ class CommentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
     """
     queryset = Comment.objects.all()
     serializer_class = DeleteSerializer
+
     # permission_classes = [permissions.IsAuthenticated, IsOwnerOrAdminOrReadOnly]
 
     def perform_destroy(self, instance):
         instance.delete()
         return Response(status=204)
-
-
