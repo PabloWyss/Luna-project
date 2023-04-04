@@ -6,17 +6,14 @@ import webImg from '../../Assets/web.svg';
 import phoneImg from '../../Assets/phone.svg';
 import moneyImg from '../../Assets/money.svg';
 import clockImg from '../../Assets/clock.svg';
-import { BodyContainer, ButtonsContainer, ButtonWraper, ButtonWraperSmall, Category, ContactContainer, ContactDetails, FilterBar, HeaderContainer, IconTextContainer, Name, RatingContainer, Separator, TitleContainer } from './RestaurantStyles.js';
-import { useDispatch, useSelector } from 'react-redux';
+import { BodyContainer, ButtonsContainer, ButtonWraper, ButtonWraperSmall, Category, ContactContainer, ContactDetails, FilterBar, HeaderContainer, IconTextContainer, Name, NoReviewsText, RatingContainer, Separator, TitleContainer } from './RestaurantStyles.js';
 import ReviewsList from './ReviewsList/ReviewsList.js';
 import lunaAPI from '../../Axios/lunaApi.js';
-import { updateRestaurantData } from '../../Redux/Slices/restaurant.js';
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 
 
 const Restaurant = () => {
-  const dispatch = useDispatch();
   const { restaurantID } = useParams();
   const [restaurantData, setRestaurantData] = useState({})
 
@@ -53,7 +50,7 @@ const Restaurant = () => {
           <Category>{restaurantData?.category}</Category>
           <RatingContainer>
             <RatingStars />
-            <p>2 reviews</p>
+            <p>{restaurantData?.reviews?.length} reviews</p>
           </RatingContainer>
         </TitleContainer>
         <ContactContainer>
@@ -82,7 +79,14 @@ const Restaurant = () => {
               <Button textInput={'FILTER'} />
             </ButtonWraperSmall>
           </FilterBar>
-          <ReviewsList reviewsList={restaurantData.reviews} />
+          {
+            restaurantData.reviews?.length !== 0 ?
+              <ReviewsList restaurantID={restaurantID} />
+              :
+              <NoReviewsText>
+                No reviews yet
+              </NoReviewsText>
+          }
         </div>
         <div>
           <IconTextContainer>

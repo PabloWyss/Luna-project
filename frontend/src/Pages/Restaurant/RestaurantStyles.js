@@ -106,6 +106,11 @@ export const FilterBar = styled.div`
   }
 `
 
+export const NoReviewsText = styled.div`
+  font-weight: 300px;
+  font-size: 20px;
+`
+
 export const Separator = styled.div`
   height: 1px;
   background-color: #D8D8D8;
