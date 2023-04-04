@@ -1,3 +1,4 @@
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import generics, permissions
 
@@ -9,7 +10,7 @@ from .serializers import RestaurantReviewSerializer, LikeReviewSerializer, UserC
 
 class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RestaurantReviewSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [AllowAny, IsOwnerOrReadOnly]
     lookup_field = 'id'
 
     def get_queryset(self):
@@ -34,7 +35,7 @@ class CreateRestaurantReviewView(generics.CreateAPIView):
 
 class RestaurantReviewListView(generics.ListAPIView):
     serializer_class = RestaurantReviewSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         restaurant = Restaurant.objects.get(pk=self.kwargs['restaurant_id'])
@@ -43,7 +44,7 @@ class RestaurantReviewListView(generics.ListAPIView):
 
 class UserRestaurantReviewListView(generics.ListAPIView):
     serializer_class = RestaurantReviewSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         return RestaurantReview.objects.filter(reviewed_by_user=self.kwargs['user_id'])
@@ -69,7 +70,7 @@ class LikeReviewView(generics.CreateAPIView):
 
 class UserReviewLikesListView(generics.ListAPIView):
     serializer_class = RestaurantReviewSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         return RestaurantReview.objects.filter(liked_by_user=self.request.user)
@@ -77,7 +78,7 @@ class UserReviewLikesListView(generics.ListAPIView):
 
 class UserCommentedReviewListView(generics.ListAPIView):
     serializer_class = UserCommentedReviewSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         user = self.request.user

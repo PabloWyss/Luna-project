@@ -8,7 +8,7 @@ from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 from project import settings
 from registration.views import RegistrationView, RegistrationValidationView
 from user.views import CustomTokenObtainPairView
-from restaurant.views import CategoryListView
+from restaurant.views import CategoryListView, SearchAPIView
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -42,6 +42,7 @@ urlpatterns = [
 
     path('backend/api/comment/', include('comment.urls')),
     path('backend/api/category/list/', CategoryListView.as_view(), name='category_list'),
+    path('backend/api/search/', SearchAPIView.as_view(), name='search'),
 ]
 
 # Add media files serving in debug mode
