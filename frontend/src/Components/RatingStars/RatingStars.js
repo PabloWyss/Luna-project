@@ -7,8 +7,8 @@ const StarsContainer = styled.div`
   flex-direction: row;
 `
 
-const RatingStars = () => {
-  const [rating, setRating] = useState(0);
+const RatingStars = (props) => {
+  const [rating, setRating] = useState(props.average_rating);
 
   return (
     <StarsContainer>
