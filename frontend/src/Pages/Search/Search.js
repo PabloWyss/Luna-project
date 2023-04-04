@@ -34,7 +34,14 @@ const Search = () => {
     }
 
     const obtainAllUsers = async () => {
-    let response = await lunaAPI.get(`/user/list/`)
+    let response = await lunaAPI.get(`/users/list/`,
+        {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
         try {
             setListOfUsers(response.data)
             setListOfUsersFiltered(response.data)
