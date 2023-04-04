@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import headerImg from '../../Assets/temp/restaurantpage.jpg';
+import colorimg from '../../Assets/solid-color-image.jpeg'
 
 export const HeaderContainer = styled.div`
   height: 500px;
-  background-image: url(${headerImg});
+  background-image: url(${props => props.img ? props.img : colorimg});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -99,6 +99,10 @@ export const FilterBar = styled.div`
     margin-right: 20px;
     font-size: 16px;
     font-weight: 400;
+
+    :placeholder{
+      padding: 11px;
+    }
   }
 `
 
