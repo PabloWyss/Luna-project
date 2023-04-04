@@ -2,36 +2,36 @@ import starIcon from "../../../../Assets/star.svg"
 import restaurantImg from "../../../../Assets/temp/restaurant-pic.jpg"
 import RatingStars from "../../../../Components/RatingStars/RatingStars";
 import {
-    Card,
-    Details,
-    RatingContainer,
-    RestAddress,
-    RestaurantImageContainer,
-    RestaurantImg,
-    RestName,
-    ReviewCount
+  Card,
+  Details,
+  RatingContainer,
+  RestAddress,
+  RestaurantImageContainer,
+  RestaurantImg,
+  RestName,
+  ReviewCount
 } from "./RestaurantCardStyles";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const RestaurantCard = (prop) => {
 
-    const navigate = useNavigate()
-    const handleClickDivRestaurantCard = (e) =>{
-        e.preventDefault()
-        navigate(`/restaurant/${prop.restaurant.id}/`)
-    }
+  const navigate = useNavigate()
+  const handleClickDivRestaurantCard = (e) => {
+    e.preventDefault()
+    navigate(`/restaurant/${prop.restaurant.id}/`)
+  }
   return (
     <Card onClick={handleClickDivRestaurantCard}>
       <Details>
-        <RestName>{prop.restaurant.name}</RestName>
-        <RestAddress>{prop.restaurant.street}</RestAddress>
+        <RestName>{prop.restaurant?.name}</RestName>
+        <RestAddress>{prop.restaurant?.street}</RestAddress>
         <RatingContainer>
           <RatingStars />
-          <ReviewCount>{prop.restaurant.reviews.length}</ReviewCount>
+          <ReviewCount>{prop.restaurant?.reviews.length}</ReviewCount>
         </RatingContainer>
       </Details>
       <RestaurantImageContainer>
-        <RestaurantImg  src={prop.restaurant.image}></RestaurantImg >
+        <RestaurantImg src={prop.restaurant?.image}></RestaurantImg >
       </RestaurantImageContainer>
     </Card>
   );
