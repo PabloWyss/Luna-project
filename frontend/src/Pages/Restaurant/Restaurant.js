@@ -6,23 +6,25 @@ import webImg from '../../Assets/web.svg';
 import phoneImg from '../../Assets/phone.svg';
 import moneyImg from '../../Assets/money.svg';
 import clockImg from '../../Assets/clock.svg';
-import { BodyContainer, ButtonsContainer, ButtonWraper, ButtonWraperSmall, Category, ContactContainer, ContactDetails, FilterBar, HeaderContainer, IconTextContainer, Name, RatingContainer, ReviewsList, Separator, TitleContainer } from './RestaurantStyles.js';
-import Review from './Review/Review.js';
+import { BodyContainer, ButtonsContainer, ButtonWraper, ButtonWraperSmall, Category, ContactContainer, ContactDetails, FilterBar, HeaderContainer, IconTextContainer, Name, RatingContainer, Separator, TitleContainer } from './RestaurantStyles.js';
 import { useSelector } from 'react-redux';
+import ReviewsList from './ReviewsList/ReviewsList.js';
 
 const Restaurant = () => {
 
   const restaurantData = useSelector(state => state.restaurant.restaurantData)
+  const reviewsCount = restaurantData.reviews.length;
+  console.log(restaurantData, reviewsCount);
 
   return (
     <div>
       <HeaderContainer>
         <TitleContainer>
-          <Name>Restaurant name</Name>
-          <Category>Restaurant category</Category>
+          <Name>{restaurantData?.name}</Name>
+          <Category>{restaurantData?.category}</Category>
           <RatingContainer>
             <RatingStars />
-            <p>68 reviews</p>
+            <p>{reviewsCount} reviews</p>
           </RatingContainer>
         </TitleContainer>
         <ContactContainer>
@@ -30,15 +32,15 @@ const Restaurant = () => {
           <ContactDetails>
             <IconTextContainer>
               <img src={pinImg}></img>
-              <p>Address</p>
+              <p>{restaurantData.street}</p>
             </IconTextContainer>
             <IconTextContainer>
               <img src={phoneImg}></img>
-              <p>Phone Number</p>
+              <p>{restaurantData.phone}</p>
             </IconTextContainer>
             <IconTextContainer>
               <img src={webImg}></img>
-              <p>Website</p>
+              <p>{restaurantData.website}</p>
             </IconTextContainer>
           </ContactDetails>
         </ContactContainer>
@@ -51,24 +53,17 @@ const Restaurant = () => {
               <Button textInput={'FILTER'} />
             </ButtonWraperSmall>
           </FilterBar>
-          <ReviewsList>
-            <Review />
-            <Review />
-            <Review />
-            <Review />
-            <Review />
-            <Review />
-          </ReviewsList>
+          <ReviewsList reviewsList={restaurantData.reviews} />
         </div>
         <div>
           <IconTextContainer>
             <img src={clockImg}></img>
-            <p>Opening hours</p>
+            <p>{restaurantData.opening_hours}</p>
           </IconTextContainer>
           <Separator />
           <IconTextContainer>
             <img src={moneyImg}></img>
-            <p>Price level</p>
+            <p>Price: {restaurantData.price_range}</p>
           </IconTextContainer>
           <ButtonsContainer>
             <ButtonWraper>
