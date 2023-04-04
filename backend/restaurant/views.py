@@ -3,7 +3,7 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import AllowAny
 
 from restaurant.models import Restaurant
-from restaurant.permissions import IsOnlyAuthenticatedUser, IsOnlyChangeableByUser
+from restaurant.permissions import IsOnlyAuthenticatedUser, IsOwnerOrReadOnly
 from restaurant.serializers import RestaurantSerializer, CreateRestaurantSerializer, PatchRestaurantSerializer, \
     RestaurantCategorySerializer
 from django.db.models import Q
@@ -62,7 +62,7 @@ class RestaurantListByUser(generics.ListAPIView):
 class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = PatchRestaurantSerializer
-    permission_classes = [AllowAny, IsOnlyChangeableByUser]
+    permission_classes = [IsOwnerOrReadOnly]
 
     @swagger_auto_schema(
         operation_description="Get the details of a restaurant by providing the id of the restaurant."
