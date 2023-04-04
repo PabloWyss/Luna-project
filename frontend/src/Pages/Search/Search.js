@@ -10,6 +10,14 @@ const Search = () => {
     const [listOfRestaurants,setListOfRestaurants] = useState([])
     const [searchText, setSearchText] = useState('')
 
+    const searchHandler =(e)=>{
+        e.preventDefault()
+        setSearchText(e.target.value)
+        const searchRoute = ('?search='+setSearchText)
+    }
+
+
+
     const obtainAllRestaurants = async (search) => {
     let response = await lunaAPI.get(`/restaurants/${search}`)
         try {
@@ -20,16 +28,15 @@ const Search = () => {
     }
 
     useEffect(() => {
-        const search = '?search='+searchText
-        obtainAllRestaurants(search)
+        // const search = '?search='+searchText
+        obtainAllRestaurants(searchText)
     },[])
-
 
   return (
     <div>
       <SearchBarContainer>
         <SearchBar>
-          <input placeholder="Search..." />
+          <input placeholder="Search..." onChange={searchHandler}/>
         </SearchBar>
         <SearchCategory>
           <p>Select a category...</p>
@@ -43,7 +50,7 @@ const Search = () => {
           <Tab to='users'>Users</Tab>
         </MainMenu>
         <Grid>
-          <Outlet />
+          <Outlet context={[listOfRestaurants,setListOfRestaurants]}/>
         </Grid>
       </Main>
     </div >
@@ -51,3 +58,4 @@ const Search = () => {
 }
 
 export default Search;
+

@@ -1,21 +1,11 @@
 import RestaurantCard from './RestaurantCard/RestaurantCard'
 import lunaAPI from "../../../Axios/lunaApi";
 import {useEffect, useState} from "react";
+import {useOutletContext} from "react-router-dom";
 
 const RestaurantsGrid = () => {
-    const [listOfRestaurants,setListOfRestaurants] = useState([])
-    const obtainAllRestaurants = async () => {
-    let response = await lunaAPI.get('/restaurants/')
-        try {
-            setListOfRestaurants(response.data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
-    useEffect(() => {
-        obtainAllRestaurants()
-    },[])
+    const [listOfRestaurants,setListOfRestaurants] = useOutletContext();
 
   return (
     <>
