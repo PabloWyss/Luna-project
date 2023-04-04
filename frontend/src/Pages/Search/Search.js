@@ -23,16 +23,18 @@ const Search = () => {
     const searchHandler =(e)=>{
         e.preventDefault()
         setSearchText(e.target.value)
-        let listRestFiltered = SearchFilterComponent(searchText,listOfRestaurants)
-        setListOfRestaurantsFiltered(listRestFiltered)
-        let listUsFiltered = SearchFilterComponent(searchText,listOfUsers)
-        setListOfUsersFiltered(listUsFiltered)
-        let listRevFiltered = SearchFilterComponent(searchText,listOfReviews)
-        setListOfReviewsFiltered(listRevFiltered)
+        if(e.target.value != ""){
+            let listRestFiltered = SearchFilterComponent(searchText,listOfRestaurants)
+            setListOfRestaurantsFiltered(listRestFiltered)
+            let listUsFiltered = SearchFilterComponent(searchText,listOfUsers)
+            setListOfUsersFiltered(listUsFiltered)
+            let listRevFiltered = SearchFilterComponent(searchText,listOfReviews)
+            setListOfReviewsFiltered(listRevFiltered)
+        }
     }
 
     const obtainAllRestaurants = async () => {
-    let response = await lunaAPI.get(`/restaurants/`)
+    let response = await lunaAPI.get(`/search/?search_string=&type=restaurants`)
         try {
             setListOfRestaurants(response.data)
             setListOfRestaurantsFiltered(response.data)
@@ -42,13 +44,13 @@ const Search = () => {
     }
 
     const obtainAllUsers = async () => {
-    let response = await lunaAPI.get(`/users/list/`,
-        {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                    'Content-Type': 'application/json'
-                }
-            }
+    let response = await lunaAPI.get(`/search/?search_string=&type=users`,
+        // {
+        //         headers: {
+        //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        //             'Content-Type': 'application/json'
+        //         }
+        //     }
         )
         try {
             setListOfUsers(response.data)
@@ -60,12 +62,12 @@ const Search = () => {
 
     const obtainAllReviews = async () => {
     let response = await lunaAPI.get(`/search/?search_string=&type=reviews`,
-        {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                    'Content-Type': 'application/json'
-                }
-            }
+        // {
+        //         headers: {
+        //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        //             'Content-Type': 'application/json'
+        //         }
+        //     }
         )
         try {
             setListOfReviews(response.data)

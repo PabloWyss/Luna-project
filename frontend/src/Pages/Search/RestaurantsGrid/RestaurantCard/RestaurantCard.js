@@ -13,6 +13,9 @@ import {
 } from "./RestaurantCardStyles";
 import {useNavigate} from "react-router-dom";
 
+const isDev = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
+const baseURLImage = isDev ? 'http://localhost:8001' : 'https://luna-team4.propulsion-learn.ch'
+
 const RestaurantCard = (prop) => {
 
     const navigate = useNavigate()
@@ -31,7 +34,7 @@ const RestaurantCard = (prop) => {
         </RatingContainer>
       </Details>
       <RestaurantImageContainer>
-        <RestaurantImg  src={prop.restaurant.image}></RestaurantImg >
+        <RestaurantImg  src={baseURLImage+prop.restaurant.image}></RestaurantImg >
       </RestaurantImageContainer>
     </Card>
   );

@@ -3,6 +3,7 @@ import { Grid, HomeBanner, HomeBody, Main, Underline } from "./HomepageStyles";
 
 const Homepage = () => {
   return (
+
     <Main>
       <HomeBanner>
         <div>SearchBar</div>
