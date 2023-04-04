@@ -41,8 +41,6 @@ urlpatterns = [
     path('backend/api/docs/redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 
     path('backend/api/comment/', include('comment.urls')),
-    path('backend/api/review/', include('review.urls')),
-
     path('backend/api/category/list/', CategoryListView.as_view(), name='category_list'),
 ]
 
