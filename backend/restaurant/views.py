@@ -1,16 +1,21 @@
-from rest_framework import generics
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.permissions import AllowAny
-
 from restaurant.models import Restaurant
 from restaurant.permissions import IsOnlyAuthenticatedUser, IsOnlyChangeableByUser
-from restaurant.serializers import RestaurantSerializer, CreateRestaurantSerializer, PatchRestaurantSerializer, RestaurantCategorySerializer
+from restaurant.serializers import RestaurantSerializer, CreateRestaurantSerializer, PatchRestaurantSerializer, \
+    RestaurantCategorySerializer
+from django.db.models import Q
+from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from user.serializer import UserSerializer
+from review.serializers import RestaurantReviewSerializer
+from review.models import RestaurantReview
+from user.models import User
 
 
 class RestaurantList(generics.ListCreateAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
-    authentication_classes = [AllowAny]
 
 
 class RestaurantCreate(generics.CreateAPIView):
@@ -22,7 +27,6 @@ class RestaurantCreate(generics.CreateAPIView):
 class RestaurantCategoryList(generics.ListAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
-    authentication_classes = [AllowAny]
 
     def get_queryset(self):
         category = self.kwargs['category']
@@ -41,7 +45,7 @@ class RestaurantListByUser(generics.ListAPIView):
 class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = PatchRestaurantSerializer
-    permission_classes = [AllowAny, IsOnlyChangeableByUser]
+    permission_classes = [IsOnlyChangeableByUser]
 
     def perform_update(self, serializer):
         restaurant = self.get_object()
@@ -61,4 +65,39 @@ class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
 class CategoryListView(generics.ListAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantCategorySerializer
-    authentication_classes = [AllowAny]
+
+
+class SearchAPIView(APIView):
+    def get(self, request):
+        search_string = request.query_params.get('search_string')
+        search_type = request.query_params.get('type')
+
+        if search_type == 'restaurants':
+            restaurants = Restaurant.objects.filter(
+                Q(name__icontains=search_string) |
+                Q(category__icontains=search_string) |
+                Q(city__icontains=search_string)
+            )
+            serializer = RestaurantSerializer(restaurants, many=True)
+            return Response(serializer.data)
+
+        elif search_type == 'reviews':
+            reviews = RestaurantReview.objects.filter(
+                Q(text_content__icontains=search_string) |
+                Q(reviewed_by_user__username__icontains=search_string)
+            )
+            serializer = RestaurantReviewSerializer(reviews, many=True)
+            return Response(serializer.data)
+
+        elif search_type == 'users':
+            users = User.objects.filter(
+                Q(username__icontains=search_string) |
+                Q(email__icontains=search_string) |
+                Q(first_name__icontains=search_string) |
+                Q(last_name__icontains=search_string)
+            )
+            serializer = UserSerializer(users, many=True)
+            return Response(serializer.data)
+
+        else:
+            return Response({'message': 'Invalid search type.'}, status=400)
