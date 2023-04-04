@@ -22,12 +22,19 @@ const Search = () => {
   const searchHandler = (e) => {
     e.preventDefault()
     setSearchText(e.target.value)
-    let listRestFiltered = SearchFilterComponent(searchText, listOfRestaurants)
-    setListOfRestaurantsFiltered(listRestFiltered)
-    let listUsFiltered = SearchFilterComponent(searchText, listOfUsers)
-    setListOfUsersFiltered(listUsFiltered)
-    let listRevFiltered = SearchFilterComponent(searchText, listOfReviews)
-    setListOfReviewsFiltered(listRevFiltered)
+      if(searchText.length >= 2){
+          let listRestFiltered = SearchFilterComponent(searchText, listOfRestaurants)
+          setListOfRestaurantsFiltered(listRestFiltered)
+          let listUsFiltered = SearchFilterComponent(searchText, listOfUsers)
+          setListOfUsersFiltered(listUsFiltered)
+          let listRevFiltered = SearchFilterComponent(searchText, listOfReviews)
+          setListOfReviewsFiltered(listRevFiltered)
+      } else {
+          setListOfRestaurantsFiltered(listOfRestaurants)
+          setListOfUsersFiltered(listOfUsers)
+          setListOfReviewsFiltered(listOfReviews)
+      }
+
   }
 
   const obtainAllRestaurants = async () => {

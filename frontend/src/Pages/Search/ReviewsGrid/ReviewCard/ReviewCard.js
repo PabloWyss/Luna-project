@@ -7,9 +7,9 @@ import reviews from "../../../User/Reviews/Reviews";
 
 const ReviewCard = (props) => {
     const [userReview,setUserReview] = useState({})
+    const [restaurantReview,setRestaurantReview] = useState({})
 
-
-  const obtainSoecificUser = async () => {
+  const obtainSpecificUser = async () => {
     let response = await lunaAPI.get(`/users/users/${props.review.reviewed_by_user}/`,
         {
                 headers: {
@@ -26,23 +26,38 @@ const ReviewCard = (props) => {
         }
     }
 
+    const obtainSpecificRestaurant = async () => {
+    let response = await lunaAPI.get(`/restaurants/${props.review.review_on_restaurant}/`)
+        try {
+            setRestaurantReview(response.data)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
     useEffect(() => {
-        obtainSoecificUser()
+        obtainSpecificUser()
+        obtainSpecificRestaurant()
     },[])
+
+    console.log(restaurantReview)
 
   return (
     <Card>
       <CardHeader>
         <UserAvatar>
-          <img src={userReview.profile_picture}></img>
+          <img src={userReview?.profile_picture}></img>
         </UserAvatar>
         <UserInfo>
-          <TextOrangeBig>{userReview.username}</TextOrangeBig>
+          <TextOrangeBig>{userReview?.username}</TextOrangeBig>
           <TextGreyBold> 10 Reviews in total</TextGreyBold>
         </UserInfo>
       </CardHeader>
       <CardBody>
-        <TextOrangeBig>Restaurant name</TextOrangeBig>
+        <TextOrangeBig>{restaurantReview.name}</TextOrangeBig>
         <TextGreyBold>{props.review.text_content}</TextGreyBold>
         <TextOrangeSmall>read more</TextOrangeSmall>
         <LikeCommentButtons />
