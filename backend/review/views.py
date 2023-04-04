@@ -11,7 +11,7 @@ from .serializers import RestaurantReviewSerializer, LikeReviewSerializer, UserC
 
 class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RestaurantReviewSerializer
-    permission_classes = [AllowAny, IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     lookup_field = 'id'
 
     @swagger_auto_schema(
@@ -52,7 +52,7 @@ class CreateRestaurantReviewView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         restaurant = Restaurant.objects.get(pk=self.kwargs['pk'])
-        serializer.save(reviewed_by_user=self.request.user, review_on_restaurant=[restaurant])
+        serializer.save(reviewed_by_user=self.request.user, review_on_restaurant=restaurant)
 
 
 class RestaurantReviewListView(generics.ListAPIView):
