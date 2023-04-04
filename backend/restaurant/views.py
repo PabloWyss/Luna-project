@@ -68,18 +68,21 @@ class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
         operation_description="Get the details of a restaurant by providing the id of the restaurant."
     )
     def get(self, request, *args, **kwargs):
+        self.serializer_class = RestaurantSerializer
         return self.retrieve(request, *args, **kwargs)
 
     @swagger_auto_schema(
         operation_description="Update a restaurant by id (only by owner or restaurant admin)."
     )
     def patch(self, request, *args, **kwargs):
+        self.serializer_class = PatchRestaurantSerializer
         return self.partial_update(request, *args, **kwargs)
 
     @swagger_auto_schema(
         operation_description="Delete a restaurant by id (only by owner or restaurant admin)."
     )
     def delete(self, request, *args, **kwargs):
+        self.serializer_class = PatchRestaurantSerializer
         return self.destroy(request, *args, **kwargs)
 
     def perform_update(self, serializer):
