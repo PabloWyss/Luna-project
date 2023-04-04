@@ -37,5 +37,12 @@ class Restaurant(models.Model):
     created_by_user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='created_restaurants', default=1)
     reviews = models.ManyToManyField(to=RestaurantReview, related_name='review_on_restaurant', blank=True)
 
+    def get_average_rating(self):
+        reviews = self.reviews.all()
+        if not reviews:
+            return 0
+        total_rating = sum([review.rating for review in reviews])
+        return total_rating / len(reviews)
+
     def __str__(self):
         return self.name
