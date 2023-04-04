@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import generics, permissions
@@ -13,6 +14,24 @@ class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [AllowAny, IsOwnerOrReadOnly]
     lookup_field = 'id'
 
+    @swagger_auto_schema(
+        operation_description="Get a specific review by ID and display all the information."
+    )
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_description="Update a specific review (only by owner)."
+    )
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_description="Delete a specific review (only by owner)."
+    )
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
     def get_queryset(self):
         return RestaurantReview.objects.filter(pk=self.kwargs['id'])
 
@@ -25,6 +44,9 @@ class ReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class CreateRestaurantReviewView(generics.CreateAPIView):
+    """
+        Create new review for a restaurant.
+    """
     serializer_class = RestaurantReviewSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -34,6 +56,9 @@ class CreateRestaurantReviewView(generics.CreateAPIView):
 
 
 class RestaurantReviewListView(generics.ListAPIView):
+    """
+    Get the list of the reviews for a single restaurant.
+    """
     serializer_class = RestaurantReviewSerializer
     permission_classes = [AllowAny]
 
@@ -43,6 +68,9 @@ class RestaurantReviewListView(generics.ListAPIView):
 
 
 class UserRestaurantReviewListView(generics.ListAPIView):
+    """
+    Get the list of the reviews by a single user.
+    """
     serializer_class = RestaurantReviewSerializer
     permission_classes = [AllowAny]
 
@@ -51,6 +79,9 @@ class UserRestaurantReviewListView(generics.ListAPIView):
 
 
 class LikeReviewView(generics.CreateAPIView):
+    """
+    Like a review.
+    """
     serializer_class = LikeReviewSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -69,14 +100,21 @@ class LikeReviewView(generics.CreateAPIView):
 
 
 class UserReviewLikesListView(generics.ListAPIView):
+    """
+    Get the list of the reviews liked by the current user.
+    """
     serializer_class = RestaurantReviewSerializer
     permission_classes = [AllowAny]
 
     def get_queryset(self):
-        return RestaurantReview.objects.filter(liked_by_user=self.request.user)
+        user = self.request.user
+        return RestaurantReview.objects.filter(liked_by_user=user)
 
 
 class UserCommentedReviewListView(generics.ListAPIView):
+    """
+    Get the list of the reviews commented by the current user.
+    """
     serializer_class = UserCommentedReviewSerializer
     permission_classes = [AllowAny]
 
