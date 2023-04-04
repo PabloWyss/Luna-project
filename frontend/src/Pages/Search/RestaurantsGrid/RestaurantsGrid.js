@@ -5,7 +5,7 @@ import {useOutletContext} from "react-router-dom";
 
 const RestaurantsGrid = () => {
 
-    const [listOfRestaurants,setListOfRestaurants] = useOutletContext();
+    const [listOfRestaurants] = useOutletContext();
 
   return (
     <>

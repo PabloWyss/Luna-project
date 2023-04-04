@@ -11,12 +11,16 @@ const Search = () => {
     const [listOfRestaurants,setListOfRestaurants] = useState([])
     const [searchText, setSearchText] = useState('')
     const [listOfRestaurantFiltered, setListOfRestaurantsFiltered] = useState([])
+    const [listOfUsers,setListOfUsers] = useState([])
+    const [listOfUsersFiltered, setListOfUsersFiltered] = useState([])
 
     const searchHandler =(e)=>{
         e.preventDefault()
         setSearchText(e.target.value)
-        let listFiltered = SearchFilterComponent(searchText,listOfRestaurants)
-        setListOfRestaurantsFiltered(listFiltered)
+        let listRestFiltered = SearchFilterComponent(searchText,listOfRestaurants)
+        setListOfRestaurantsFiltered(listRestFiltered)
+        let listUsFiltered = SearchFilterComponent(searchText,listOfUsers)
+        setListOfUsersFiltered(listUsFiltered)
     }
 
     const obtainAllRestaurants = async () => {
@@ -29,8 +33,19 @@ const Search = () => {
         }
     }
 
+    const obtainAllUsers = async () => {
+    let response = await lunaAPI.get(`/user/list/`)
+        try {
+            setListOfUsers(response.data)
+            setListOfUsersFiltered(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         obtainAllRestaurants()
+        obtainAllUsers()
     },[])
 
   return (
@@ -51,7 +66,7 @@ const Search = () => {
           <Tab to='users'>Users</Tab>
         </MainMenu>
         <Grid>
-          <Outlet context={[listOfRestaurantFiltered]}/>
+          <Outlet context={[listOfRestaurantFiltered,listOfUsersFiltered]}/>
         </Grid>
       </Main>
     </div >
