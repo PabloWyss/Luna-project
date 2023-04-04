@@ -7,24 +7,53 @@ import phoneImg from '../../Assets/phone.svg';
 import moneyImg from '../../Assets/money.svg';
 import clockImg from '../../Assets/clock.svg';
 import { BodyContainer, ButtonsContainer, ButtonWraper, ButtonWraperSmall, Category, ContactContainer, ContactDetails, FilterBar, HeaderContainer, IconTextContainer, Name, RatingContainer, Separator, TitleContainer } from './RestaurantStyles.js';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReviewsList from './ReviewsList/ReviewsList.js';
+import lunaAPI from '../../Axios/lunaApi.js';
+import { updateRestaurantData } from '../../Redux/Slices/restaurant.js';
+import { useEffect } from 'react';
+import { useParams } from "react-router-dom";
+
 
 const Restaurant = () => {
+  const dispatch = useDispatch();
+  const { restaurantID } = useParams();
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      return;
+    }
+
+    const getRestaurantByID = async () => {
+      try {
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        };
+
+        const response = await lunaAPI.get(`restaurants/${restaurantID}/`, config);
+        dispatch(updateRestaurantData(response.data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getRestaurantByID();
+  }, []);
 
   const restaurantData = useSelector(state => state.restaurant.restaurantData)
-  const reviewsCount = restaurantData.reviews.length;
-  console.log(restaurantData, reviewsCount);
+  console.log(restaurantData.reviews)
 
   return (
     <div>
-      <HeaderContainer>
+      <HeaderContainer img={restaurantData?.image}>
         <TitleContainer>
           <Name>{restaurantData?.name}</Name>
           <Category>{restaurantData?.category}</Category>
           <RatingContainer>
             <RatingStars />
-            <p>{reviewsCount} reviews</p>
+            <p>2 reviews</p>
           </RatingContainer>
         </TitleContainer>
         <ContactContainer>

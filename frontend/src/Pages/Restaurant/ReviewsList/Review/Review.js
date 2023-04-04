@@ -45,7 +45,7 @@ const Review = ({ review }) => {
     <ReviewContainer>
       <ReviewHeader>
         <HeaderRight>
-          <ReviewUser />
+          <ReviewUser userName={review?.reviewed_by_user} />
           <RatingStars />
         </HeaderRight>
         <DateContainer>
