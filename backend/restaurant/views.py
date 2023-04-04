@@ -1,4 +1,6 @@
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.permissions import AllowAny
+
 from restaurant.models import Restaurant
 from restaurant.permissions import IsOnlyAuthenticatedUser, IsOnlyChangeableByUser
 from restaurant.serializers import RestaurantSerializer, CreateRestaurantSerializer, PatchRestaurantSerializer, \
@@ -16,6 +18,7 @@ from user.models import User
 class RestaurantList(generics.ListCreateAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
+    permission_classes = [AllowAny]
 
 
 class RestaurantCreate(generics.CreateAPIView):
@@ -27,6 +30,7 @@ class RestaurantCreate(generics.CreateAPIView):
 class RestaurantCategoryList(generics.ListAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         category = self.kwargs['category']
@@ -45,7 +49,7 @@ class RestaurantListByUser(generics.ListAPIView):
 class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = PatchRestaurantSerializer
-    permission_classes = [IsOnlyChangeableByUser]
+    permission_classes = [AllowAny, IsOnlyChangeableByUser]
 
     def perform_update(self, serializer):
         restaurant = self.get_object()
@@ -65,9 +69,12 @@ class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
 class CategoryListView(generics.ListAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantCategorySerializer
+    permission_classes = [AllowAny]
 
 
 class SearchAPIView(APIView):
+    permission_classes = [AllowAny]
+
     def get(self, request):
         search_string = request.query_params.get('search_string')
         search_type = request.query_params.get('type')
