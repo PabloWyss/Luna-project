@@ -5,7 +5,6 @@ import RestaurantCard from "../RestaurantsGrid/RestaurantCard/RestaurantCard";
 const UsersGrid = () => {
 
     const [listOfRestaurantFiltered,listOfUsersFiltered] = useOutletContext();
-    console.log(listOfUsersFiltered)
   return (
     <>
         {listOfUsersFiltered.map((user,index)=>{

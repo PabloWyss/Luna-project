@@ -1,20 +1,16 @@
 import ReviewCard from './ReviewCard/ReviewCard'
+import {useOutletContext} from "react-router-dom";
+import UserCard from "../UsersGrid/UserCard/UserCard";
 
 const ReviewssGrid = () => {
+
+    const [listOfRestaurantFiltered,listOfUsersFiltered,listOfReviewsFiltered] = useOutletContext();
+
   return (
     <>
-      <ReviewCard />
-      <ReviewCard />
-      <ReviewCard />
-      <ReviewCard />
-      <ReviewCard />
-      <ReviewCard />
-      <ReviewCard />
-      <ReviewCard />
-      <ReviewCard />
-      <ReviewCard />
-      <ReviewCard />
-      <ReviewCard />
+        {listOfReviewsFiltered.map((review,index)=>{
+            return <ReviewCard review={review} key={index}/>
+        })}
     </>
   );
 }
