@@ -27,7 +27,7 @@ class RestaurantList(generics.ListCreateAPIView):
 
 class RestaurantCreate(generics.CreateAPIView):
     """
-    Create a new restaurant.
+    API endpoint to create a new restaurant.
     """
     queryset = Restaurant.objects.all()
     serializer_class = CreateRestaurantSerializer
