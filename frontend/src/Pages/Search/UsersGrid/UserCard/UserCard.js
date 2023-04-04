@@ -8,7 +8,7 @@ const UserCard = (props) => {
     <Card>
       <CardHeader>
         <UserAvatar>
-          <img src={avatar}></img>
+          <img src={props.user.profile_picture}></img>
         </UserAvatar>
         <UserInfo>
           <TextOrangeBig>{props.user.username}</TextOrangeBig>
@@ -16,7 +16,7 @@ const UserCard = (props) => {
         </UserInfo>
       </CardHeader>
       <CardBody>
-        <TextGreyBold>{props.user.description}</TextGreyBold>
+        <TextGreyBold>{props.user.description} ...</TextGreyBold>
         <TextOrangeSmall>read more</TextOrangeSmall>
       </CardBody>
     </Card >

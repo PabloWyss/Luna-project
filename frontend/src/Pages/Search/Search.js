@@ -8,8 +8,9 @@ import SearchFilterComponent from "../../Components/SearchFilterComponent";
 
 const Search = () => {
 
-    const [listOfRestaurants,setListOfRestaurants] = useState([])
+
     const [searchText, setSearchText] = useState('')
+    const [listOfRestaurants,setListOfRestaurants] = useState([])
     const [listOfRestaurantFiltered, setListOfRestaurantsFiltered] = useState([])
     const [listOfUsers,setListOfUsers] = useState([])
     const [listOfUsersFiltered, setListOfUsersFiltered] = useState([])
