@@ -39,3 +39,8 @@ export const ReviewCount = styled.p`
   font-size: 20px;
   font-weight: 300;
 `
+
+export const RestaurantImg = styled.img`
+  height: 288px;
+  width: 270px;
+`

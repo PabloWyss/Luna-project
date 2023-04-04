@@ -1,21 +1,32 @@
 import starIcon from "../../../../Assets/star.svg"
 import restaurantImg from "../../../../Assets/temp/restaurant-pic.jpg"
 import RatingStars from "../../../../Components/RatingStars/RatingStars";
-import { Card, Details, RatingContainer, RestAddress, RestName, ReviewCount } from "./RestaurantCardStyles";
+import {
+    Card,
+    Details,
+    RatingContainer,
+    RestAddress,
+    RestaurantImg,
+    RestName,
+    ReviewCount
+} from "./RestaurantCardStyles";
 
-const RestaurantCard = () => {
+const RestaurantCard = (prop) => {
+
+    console.log(prop.restaurant
+    )
   return (
     <Card>
       <Details>
-        <RestName>Restaurant Name</RestName>
-        <RestAddress>Address</RestAddress>
+        <RestName>{prop.restaurant.name}</RestName>
+        <RestAddress>{prop.restaurant.street}</RestAddress>
         <RatingContainer>
           <RatingStars />
-          <ReviewCount>24</ReviewCount>
+          <ReviewCount>{prop.restaurant.reviews.length}</ReviewCount>
         </RatingContainer>
       </Details>
       <div>
-        <img src={restaurantImg}></img>
+        <RestaurantImg  src={prop.restaurant.image}></RestaurantImg >
       </div>
     </Card>
   );
