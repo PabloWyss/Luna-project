@@ -11,11 +11,17 @@ import {
     RestName,
     ReviewCount
 } from "./RestaurantCardStyles";
+import {useNavigate} from "react-router-dom";
 
 const RestaurantCard = (prop) => {
 
+    const navigate = useNavigate()
+    const handleClickDivRestaurantCard = (e) =>{
+        e.preventDefault()
+        navigate(`/restaurant/${prop.restaurant.id}/`)
+    }
   return (
-    <Card>
+    <Card onClick={handleClickDivRestaurantCard}>
       <Details>
         <RestName>{prop.restaurant.name}</RestName>
         <RestAddress>{prop.restaurant.street}</RestAddress>
