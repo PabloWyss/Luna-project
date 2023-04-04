@@ -12,6 +12,9 @@ from user.admin import User
 
 
 class RegistrationView(APIView):
+    """
+        Register new user by asking for email (a validation code will be sent to given email).
+    """
     serializer_class = RegistrationSerializer
     permission_classes = [AllowAny]
 
@@ -53,6 +56,9 @@ class RegistrationView(APIView):
 
 
 class RegistrationValidationView(APIView):
+    """
+        Validate the creation of new user with the code sent by email.
+    """
     serializer_class = RegistrationValidationSerializer
     permission_classes = [AllowAny]
 

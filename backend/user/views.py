@@ -64,6 +64,9 @@ class UserDetailView(generics.RetrieveAPIView):
 
 
 class UserSearchByUsernameView(ListAPIView):
+    """
+    API endpoint to search for a user by username.
+    """
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
@@ -76,6 +79,9 @@ class UserSearchByUsernameView(ListAPIView):
 
 
 class UserSearchByEmailView(ListAPIView):
+    """
+    API endpoint to search for a user by email.
+    """
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
 
@@ -88,4 +94,7 @@ class UserSearchByEmailView(ListAPIView):
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
+    """
+    API endpoint to retrieve a JWT token for a user.
+    """
     serializer_class = CustomTokenObtainPairSerializer

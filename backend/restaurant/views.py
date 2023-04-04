@@ -1,3 +1,4 @@
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import AllowAny
 
@@ -16,18 +17,27 @@ from user.models import User
 
 
 class RestaurantList(generics.ListCreateAPIView):
+    """
+    API endpoint to get the list of all the restaurant.
+    """
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
     permission_classes = [AllowAny]
 
 
 class RestaurantCreate(generics.CreateAPIView):
+    """
+    Create a new restaurant.
+    """
     queryset = Restaurant.objects.all()
     serializer_class = CreateRestaurantSerializer
     permission_classes = [IsOnlyAuthenticatedUser]
 
 
 class RestaurantCategoryList(generics.ListAPIView):
+    """
+    Get the all the restaurants by category.
+    """
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
     permission_classes = [AllowAny]
@@ -38,6 +48,9 @@ class RestaurantCategoryList(generics.ListAPIView):
 
 
 class RestaurantListByUser(generics.ListAPIView):
+    """
+    Get the all the restaurants created by a specific user in chronological order.
+    """
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
 
@@ -50,6 +63,24 @@ class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = PatchRestaurantSerializer
     permission_classes = [AllowAny, IsOnlyChangeableByUser]
+
+    @swagger_auto_schema(
+        operation_description="Get the details of a restaurant by providing the id of the restaurant."
+    )
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_description="Update a restaurant by id (only by owner or restaurant admin)."
+    )
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_description="Delete a restaurant by id (only by owner or restaurant admin)."
+    )
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
 
     def perform_update(self, serializer):
         restaurant = self.get_object()
@@ -67,12 +98,21 @@ class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class CategoryListView(generics.ListAPIView):
+    """
+    Get the list of all the categories.
+    """
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantCategorySerializer
     permission_classes = [AllowAny]
 
+    def get_queryset(self):
+        return Restaurant.objects.values('category').distinct()
+
 
 class SearchAPIView(APIView):
+    """
+    Search for ‘restaurants’, ‘reviews’ or ‘users’. {type: ‘restaurants’, "‘search_string’: ‘Pub’}.
+    """
     permission_classes = [AllowAny]
 
     def get(self, request):
