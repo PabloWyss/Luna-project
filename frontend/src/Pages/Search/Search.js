@@ -7,11 +7,17 @@ import SearchFilterComponent from "../../Components/SearchFilterComponent";
 
 const Search = () => {
 
-    const [listOfRestaurants,setListOfRestaurants] = useState([])
+    // looks for search input
     const [searchText, setSearchText] = useState('')
+    // Restaurants
+    const [listOfRestaurants,setListOfRestaurants] = useState([])
     const [listOfRestaurantFiltered, setListOfRestaurantsFiltered] = useState([])
+    // Users
     const [listOfUsers,setListOfUsers] = useState([])
     const [listOfUsersFiltered, setListOfUsersFiltered] = useState([])
+    // Reviews
+    const [listOfReviews,setListOfReviews] = useState([])
+    const [listOfReviewsFiltered, setListOfReviewsFiltered] = useState([])
 
     const searchHandler =(e)=>{
         e.preventDefault()
@@ -20,6 +26,8 @@ const Search = () => {
         setListOfRestaurantsFiltered(listRestFiltered)
         let listUsFiltered = SearchFilterComponent(searchText,listOfUsers)
         setListOfUsersFiltered(listUsFiltered)
+        let listRevFiltered = SearchFilterComponent(searchText,listOfReviews)
+        setListOfReviewsFiltered(listRevFiltered)
     }
 
     const obtainAllRestaurants = async () => {
@@ -33,7 +41,14 @@ const Search = () => {
     }
 
     const obtainAllUsers = async () => {
-    let response = await lunaAPI.get(`/user/list/`)
+    let response = await lunaAPI.get(`/users/list/`,
+        {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
         try {
             setListOfUsers(response.data)
             setListOfUsersFiltered(response.data)
@@ -42,9 +57,27 @@ const Search = () => {
         }
     }
 
+    const obtainAllReviews = async () => {
+    let response = await lunaAPI.get(`/search/?search_string=&type=reviews`,
+        {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
+        try {
+            setListOfReviews(response.data)
+            setListOfReviewsFiltered(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         obtainAllRestaurants()
         obtainAllUsers()
+        obtainAllReviews()
     },[])
 
   return (
@@ -65,7 +98,7 @@ const Search = () => {
           <Tab to='users'>Users</Tab>
         </MainMenu>
         <Grid>
-          <Outlet context={[listOfRestaurantFiltered,listOfUsersFiltered]}/>
+          <Outlet context={[listOfRestaurantFiltered,listOfUsersFiltered,listOfReviewsFiltered]}/>
         </Grid>
       </Main>
     </div >
