@@ -23,7 +23,7 @@ export const restaurantSlice = createSlice({
           text_content: "Love this place",
           rating: 4,
           date_created: "03.04.2022 16:57",
-          likes_on_review: 5,
+          likes_on_review: 2,
           reviewed_by_user: 'Sam Smith',
         },
         {
@@ -31,16 +31,16 @@ export const restaurantSlice = createSlice({
           text_content: "Too expensive",
           rating: 1,
           date_created: "03.04.2022 16:57",
-          likes_on_review: 5,
-          reviewed_by_user: 'Sam Smith',
+          likes_on_review: 35,
+          reviewed_by_user: 'Marta Bilbao',
         },
         {
           id: 3,
           text_content: "Amazing chocolate!!!",
           rating: 4,
           date_created: "03.04.2022 16:57",
-          likes_on_review: 5,
-          reviewed_by_user: 'Sam Smith',
+          likes_on_review: 10,
+          reviewed_by_user: 'Pablo Wyss',
         },
         {
           id: 4,
@@ -48,7 +48,7 @@ export const restaurantSlice = createSlice({
           rating: 3,
           date_created: "03.04.2022 16:57",
           likes_on_review: 5,
-          reviewed_by_user: 'Sam Smith',
+          reviewed_by_user: 'Javier Ruiz',
         },
       ]
     },

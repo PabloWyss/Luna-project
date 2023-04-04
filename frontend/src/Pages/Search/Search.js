@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import arrow from "../../Assets/arrow.svg";
-import Header from "../../Components/Header";
 import { Grid, Main, MainMenu, SearchBar, SearchBarContainer, SearchCategory, Tab } from "./SearchStyles";
 import {useEffect, useState} from "react";
 import lunaAPI from "../../Axios/lunaApi";
