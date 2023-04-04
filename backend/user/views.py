@@ -68,9 +68,6 @@ class UserSearchByUsernameView(ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        """
-        This view should return a user based on the query param in url
-        """
         queryset = User.objects.none()
         username = self.request.query_params.get("search")
         if username:
@@ -83,9 +80,6 @@ class UserSearchByEmailView(ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        """
-        This view should return a user based on the query param in url
-        """
         queryset = User.objects.none()
         email = self.request.query_params.get("search")
         if email:
