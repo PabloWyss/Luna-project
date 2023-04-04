@@ -24,4 +24,4 @@ class RestaurantReview(models.Model):
         ordering = ['-date_created']
 
     def __str__(self):
-        return f"{self.reviewed_by_user.username} - {self.text_content} - {self.rating}"
+        return f'{self.id} - {self.reviewed_by_user} - {self.text_content}'
