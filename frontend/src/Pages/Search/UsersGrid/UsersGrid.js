@@ -1,27 +1,16 @@
 import UserCard from './UserCard/UserCard'
+import {useOutletContext} from "react-router-dom";
+import RestaurantCard from "../RestaurantsGrid/RestaurantCard/RestaurantCard";
 
 const UsersGrid = () => {
+
+    const [listOfRestaurantFiltered,listOfUsersFiltered] = useOutletContext();
+    console.log(listOfUsersFiltered)
   return (
     <>
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
-      <UserCard />
+        {listOfUsersFiltered.map((user,index)=>{
+            return <UserCard user={user} key={index}/>
+        })}
     </>
   );
 }

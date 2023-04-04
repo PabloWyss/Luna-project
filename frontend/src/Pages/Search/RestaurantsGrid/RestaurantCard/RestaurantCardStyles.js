@@ -5,7 +5,7 @@ export const Card = styled.div`
   border-radius: 3px;
   border-top: 8px solid #E47D31;
   background-color: #FFFFFF;
-
+  height: 410px;
   p {
     color: #4C4C4C;
   }
@@ -39,3 +39,14 @@ export const ReviewCount = styled.p`
   font-size: 20px;
   font-weight: 300;
 `
+
+export const RestaurantImg = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+`
+
+export const RestaurantImageContainer = styled.div`
+  height: 288px;
+`
+
