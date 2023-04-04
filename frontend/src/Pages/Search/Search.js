@@ -4,6 +4,7 @@ import Header from "../../Components/Header";
 import { Grid, Main, MainMenu, SearchBar, SearchBarContainer, SearchCategory, Tab } from "./SearchStyles";
 import {useEffect, useState} from "react";
 import lunaAPI from "../../Axios/lunaApi";
+import SearchFilterComponent from "../../Components/SearchFilterComponent";
 
 const Search = () => {
 
@@ -14,16 +15,7 @@ const Search = () => {
     const searchHandler =(e)=>{
         e.preventDefault()
         setSearchText(e.target.value)
-        let toSearch = searchText.toLowerCase()
-        let listFiltered = []
-        for(let i=0; i<listOfRestaurants.length; i++) {
-          for(let key in listOfRestaurants[i]) {
-            if(String(listOfRestaurants[i][key]).toLowerCase().includes(toSearch)) {
-              listFiltered.push(listOfRestaurants[i]);
-              break
-            }
-          }
-        }
+        let listFiltered = SearchFilterComponent(searchText,listOfRestaurants)
         setListOfRestaurantsFiltered(listFiltered)
     }
 
