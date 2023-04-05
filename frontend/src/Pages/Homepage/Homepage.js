@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
   const navigate = useNavigate();
-  const [searchText, setSearchText] = useState('');
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [listOfRestaurantFiltered, setListOfRestaurantsFiltered] = useState([]);
 
@@ -20,7 +19,6 @@ const Homepage = () => {
       try {
         const response = await lunaAPI.get(`/restaurants/`)
         setListOfRestaurants(response.data)
-        setListOfRestaurantsFiltered(response.data)
       }
       catch (error) {
         console.log(error)
@@ -36,7 +34,7 @@ const Homepage = () => {
   //------------- SEARCH BAR -------------
   const searchHandler = (e) => {
     e.preventDefault();
-    setSearchText(e.target.value);
+    const searchText = e.target.value;
     if (searchText.length >= 2) {
       let listRestFiltered = SearchFilterComponent(searchText, listOfRestaurants);
       setListOfRestaurantsFiltered(listRestFiltered);
@@ -51,7 +49,6 @@ const Homepage = () => {
   }
 
   return (
-
     <Main>
       <HomeBanner>
         <div>
@@ -62,11 +59,11 @@ const Homepage = () => {
             </ButtonWraper>
           </SearchWraper>
           {
-            searchText?.length > 2 ?
+            listOfRestaurantFiltered.length > 0 ?
               <SearchResults>
                 {
-                  listOfRestaurantFiltered?.map(restaurant => {
-                    return <SearchedRestaurant onClick={() => handleSearchedRestaurantClick(restaurant.id)}>
+                  listOfRestaurantFiltered.map(restaurant => {
+                    return <SearchedRestaurant key={restaurant.id} onClick={() => handleSearchedRestaurantClick(restaurant.id)}>
                       <div>
                         <Name>{restaurant.name}</Name>
                         <Street>{restaurant.street}</Street>
@@ -81,6 +78,7 @@ const Homepage = () => {
           }
         </div>
       </HomeBanner>
+
       <HomeBody>
         <p>Best rated restaurants</p>
         <Underline></Underline>

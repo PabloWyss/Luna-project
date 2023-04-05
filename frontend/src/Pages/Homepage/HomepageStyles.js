@@ -43,13 +43,15 @@ export const ButtonWraper = styled.div`
 `
 
 export const SearchResults = styled.div`
-  background-color: white;
   margin-top: 5px;
   width: 532px;
   border-radius: 3px;
+  position: relative;
+  z-index: 2;
 `
 
 export const SearchedRestaurant = styled.div`
+  background-color: white;
   width: 532px;
   padding: 10px 15px;
   font-size: 20px;
