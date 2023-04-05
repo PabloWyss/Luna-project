@@ -35,7 +35,7 @@ const Registration = () => {
         } catch (error) {
             console.log(error)
             setErrorEntry(true)
-            serErrorMessage("Please enter a valid email")
+            serErrorMessage(error.response.data['email'] || error.response.data['error'])
         }
       }
 

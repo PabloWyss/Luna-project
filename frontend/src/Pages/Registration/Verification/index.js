@@ -21,7 +21,6 @@ const Verification = () => {
     const [repeatPassword, setRepeatPassword] = useState("");
     const [errorEntry, setErrorEntry] = useState(false);
     const [errorMessage, serErrorMessage] = useState("")
-    const [passwordMatch, setPasswordMatch] = useState(true);
     const navigate = useNavigate();
 
     //store typed email
@@ -60,10 +59,10 @@ const Verification = () => {
 
     const checkPasswordMatch = () => {
         if (repeatPassword !== "" && repeatPassword !== userPassword) {
-          setErrorEntry(false);
+          setErrorEntry(true);
           serErrorMessage("The passwords don't match")
         } else {
-          setErrorEntry(true);
+          setErrorEntry(false);
           serErrorMessage("")
         }
     };
@@ -88,7 +87,7 @@ const Verification = () => {
         } catch (error) {
             console.log(error)
             setErrorEntry(true)
-            serErrorMessage("Please enter valid information")
+            serErrorMessage( error.response.data['error'] ||"All fields are required")
         }
       }
 
@@ -138,7 +137,7 @@ const Verification = () => {
                                 </VerificationRightDiv>
                             </VerificationInnerDiv>
                             <ErrorP>
-                                {passwordMatch ? errorMessage : ""}
+                                {errorEntry ? errorMessage : ""}
                             </ErrorP>
                         </VerificationDiv>
                         <ButtonRegistrationDiv>

@@ -41,4 +41,5 @@ export const ButtonRegistrationDiv = styled.div`
 
 export const ErrorP = styled.p`
   color : red;
+  padding-bottom: 10px;
 `
