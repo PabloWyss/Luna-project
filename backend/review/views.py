@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import generics, permissions
 
 from restaurant.models import Restaurant
+from .email_utils import send_liked_review_email
 from .models import RestaurantReview
 from .permissions import IsOwnerOrReadOnly
 from .serializers import RestaurantReviewSerializer, LikeReviewSerializer, UserCommentedReviewSerializer
@@ -98,7 +99,9 @@ class LikeReviewView(generics.CreateAPIView):
             review.likes_on_review += 1
             review.liked_by_user.add(self.request.user)
             review.save()
-            return Response({'status': 'liked'})
+            response = Response({'status': 'liked'})
+            send_liked_review_email(review.reviewed_by_user, review)
+            return response
 
 
 class UserReviewLikesListView(generics.ListAPIView):

@@ -34,10 +34,13 @@ const ReviewsList = ({ restaurantID }) => {
     }
     getReviewsFromRestaurantByID();
   }, []);
+
+  console.log(reviewsList)
   return (
     <List>
       {
         reviewsList.map(review => {
+          console.log(review)
           return <Review key={review.id} review={review} />
         })
       }

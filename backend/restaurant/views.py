@@ -2,11 +2,12 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import AllowAny
 
+from restaurant.email_utils import send_create_restaurant_email, send_update_restaurant_email
 from restaurant.models import Restaurant
 from restaurant.permissions import IsOnlyAuthenticatedUser, IsOwnerOrReadOnly
 from restaurant.serializers import RestaurantSerializer, CreateRestaurantSerializer, PatchRestaurantSerializer, \
     RestaurantCategorySerializer
-from django.db.models import Q
+from django.db.models import Q, Avg
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -32,6 +33,11 @@ class RestaurantCreate(generics.CreateAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = CreateRestaurantSerializer
     permission_classes = [IsOnlyAuthenticatedUser]
+
+    def perform_create(self, serializer):
+        restaurant = serializer.save()
+        target_user = self.request.user
+        send_create_restaurant_email(target_user, restaurant)
 
 
 class RestaurantCategoryList(generics.ListAPIView):
@@ -76,7 +82,11 @@ class RestaurantDetail(generics.RetrieveUpdateDestroyAPIView):
     )
     def patch(self, request, *args, **kwargs):
         self.serializer_class = PatchRestaurantSerializer
-        return self.partial_update(request, *args, **kwargs)
+        response = self.partial_update(request, *args, **kwargs)
+        target_user = self.request.user
+        restaurant = self.get_object()
+        send_update_restaurant_email(target_user, restaurant)
+        return response
 
     @swagger_auto_schema(
         operation_description="Delete a restaurant by id (only by owner or restaurant admin)."
@@ -151,3 +161,15 @@ class SearchAPIView(APIView):
 
         else:
             return Response({'message': 'Invalid search type.'}, status=400)
+
+
+class BestRestaurantsView(APIView):
+    """
+    Get the best 4 restaurants by rating.
+    """
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        restaurants = Restaurant.objects.all().annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating')[:4]
+        serializer = RestaurantSerializer(restaurants, many=True)
+        return Response(serializer.data)

@@ -8,7 +8,7 @@ from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 from project import settings
 from registration.views import RegistrationView, RegistrationValidationView
 from user.views import CustomTokenObtainPairView
-from restaurant.views import CategoryListView, SearchAPIView
+from restaurant.views import CategoryListView, SearchAPIView, BestRestaurantsView
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -25,6 +25,8 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('backend/api/admin/', admin.site.urls),
+
+    path('backend/api/home/', BestRestaurantsView.as_view(), name='home'),
 
     path('backend/api/users/', include('user.urls')),
     path('backend/api/restaurants/', include('restaurant.urls')),
