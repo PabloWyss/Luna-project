@@ -12,6 +12,7 @@ import lunaAPI from "../../../Axios/lunaApi";
 const Registration = () => {
     const navigate = useNavigate();
     const [userEmail, setEmail] = useState("");
+    const [error, setError] = useState("");
     const handleEmailInput = (e) => {
         setEmail(e.target.value);
     };
@@ -30,6 +31,7 @@ const Registration = () => {
             navigate("/registration-message");
         } catch (error) {
             console.log(error)
+            alert("Your file is being uploaded!")
         }
       }
 
