@@ -1,6 +1,5 @@
 from rest_framework import serializers
 
-from review.models import RestaurantReview
 from .models import Comment
 
 
