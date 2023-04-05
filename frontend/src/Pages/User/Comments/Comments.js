@@ -21,7 +21,7 @@ const CommentsList = ({ userID }) => {
           },
         };
 
-        const response = await lunaAPI.get(`/comment/1/`, config);
+        const response = await lunaAPI.get(`/comment/reviews/comments/1/`, config);
         setCommentsList(response.data);
       } catch (error) {
         console.log(error);
@@ -37,7 +37,7 @@ const CommentsList = ({ userID }) => {
   }, [userID]);
 
   return (
-    <div>{Array.isArray(commentsList)}
+    <div>
         {Array.isArray(commentsList) &&
           commentsList?.map((comment) => (
             <CommentComponent key={comment.id} comment={comment} />

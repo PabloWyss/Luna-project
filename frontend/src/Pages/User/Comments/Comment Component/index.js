@@ -5,8 +5,7 @@ const CommentComponent = ({ comment }) => {
   return (
     <CommentsDiv>
       <CommentsTitleDiv>
-        <p>Comments</p>
-        <CommentsDateP>{comment?.date_created}</CommentsDateP>
+        <CommentsDateP>{comment?.created_date}</CommentsDateP>
       </CommentsTitleDiv>
       <CommentsDescriptionDiv>
         <p>{comment?.text_content}</p>

@@ -7,11 +7,10 @@ export const Container = styled.div`
   margin-left: 300px;
   font-weight: 700;
   border: 1px solid #EBEBEB ;
-  background: red;
+  background: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
   
 `;
 
