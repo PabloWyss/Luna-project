@@ -7,7 +7,7 @@ const RestaurantsGrid = () => {
   return (
     <>
       {listOfRestaurants.map((restaurant, index) => {
-        return <RestaurantCard restaurant={restaurant} key={index} />
+        return <RestaurantCard restaurant={restaurant} key={index} reviews={restaurant.reviews} />
       })}
     </>
   );

@@ -1,4 +1,4 @@
-import {ButtonRegistrationDiv, InputSignInStyle, SignUpDiv} from "../Signup/Signup.style";
+import {ButtonRegistrationDiv, ErrorP, InputSignInStyle, SignUpDiv} from "../Signup/Signup.style";
 import RegistrationTitle from "../RegistrationTitle";
 import OrangeButton from "../../../Components/Button";
 import {LoginDiv, LoginInnerDiv} from "./Login.style";
@@ -16,6 +16,8 @@ const Login = () => {
     const [userPassword, setPassword] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [errorEntry, setErrorEntry] = useState(false);
+    const [errorMessage, serErrorMessage] = useState("")
 
       //store typed email
     const handleUsernameInput = (e) => {
@@ -38,13 +40,18 @@ const Login = () => {
             "password" : userPassword
         }
 
-        let response = await lunaAPI.post('/auth/token/',data)
         try {
+            let response = await lunaAPI.post('/auth/token/',data)
+            setErrorEntry(false)
+            serErrorMessage("")
             localStorage.setItem("token", response.data.access);
         } catch (error) {
             console.log(error)
+            setErrorEntry(true)
+            serErrorMessage("Please enter valid Username and Password")
         }
-        let response2 = await lunaAPI.get('users/me/',
+        try {
+            let response2 = await lunaAPI.get('users/me/',
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -52,13 +59,13 @@ const Login = () => {
                 }
             }
             )
-        try {
             localStorage.setItem("id", response2.data.id);
             dispatch(updateUserData(response2.data))
-            navigate("/profile");
         } catch (error) {
             console.log(error)
-            alert("Please check your username or password")
+        }
+        if (errorEntry){
+            navigate("/profile");
         }
     }
 
@@ -81,6 +88,9 @@ const Login = () => {
                                 onChange={handlePasswordInput}
                             />
                         </LoginInnerDiv>
+                        <ErrorP>
+                                {errorEntry ? errorMessage : ""}
+                        </ErrorP>
                         <ButtonRegistrationDiv>
                             <OrangeButton textInput={'Login'} type={"submit"}/>
                         </ButtonRegistrationDiv>

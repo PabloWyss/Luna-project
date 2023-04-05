@@ -59,6 +59,7 @@ const UserProfile = () => {
       const newProfileData = {
         profile_picture: e.target.result
       }
+      console.log(e.target.result)
 
       const response2 = await lunaApi.patch("/users/me/", newProfileData,
       {
