@@ -8,7 +8,6 @@ const LikeCommentButtons = ({ likesCount, commentsCount, idReview, likedByLoginU
 
     const [likesSumRest, setLikesSumRest] = useState(likesCount)
     const [likedByUser,setlikedByUser] = useState(likedByLoginUser)
-    console.log(likedByLoginUser)
 
     const handleClickLike = (e) => {
         e.preventDefault()
@@ -54,7 +53,7 @@ const LikeCommentButtons = ({ likesCount, commentsCount, idReview, likedByLoginU
         <p>{likesSumRest}</p>
       </LikeButton>
       <CommentButton>
-        <p>Comment</p>
+        <p>Comments</p>
         <p>{commentsCount}</p>
       </CommentButton>
     </Buttons>

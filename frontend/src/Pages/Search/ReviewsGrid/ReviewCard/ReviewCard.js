@@ -1,71 +1,36 @@
-import avatar from "../../../../Assets/temp/JohnSmith.jpeg";
 import { Card, CardHeader, Comment, LatestComments, CardBody, TextGreyBold, TextOrangeBig, TextOrangeSmall, UserAvatar, UserInfo } from "./ReviewCardStyles";
 import LikeCommentButtons from "../../../../Components/LikeCommentButtons/LikeCommentButtons";
-import lunaAPI from "../../../../Axios/lunaApi";
-import {useEffect, useState} from "react";
-import reviews from "../../../User/Reviews/Reviews";
+import CommentReview from "./ComentReview";
+
+const isDev = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
+const baseURLImage = isDev ? 'http://localhost:8001' : 'https://luna-team4.propulsion-learn.ch'
 
 const ReviewCard = (props) => {
-    const [userReview,setUserReview] = useState({})
-    const [restaurantReview,setRestaurantReview] = useState({})
 
-  const obtainSpecificUser = async () => {
-    let response = await lunaAPI.get(`/users/users/${props.review.reviewed_by_user}/`,
-        {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                    'Content-Type': 'application/json'
-                }
-            }
-        )
-        try {
-            setUserReview(response.data)
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const obtainSpecificRestaurant = async () => {
-    let response = await lunaAPI.get(`/restaurants/${props.review.review_on_restaurant}/`,)
-        try {
-            setRestaurantReview(response.data)
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    useEffect(() => {
-        obtainSpecificUser()
-        obtainSpecificRestaurant()
-    },[])
-
-    const likedByLoginUser = props.review.liked_by_user.includes(userReview.id)
-
-
+  const userID = localStorage.getItem('id')
+  const likedByLoginUser = props.review.liked_by_user.includes(Number(userID))
+  const firstTwoComents = props.review.comments.slice(0, 2);
 
   return (
     <Card>
       <CardHeader>
         <UserAvatar>
-          <img src={userReview?.profile_picture}></img>
+          <img src={baseURLImage+props.review.reviewed_by_user.profile_picture}></img>
         </UserAvatar>
         <UserInfo>
-          <TextOrangeBig>{userReview?.username}</TextOrangeBig>
+          <TextOrangeBig>{props.review.reviewed_by_user.username}</TextOrangeBig>
           <TextGreyBold> 10 Reviews in total</TextGreyBold>
         </UserInfo>
       </CardHeader>
       <CardBody>
-        <TextOrangeBig>{restaurantReview.name}</TextOrangeBig>
+        <TextOrangeBig>{props.review.review_on_restaurant.name}</TextOrangeBig>
         <TextGreyBold>{props.review.text_content}</TextGreyBold>
         <TextOrangeSmall>read more</TextOrangeSmall>
-        <LikeCommentButtons idReview = {props.review.id} likedByLoginUser = {likedByLoginUser} likesCount={props.review.liked_by_user.length} commentsCount={props.review.comments.length}/>
+        <LikeCommentButtons idReview={props.review.id} likedByLoginUser={likedByLoginUser} likesCount={props.review.liked_by_user.length} commentsCount={props.review.comments.length}/>
         <LatestComments>Latest comments</LatestComments>
-        <TextOrangeSmall>Name</TextOrangeSmall>
-        <Comment>Is good! but too expensive!</Comment>
-        <TextOrangeSmall>Name</TextOrangeSmall>
-        <Comment>I totally agree with you!</Comment>
+        {firstTwoComents?.map((comment,index)=>{
+          return <CommentReview key={index} comment={comment}/>
+        })}
       </CardBody>
     </Card >
   );

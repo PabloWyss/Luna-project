@@ -48,14 +48,7 @@ const Search = () => {
   }
 
     const obtainAllUsers = async () => {
-    let response = await lunaAPI.get(`/search/?search_string=&type=users`,
-        // {
-        //         headers: {
-        //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        //             'Content-Type': 'application/json'
-        //         }
-        //     }
-        )
+    let response = await lunaAPI.get(`/search/?search_string=&type=users`)
         try {
             setListOfUsers(response.data)
             setListOfUsersFiltered(response.data)
@@ -65,14 +58,7 @@ const Search = () => {
     }
 
   const obtainAllReviews = async () => {
-    let response = await lunaAPI.get(`/search/?search_string=&type=reviews`,
-        // {
-        //         headers: {
-        //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        //             'Content-Type': 'application/json'
-        //         }
-        //     }
-        )
+    let response = await lunaAPI.get(`/search/?search_string=&type=reviews`)
         try {
             setListOfReviews(response.data)
             setListOfReviewsFiltered(response.data)
