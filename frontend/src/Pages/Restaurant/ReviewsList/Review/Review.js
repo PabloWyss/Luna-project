@@ -7,6 +7,7 @@ import Button from '../../../../Components/Button'
 import Comment from "./Comment/Comment";
 import { useState } from "react";
 import { formatDate } from "../../../../helpers";
+import {getCLS} from "web-vitals";
 
 const ReviewContent = styled.p`
   font-size: 16px;
@@ -37,7 +38,6 @@ const CommentList = styled.div`
 
 const Review = ({ review }) => {
   const [areAllCommentsShown, setAreAllCommentsShown] = useState(false)
-
   const handleShowHideCommentsClick = () => {
     setAreAllCommentsShown(prev => !prev);
   }
@@ -46,7 +46,7 @@ const Review = ({ review }) => {
     <ReviewContainer>
       <ReviewHeader>
         <HeaderRight>
-          <ReviewUser userName={review?.reviewed_by_user} />
+          <ReviewUser userName={review?.reviewed_by_user.username} />
           <RatingStars rating={review.rating} />
         </HeaderRight>
         <DateContainer>

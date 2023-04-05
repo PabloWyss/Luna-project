@@ -14,6 +14,7 @@ export const SearchBar = styled.div`
   width: 77%;
   border-right: 1px solid #D8D8D8;
   padding: 12px 32px;
+  height: 2vh;
 
   input{
     width: 100%;

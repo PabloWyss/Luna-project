@@ -38,3 +38,8 @@ export const ButtonRegistrationDiv = styled.div`
   height: 50px;
   width: 200px;
 `
+
+export const ErrorP = styled.p`
+  color : red;
+  padding-bottom: 10px;
+`
