@@ -53,6 +53,7 @@ const Login = () => {
             }
             )
         try {
+            localStorage.setItem("id", response2.data.id);
             dispatch(updateUserData(response2.data))
             navigate("/profile");
         } catch (error) {
