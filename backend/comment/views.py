@@ -1,3 +1,4 @@
+from .email_utils import send_new_comment_on_review_email
 from .models import Comment
 from .serializers import CommentSerializer, DeleteSerializer, CreateCommentSerializer
 from .permissions import IsOwnerOrAdminOrReadOnly
@@ -17,6 +18,10 @@ class CommentCreateAPIView(generics.CreateAPIView):
         review_id = self.kwargs.get('review_id')
         review = RestaurantReview.objects.get(id=review_id)
         serializer.save(comment_by_user=self.request.user, comments_on_review=review)
+        target_user = review.reviewed_by_user
+        response = Response({'status': 'commented'})
+        send_new_comment_on_review_email(target_user, review)
+        return response
 
 
 class CommentListAPIView(generics.ListAPIView):
