@@ -1,9 +1,17 @@
 from rest_framework import serializers
 from restaurant.models import Restaurant
+from review.models import RestaurantReview
+
+
+class ReviewIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RestaurantReview
+        fields = ['id']
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
     average_rating = serializers.SerializerMethodField()
+    reviews = ReviewIdSerializer(many=True, read_only=True)
 
     def get_average_rating(self, obj):
         return obj.get_average_rating()
