@@ -37,7 +37,7 @@ const CommentsList = ({ userID }) => {
   }, [userID]);
 
   return (
-    <div>
+    <div>{Array.isArray(commentsList)}
         {Array.isArray(commentsList) &&
           commentsList?.map((comment) => (
             <CommentComponent key={comment.id} comment={comment} />
@@ -47,7 +47,7 @@ const CommentsList = ({ userID }) => {
   );
 };
 
-const Comments = () => {
+const UserComments = () => {
   const currentUser = useSelector((store) => store.user.userData);
 
   return (
@@ -59,5 +59,5 @@ const Comments = () => {
     </Container>
   );
 };
-export default CommentsList;
+export default UserComments;
 

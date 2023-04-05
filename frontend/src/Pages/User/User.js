@@ -20,7 +20,7 @@ import Restaurant from "./Restaurants/Restaurant";
 import EditUserProfile from "./EditUserProfile/EditUserProfie";
 import {updateUserData, updateUserProfile} from "../../Redux/Slices/user";
 import lunaApi from "../../Axios/lunaApi";
-import CommentsList from "./Comments/Comments";
+import UserComments from "./Comments/Comments";
 
 
 
@@ -40,7 +40,7 @@ const UserProfile = () => {
   const [thingsILove, setThingsILove] = useState(currentUser?.things_i_love || '');
   const [description, setDescription] = useState(currentUser?.description || '');
   const [showReviews, setShowReviews] = useState(true);
-  const [showComments, setShowComments] = useState(false);
+  const [showUserComments, setShowUserComments] = useState(false);
   const [showRestaurants, setShowRestaurants] = useState(false);
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [bannerText, setBannerText] = useState('');
@@ -98,21 +98,21 @@ const handleProfilePictureChange = async (event) => {
 
   const handleReviewsClick = () => {
     setShowReviews(true);
-    setShowComments(false);
+    setShowUserComments(false);
     setShowRestaurants(false);
     setShowEditProfile(false);
   };
 
   const handleCommentsClick = () => {
     setShowReviews(false);
-    setShowComments(true);
+    setShowUserComments(true);
     setShowRestaurants(false);
     setShowEditProfile(false);
   };
 
   const handleRestaurantsClick = () => {
     setShowReviews(false);
-    setShowComments(false);
+    setShowUserComments(false);
     setShowRestaurants(true);
     setShowEditProfile(false);
   };
@@ -122,7 +122,7 @@ const handleProfilePictureChange = async (event) => {
       setShowEditProfile(false);
     } else {
       setShowReviews(false);
-      setShowComments(false);
+      setShowUserComments(false);
       setShowRestaurants(false);
       setShowEditProfile(true);
       setBackgroundEditable(true);
@@ -162,17 +162,15 @@ const handleProfilePictureChange = async (event) => {
           <ProfileNavButtons>
             <ProfileNavButtons>
               <button onClick={() => {setActiveView("reviews")}}><StarIcon/>Reviews</button>
-              <button onClick={() => {setActiveView("comments")}}><CommentIcon/>Comments
-              </button>
-              <button onClick={() => {setActiveView("restaurants")}}><RestaurantIcon/>Restaurants
-              </button>
+              <button onClick={() => {setActiveView("comments")}}><CommentIcon/>Comments </button>
+              <button onClick={() => {setActiveView("restaurants")}}><RestaurantIcon/>Restaurants </button>
               <button onClick={() => {setActiveView("edit")}}><EditIcon/>Edit Profile</button>
             </ProfileNavButtons>
 
           </ProfileNavButtons>
         </ProfileNav>
         {activeView === "reviews" ? <Reviews/> : ""}
-        {activeView === "comments" ?<CommentsList/>: ""}
+        {activeView === "comments" ? <UserComments/> : ""}
         {activeView === "restaurants" ?<Restaurant/>: ""}
         {activeView === "edit" ?<EditUserProfile/>: ""}
         <About>
