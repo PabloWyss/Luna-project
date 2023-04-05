@@ -27,7 +27,7 @@ const ReviewCard = (props) => {
     }
 
     const obtainSpecificRestaurant = async () => {
-    let response = await lunaAPI.get(`/restaurants/${props.review.review_on_restaurant}/`)
+    let response = await lunaAPI.get(`/restaurants/${props.review.review_on_restaurant}/`,)
         try {
             setRestaurantReview(response.data)
 
@@ -36,15 +36,10 @@ const ReviewCard = (props) => {
         }
     }
 
-
-
     useEffect(() => {
         obtainSpecificUser()
         obtainSpecificRestaurant()
     },[])
-
-    console.log(restaurantReview)
-
   return (
     <Card>
       <CardHeader>
@@ -60,7 +55,7 @@ const ReviewCard = (props) => {
         <TextOrangeBig>{restaurantReview.name}</TextOrangeBig>
         <TextGreyBold>{props.review.text_content}</TextGreyBold>
         <TextOrangeSmall>read more</TextOrangeSmall>
-        <LikeCommentButtons />
+        <LikeCommentButtons idReview = {props.review.id} likesCount={props.review.liked_by_user.length} commentsCount={props.review.comments.length}/>
         <LatestComments>Latest comments</LatestComments>
         <TextOrangeSmall>Name</TextOrangeSmall>
         <Comment>Is good! but too expensive!</Comment>
