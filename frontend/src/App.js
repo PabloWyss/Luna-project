@@ -14,6 +14,7 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Restaurant from './Pages/Restaurant/Restaurant';
 import AddReview from './Pages/AddReview';
+import AddRestaurant from './Pages/AddRestaurant/AddRestaurant';
 
 function App() {
     return (
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/verification" element={<Verification />} />
                 <Route path="/restaurant/:restaurantID" element={<Restaurant />} />
                 <Route path="addreview" element={<AddReview />} />
+                <Route path="AddRestaurant" element={<AddRestaurant />} />
             </Routes>
             <Footer />
         </div>
