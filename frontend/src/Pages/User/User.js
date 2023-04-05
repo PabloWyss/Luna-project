@@ -133,8 +133,6 @@ const UserProfile = () => {
     console.log("use effect")
 
 
-
-
     /* setFirstName(currentUser?.first_name || '');
     setLastName(currentUser?.last_name || '');
     setLocation(currentUser?.location || '');
