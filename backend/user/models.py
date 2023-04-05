@@ -18,6 +18,8 @@ class User(AbstractUser):
     description = models.CharField(max_length=50, blank=True)
     join_date = models.DateTimeField(auto_now_add=True)
     profile_picture = models.ImageField(upload_to=user_directory_path, blank=True)
+    things_i_love = models.CharField(max_length=50, blank=True)
+    background_image = models.ImageField(upload_to=user_directory_path, blank=True)
 
     def __str__(self):
         return self.username

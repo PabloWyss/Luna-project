@@ -52,7 +52,9 @@ class CreateRestaurantReviewView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         restaurant = Restaurant.objects.get(pk=self.kwargs['pk'])
-        serializer.save(reviewed_by_user=self.request.user, review_on_restaurant=restaurant)
+        review = serializer.save(reviewed_by_user=self.request.user, review_on_restaurant=restaurant)
+        restaurant.reviews.add(review)
+        restaurant.save()
 
 
 class RestaurantReviewListView(generics.ListAPIView):
