@@ -76,6 +76,18 @@ const Search = () => {
         }
     }
 
+    const filterByCategory = (category) =>{
+
+        let toSearch = category.toLowerCase()
+        let listFiltered = []
+        for(let i=0; i<listOfRestaurants.length; i++) {
+            if(String(listOfRestaurants[i]['category']).toLowerCase().includes(toSearch)) {
+              listFiltered.push(listOfRestaurants[i]);
+            }
+        }
+        setListOfRestaurantsFiltered(listFiltered)
+    }
+
   useEffect(() => {
     obtainAllRestaurants()
     obtainAllUsers()
@@ -92,9 +104,9 @@ const Search = () => {
           <p>Select a category...</p>
           <img src={arrow}></img>
         </SearchCategory>
-          {/*{categoryClicked ?*/}
-          {/*<CategoryList/>:*/}
-          {/*""}*/}
+          {categoryClicked ?
+          <CategoryList categoryFunction={filterByCategory}/>:
+          ""}
       </SearchBarContainer>
       <Main>
         <MainMenu>
