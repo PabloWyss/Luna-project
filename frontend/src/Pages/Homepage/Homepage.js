@@ -1,8 +1,8 @@
-import { Grid, HomeBanner, HomeBody, Main, Underline } from "./HomepageStyles";
-import RestaurantsGrid from '../Search/RestaurantsGrid/RestaurantsGrid';
+import { SearchWraper, ButtonWraper, Grid, HomeBanner, HomeBody, Main, Underline } from "./HomepageStyles";
 import { useEffect, useState } from "react";
 import lunaAPI from "../../Axios/lunaApi";
 import RestaurantCard from "../Search/RestaurantsGrid/RestaurantCard/RestaurantCard";
+import Button from '../../Components/Button'
 
 const Homepage = () => {
 
@@ -21,7 +21,7 @@ const Homepage = () => {
     getFourBestRatedRestaurants();
   }, [])
 
-  const sortedList = listOfRestaurants?.sort((a, b) => b.rating - a.rating);
+  const sortedList = listOfRestaurants?.sort((a, b) => b.average_rating - a.average_rating);
   const topFourList = sortedList?.slice(0, 4);
   console.log(topFourList);
 
@@ -29,7 +29,12 @@ const Homepage = () => {
 
     <Main>
       <HomeBanner>
-        <div>SearchBar</div>
+        <SearchWraper>
+          <input placeholder='Search...'></input>
+          <ButtonWraper>
+            <Button textInput={'Search'} />
+          </ButtonWraper>
+        </SearchWraper>
       </HomeBanner>
       <HomeBody>
         <p>Best rated restaurants</p>

@@ -17,12 +17,26 @@ export const HomeBanner = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+`
 
-  div{
-    background-color: white;
-    width: 400px;
-    padding: 20px;
+export const SearchWraper = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  input{
+    padding: 20px 15px;
+    width: 530px;
+    border: 1px solid #EBEBEB;
+    border-radius: 3px;
+    margin-right: 20px;
+    font-size: 16px;
+    font-weight: 400;
   }
+`
+
+export const ButtonWraper = styled.div`
+  width: 200px;
+  flex-shrink: 0;
 `
 
 export const HomeBody = styled.div`
