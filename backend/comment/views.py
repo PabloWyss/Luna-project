@@ -1,5 +1,5 @@
 from .models import Comment
-from .serializers import CommentSerializer, DeleteSerializer
+from .serializers import CommentSerializer, DeleteSerializer, CreateCommentSerializer
 from .permissions import IsOwnerOrAdminOrReadOnly
 from review.models import RestaurantReview
 from rest_framework import generics, permissions
@@ -10,7 +10,7 @@ class CommentCreateAPIView(generics.CreateAPIView):
     """
     API endpoint to create a comment on a review.
     """
-    serializer_class = CommentSerializer
+    serializer_class = CreateCommentSerializer
     permission_classes = [IsOwnerOrAdminOrReadOnly]
 
     def perform_create(self, serializer):
