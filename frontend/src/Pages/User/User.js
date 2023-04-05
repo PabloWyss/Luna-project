@@ -37,7 +37,7 @@ const UserProfile = () => {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [bannerText, setBannerText] = useState('');
   const [activeView, setActiveView] = useState('reviews');
-  const [backgroundEditable, setBackgroundEditable] = useState(false);
+  const [backgroundEditable, setBackgroundEditable] = useState(true);
 
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
@@ -49,10 +49,12 @@ const UserProfile = () => {
   };
 
   const handleBackgroundChange = (event) => {
+    console.log(backgroundEditable)
     if (backgroundEditable) {
       const file = event.target.files[0];
       const reader = new FileReader();
       reader.onload = (e) => {
+        console.log(e.target.result)
         setBackgroundImage(e.target.result);
       };
       reader.readAsDataURL(file);
