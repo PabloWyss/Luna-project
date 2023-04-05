@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Container,
   Background,
-  Avatar,
+  ProfilePicture,
   ProfileNav,
   ProfileNavButtons,
   About,
@@ -31,7 +31,7 @@ const UserProfile = () => {
   const [user, setUser] = useState(currentUser || []);
 
   console.log(user)
-  const [avatarPicture, setAvatarPicture] = useState(currentUser?.avatar || '');
+  const [profilePicture, setProfilePicture] = useState(currentUser?.profile_picture || '');
   const [backgroundImage, setBackgroundImage] = useState(currentUser?.background_image || '');
   const [firstName, setFirstName] = useState(currentUser?.first_name || '');
   const [lastName, setLastName] = useState(currentUser?.last_name || '');
@@ -46,18 +46,18 @@ const UserProfile = () => {
   const [activeView, setActiveView] = useState('reviews');
   const [backgroundEditable, setBackgroundEditable] = useState(true);
 
-  const handleAvatarChange = (event) => {
+  const handleProfilePictureChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.onload = async (e) => {
-      setAvatarPicture(e.target.result);
+      setProfilePicture(e.target.result);
 
       //
       // upload avatar
       //
       console.log(e)
       const newProfileData = {
-        avatar: e.target.result
+        profile_picture: e.target.result
       }
 
       const response2 = await lunaApi.patch("/users/me/", newProfileData,
@@ -145,7 +145,7 @@ const UserProfile = () => {
     const isDev = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
     let baseUrl = isDev ? 'http://localhost:8001' : 'https://luna-team4.propulsion-learn.ch'
 
-    setAvatarPicture(baseUrl + currentUser.avatar)
+    setProfilePicture(baseUrl + currentUser.profile_picture)
     setBackgroundImage(currentUser.background_image ? baseUrl + currentUser.background_image : 'http://localhost:3000/static/media/homepage.51b269f18a4e07566511.jpeg')
   }, [currentUser]);
 
@@ -155,9 +155,9 @@ const UserProfile = () => {
             <Background image={backgroundImage}>
               {activeView === 'edit'? <input id="background-image" type="file" accept="image/*" onChange={handleBackgroundChange}/> : ""}
             </Background>
-            <Avatar image={avatarPicture}>
-              {activeView === 'edit'? <input id="avatar-image" type="file" accept="image/*" onChange={handleAvatarChange}/>: ""}
-            </Avatar>
+            <ProfilePicture image={profilePicture}>
+              {activeView === 'edit'? <input id="profile-image" type="file" accept="image/*" onChange={handleProfilePictureChange}/>: ""}
+            </ProfilePicture>
         <BannerText firstName={firstName} lastName={lastName} location={location}/>
         <ProfileNav>
           <p>{firstName}'s Profile</p>

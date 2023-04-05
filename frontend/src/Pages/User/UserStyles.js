@@ -7,7 +7,7 @@ export const Container = styled.div`
   height:1200px;
 `;
 
-export const Avatar = styled.div`
+export const ProfilePicture = styled.div`
   background-color: orange;
   position: absolute;
   height: 200px;

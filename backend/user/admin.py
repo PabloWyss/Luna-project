@@ -20,7 +20,7 @@ class CustomUserAdmin(UserAdmin):
         (None, {'fields': ('username', 'password')}),
         ('Personal info',
          {'fields': (
-             'first_name', 'last_name', 'email', 'phone', 'location', 'description', 'things_i_love', 'avatar',)}),
+             'first_name', 'last_name', 'email', 'phone', 'location', 'description', 'things_i_love', 'profile_picture',)}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'join_date')}),
     )
@@ -29,7 +29,7 @@ class CustomUserAdmin(UserAdmin):
             'classes': ('wide',),
             'fields': (
                 'username', 'email', 'first_name', 'last_name', 'password1', 'password2', 'is_staff', 'is_superuser',
-                'is_active', 'phone', 'location', 'description', 'avatar', 'groups', 'user_permissions',
+                'is_active', 'phone', 'location', 'description', 'profile_picture', 'groups', 'user_permissions',
             )}
          ),
     )
