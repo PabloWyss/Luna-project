@@ -26,7 +26,7 @@ const RestaurantCard = (prop) => {
         <RestName>{prop.restaurant?.name}</RestName>
         <RestAddress>{prop.restaurant?.street}</RestAddress>
         <RatingContainer>
-          <RatingStars />
+          <RatingStars rating={prop.restaurant?.average_rating} isVoting={false} />
           <ReviewCount>{prop.restaurant?.reviews.length}</ReviewCount>
         </RatingContainer>
       </Details>
