@@ -24,7 +24,7 @@ const CommentsList = ({ userID }) => {
           },
         };
 
-        const response = await lunaAPI.get(`comments/user/${userID}/`, config);
+        const response = await lunaAPI.get(`/comment/${userID}/`, config);
         setReviewsList(response.data)
       } catch (error) {
         console.log(error);
