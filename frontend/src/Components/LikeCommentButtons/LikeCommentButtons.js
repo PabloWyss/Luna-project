@@ -13,7 +13,6 @@ const LikeCommentButtons = ({ likesCount, commentsCount, idReview, likedByLoginU
     e.preventDefault()
     addSubLike()
     updateLike()
-
   }
 
   const addSubLike = () => {
@@ -45,12 +44,12 @@ const LikeCommentButtons = ({ likesCount, commentsCount, idReview, likedByLoginU
 
   return (
     <Buttons>
-      <LikeButton onClick={handleLikeOnClick}>
+      <LikeButton>
         <FaRegThumbsUp></FaRegThumbsUp>
         <p>Like</p>
         <p>{likesSumRest}</p>
       </LikeButton>
-      <CommentButton onClick={handleCommentOnClick}>
+      <CommentButton>
         <p>Comment</p>
         <p>24</p>
       </CommentButton>
