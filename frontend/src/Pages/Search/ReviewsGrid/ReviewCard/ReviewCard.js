@@ -23,7 +23,7 @@ const ReviewCard = (props) => {
   const likedByLoginUser = props.review.liked_by_user.includes(Number(userID))
   const firstTwoComents = props.review.comments.slice(0, 2);
   let commentLength = 130
-
+  console.log(props.review)
   return (
     <Card>
       <CardHeader>
