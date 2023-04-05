@@ -1,10 +1,10 @@
 import {Comment, TextOrangeSmall} from "../ReviewCardStyles";
 
 const CommentReview = ({comment}) => {
-    console.log(comment)
+
     return (
         <>
-            <TextOrangeSmall>Name</TextOrangeSmall>
+            <TextOrangeSmall>{comment.comment_by_user}</TextOrangeSmall>
             <Comment>{comment.text_content}</Comment>
         </>
     )
