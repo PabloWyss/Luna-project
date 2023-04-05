@@ -2,44 +2,21 @@ import styled from "styled-components";
 import LikeCommentButtons from "../../../../Components/LikeCommentButtons/LikeCommentButtons";
 import RatingStars from "../../../../Components/RatingStars/RatingStars";
 import ReviewUser from "../../../../Components/UserCardHeader/UserCardHeader";
-import { ButtonWraperSmall, DateContainer, AddCommentWraper, HeaderRight, ReviewContainer, ReviewHeader } from "./ReviewStyles";
+import { ButtonWraperSmall, DateContainer, AddCommentWraper, HeaderRight, ReviewContainer, ReviewHeader, ReviewContent, CommentList, ShowHideCommentBtn, ReviewFooter } from "./ReviewStyles";
 import Button from '../../../../Components/Button'
 import Comment from "./Comment/Comment";
 import { useState } from "react";
 import { formatDate } from "../../../../helpers";
-
-const ReviewContent = styled.p`
-  font-size: 16px;
-  font-weight: 300;
-  padding: 10px 10px 0 10px;
-`
-
-const ShowHideCommentBtn = styled.div`
-  font-size: 16px;
-  color: #E47D31;
-
-  :hover{
-    cursor: pointer;
-  }
-`
-
-const ReviewFooter = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 10px 0 10px;
-`
-
-const CommentList = styled.div`
-  margin-top: 10px;
-`
 
 const Review = ({ review }) => {
   const [areAllCommentsShown, setAreAllCommentsShown] = useState(false)
 
   const handleShowHideCommentsClick = () => {
     setAreAllCommentsShown(prev => !prev);
+  }
+
+  const commentClick = () => {
+    setAreAllCommentsShown(true)
   }
 
   return (
@@ -77,9 +54,8 @@ const Review = ({ review }) => {
               </div>
               :
               <div>
-
                 <ReviewFooter>
-                  <LikeCommentButtons likesCount={review?.likes_on_review} />
+                  <LikeCommentButtons likesCount={review?.likes_on_review} commentClick={commentClick} />
                   <ShowHideCommentBtn onClick={handleShowHideCommentsClick}>View all comments</ShowHideCommentBtn>
                 </ReviewFooter>
               </div>
