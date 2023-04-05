@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import colorimg from '../../Assets/solid-color-image.jpeg'
+import colorimg from '../../Assets/solid-color-image-dark-grey.jpeg'
 
 export const HeaderContainer = styled.div`
   height: 500px;
@@ -104,6 +104,11 @@ export const FilterBar = styled.div`
       padding: 11px;
     }
   }
+`
+
+export const NoReviewsText = styled.div`
+  font-weight: 300px;
+  font-size: 20px;
 `
 
 export const Separator = styled.div`

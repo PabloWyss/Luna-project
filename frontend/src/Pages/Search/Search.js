@@ -26,8 +26,6 @@ const Search = () => {
     setListOfRestaurantsFiltered(listRestFiltered)
     let listUsFiltered = SearchFilterComponent(searchText, listOfUsers)
     setListOfUsersFiltered(listUsFiltered)
-    let listRevFiltered = SearchFilterComponent(searchText, listOfReviews)
-    setListOfReviewsFiltered(listRevFiltered)
   }
 
   const obtainAllRestaurants = async () => {
