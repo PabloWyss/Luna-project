@@ -51,6 +51,10 @@ export const TextGreyBold = styled.p`
   color: #4C4C4C;
 `
 
+export const ReviewTextDiv = styled.div`
+  height: 110px;
+`
+
 export const LatestComments = styled.p`
   font-size: 20px;
   font-weight: 300px;

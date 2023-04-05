@@ -1,4 +1,16 @@
-import { Card, CardHeader, Comment, LatestComments, CardBody, TextGreyBold, TextOrangeBig, TextOrangeSmall, UserAvatar, UserInfo } from "./ReviewCardStyles";
+import {
+  Card,
+  CardHeader,
+  Comment,
+  LatestComments,
+  CardBody,
+  TextGreyBold,
+  TextOrangeBig,
+  TextOrangeSmall,
+  UserAvatar,
+  UserInfo,
+  ReviewTextDiv
+} from "./ReviewCardStyles";
 import LikeCommentButtons from "../../../../Components/LikeCommentButtons/LikeCommentButtons";
 import CommentReview from "./ComentReview";
 
@@ -10,6 +22,7 @@ const ReviewCard = (props) => {
   const userID = localStorage.getItem('id')
   const likedByLoginUser = props.review.liked_by_user.includes(Number(userID))
   const firstTwoComents = props.review.comments.slice(0, 2);
+
 
   return (
     <Card>
@@ -23,9 +36,14 @@ const ReviewCard = (props) => {
         </UserInfo>
       </CardHeader>
       <CardBody>
-        <TextOrangeBig>{props.review.review_on_restaurant.name}</TextOrangeBig>
-        <TextGreyBold>{props.review.text_content}</TextGreyBold>
-        <TextOrangeSmall>read more</TextOrangeSmall>
+        <ReviewTextDiv>
+          <TextOrangeBig>{props.review.review_on_restaurant.name}</TextOrangeBig>
+          <TextGreyBold>{props.review.text_content.length<130 ?
+              props.review.text_content :
+              `${props.review.text_content.slice(0, 130)}...`
+          }</TextGreyBold>
+          <TextOrangeSmall>read more</TextOrangeSmall>
+        </ ReviewTextDiv>
         <LikeCommentButtons idReview={props.review.id} likedByLoginUser={likedByLoginUser} likesCount={props.review.liked_by_user.length} commentsCount={props.review.comments.length}/>
         <LatestComments>Latest comments</LatestComments>
         {firstTwoComents?.map((comment,index)=>{
