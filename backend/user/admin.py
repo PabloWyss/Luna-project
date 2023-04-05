@@ -2,12 +2,12 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User
 
-
 # ('Related users', {'fields': ('restaurants_love', 'reviewed_by', 'commented_by', 'liked_reviews')}),
 #  'restaurants_love', 'reviewed_by', 'commented_by', 'liked_reviews'
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User
+
 
 class CustomUserAdmin(UserAdmin):
     model = User
@@ -19,7 +19,8 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info',
-         {'fields': ('first_name', 'last_name', 'email', 'phone', 'location', 'description', 'things_i_love', 'avatar',)}),
+         {'fields': (
+             'first_name', 'last_name', 'email', 'phone', 'location', 'description', 'things_i_love', 'avatar',)}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'join_date')}),
     )
