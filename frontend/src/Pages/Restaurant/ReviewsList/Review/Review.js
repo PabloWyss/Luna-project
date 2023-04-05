@@ -23,7 +23,7 @@ const Review = ({ review }) => {
     <ReviewContainer>
       <ReviewHeader>
         <HeaderRight>
-          <ReviewUser userName={review?.reviewed_by_user} />
+          <ReviewUser userName={review?.reviewed_by_user.username} />
           <RatingStars rating={review.rating} />
         </HeaderRight>
         <DateContainer>
