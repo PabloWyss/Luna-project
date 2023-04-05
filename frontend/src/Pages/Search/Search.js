@@ -92,9 +92,9 @@ const Search = () => {
           <p>Select a category...</p>
           <img src={arrow}></img>
         </SearchCategory>
-          {categoryClicked ?
-          <CategoryList/>:
-          ""}
+          {/*{categoryClicked ?*/}
+          {/*<CategoryList/>:*/}
+          {/*""}*/}
       </SearchBarContainer>
       <Main>
         <MainMenu>
