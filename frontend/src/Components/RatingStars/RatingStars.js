@@ -7,18 +7,33 @@ const StarsContainer = styled.div`
   flex-direction: row;
 `
 
-const RatingStars = (props) => {
-  const [rating, setRating] = useState(props.average_rating);
+const RatingStars = ({ rating, isVoting }) => {
+  const [votingRating, setVotingRating] = useState(0);
+
+  const ratingRoundUp = Math.ceil(rating);
+
+  if (isVoting) {
+    return (
+      <StarsContainer>
+        {[1, 2, 3, 4, 5].map((value) => (
+          <Star
+            key={value}
+            filled={value <= votingRating}
+            onClick={() => {
+              setVotingRating(value)
+            }}
+          />
+        ))}
+      </StarsContainer>
+    );
+  }
 
   return (
     <StarsContainer>
       {[1, 2, 3, 4, 5].map((value) => (
         <Star
           key={value}
-          filled={value <= rating}
-          onClick={() => {
-            setRating(value)
-          }}
+          filled={value <= ratingRoundUp}
         />
       ))}
     </StarsContainer>

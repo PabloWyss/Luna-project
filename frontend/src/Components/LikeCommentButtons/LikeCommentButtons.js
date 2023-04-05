@@ -1,17 +1,29 @@
 import { FaRegThumbsUp } from 'react-icons/fa';
 import { Buttons, CommentButton, LikeButton } from './LikeCommentButtonsStyles';
 import lunaAPI from "../../Axios/lunaApi";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
-const LikeCommentButtons = ({ likesCount, commentsCount, idReview }) => {
+const LikeCommentButtons = ({ likesCount, commentsCount, idReview, likedByLoginUser }) => {
 
-    const [likesSumRest, setLikesSumRest] = useState(1)
+    const [likesSumRest, setLikesSumRest] = useState(likesCount)
+    const [likedByUser,setlikedByUser] = useState(likedByLoginUser)
+    console.log(likedByLoginUser)
 
     const handleClickLike = (e) => {
         e.preventDefault()
+        addSubLike()
         updateLike()
 
+    }
+
+    const addSubLike = () => {
+        if (likedByUser){
+            setLikesSumRest(likesSumRest-1)
+        } else {
+            setLikesSumRest(likesSumRest+1)
+        }
+        setlikedByUser(!likedByUser)
     }
 
      const config = {
@@ -27,8 +39,6 @@ const LikeCommentButtons = ({ likesCount, commentsCount, idReview }) => {
     const updateLike = async () => {
     let response = await lunaAPI.post(`/reviews/like/${idReview}/`,bodyParameters, config)
     try {
-        likesCount += likesSumRest
-        setLikesSumRest(-likesSumRest)
     } catch (error) {
       console.log(error)
       alert('Please sign in in order to Like a review')
@@ -36,13 +46,12 @@ const LikeCommentButtons = ({ likesCount, commentsCount, idReview }) => {
   }
 
 
-
   return (
     <Buttons>
       <LikeButton onClick={handleClickLike}>
         <FaRegThumbsUp></FaRegThumbsUp>
         <p>Like</p>
-        <p>{likesCount}</p>
+        <p>{likesSumRest}</p>
       </LikeButton>
       <CommentButton>
         <p>Comment</p>

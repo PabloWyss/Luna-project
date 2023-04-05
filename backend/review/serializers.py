@@ -1,11 +1,14 @@
 from rest_framework import serializers
 from comment.serializers import CommentSerializer
+from restaurant.serializers import RestaurantSerializer
+from user.serializer import UserSerializer
 from .models import RestaurantReview
 
 
 class RestaurantReviewSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
-    review_on_restaurant = serializers.PrimaryKeyRelatedField(read_only=True)
+    review_on_restaurant = RestaurantSerializer(read_only=True)
+    reviewed_by_user = UserSerializer(read_only=True)
 
     class Meta:
         model = RestaurantReview

@@ -6,6 +6,7 @@ import { ButtonWraperSmall, DateContainer, AddCommentWraper, HeaderRight, Review
 import Button from '../../../../Components/Button'
 import Comment from "./Comment/Comment";
 import { useState } from "react";
+import { formatDate } from "../../../../helpers";
 
 const ReviewContent = styled.p`
   font-size: 16px;
@@ -46,10 +47,10 @@ const Review = ({ review }) => {
       <ReviewHeader>
         <HeaderRight>
           <ReviewUser userName={review?.reviewed_by_user} />
-          <RatingStars />
+          <RatingStars rating={review.rating} />
         </HeaderRight>
         <DateContainer>
-          <p>{review?.date_created}</p>
+          <p>{formatDate(review?.date_created)}</p>
         </DateContainer>
       </ReviewHeader>
       <div>

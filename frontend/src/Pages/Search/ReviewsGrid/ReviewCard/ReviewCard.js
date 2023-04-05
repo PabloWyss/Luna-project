@@ -40,6 +40,11 @@ const ReviewCard = (props) => {
         obtainSpecificUser()
         obtainSpecificRestaurant()
     },[])
+
+    const likedByLoginUser = props.review.liked_by_user.includes(userReview.id)
+
+
+
   return (
     <Card>
       <CardHeader>
@@ -55,7 +60,7 @@ const ReviewCard = (props) => {
         <TextOrangeBig>{restaurantReview.name}</TextOrangeBig>
         <TextGreyBold>{props.review.text_content}</TextGreyBold>
         <TextOrangeSmall>read more</TextOrangeSmall>
-        <LikeCommentButtons idReview = {props.review.id} likesCount={props.review.liked_by_user.length} commentsCount={props.review.comments.length}/>
+        <LikeCommentButtons idReview = {props.review.id} likedByLoginUser = {likedByLoginUser} likesCount={props.review.liked_by_user.length} commentsCount={props.review.comments.length}/>
         <LatestComments>Latest comments</LatestComments>
         <TextOrangeSmall>Name</TextOrangeSmall>
         <Comment>Is good! but too expensive!</Comment>
