@@ -16,7 +16,7 @@ import { ReactComponent as StarIcon } from '../../Assets/star.svg';
 import BannerText from "./BannerText";
 import Reviews from './Reviews/Review';
 import Comments from './Comments/Comments';
-import RestaurantStyles from "./Restaurants/RestaurantStyles";
+import Restaurant from "../Restaurant/Restaurant";
 import EditUserProfile from "./EditUserProfile/EditUserProfie";
 import {updateUserData, updateUserProfile} from "../../Redux/Slices/user";
 import lunaApi from "../../Axios/lunaApi";
@@ -175,7 +175,7 @@ const UserProfile = () => {
         </ProfileNav>
         {activeView === "reviews" ? <Reviews/> : ""}
         {activeView === "comments" ?<Comments/>: ""}
-        {activeView === "restaurants" ?<RestaurantStyles/>: ""}
+        {activeView === "restaurants" ?<Restaurant/>: ""}
         {activeView === "edit" ?<EditUserProfile/>: ""}
         <About>
           <AboutTitle>About {firstName}</AboutTitle>
