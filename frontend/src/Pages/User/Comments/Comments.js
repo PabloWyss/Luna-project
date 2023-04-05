@@ -35,7 +35,7 @@ const CommentsList = ({ userID }) => {
 return (
     <div>
       {
-        commentsList.map(comment => {
+        commentsList?.map(comment => {
           return <Review key={comment.id} review={comment} />
         })
       }

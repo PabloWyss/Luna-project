@@ -16,7 +16,7 @@ import { ReactComponent as StarIcon } from '../../Assets/star.svg';
 import BannerText from "./BannerText";
 import Reviews from './Reviews/Review';
 import Comments from './Comments/Comments';
-import Restaurant from "../Restaurant/Restaurant";
+import Restaurant from "./Restaurants/Restaurant";
 import EditUserProfile from "./EditUserProfile/EditUserProfie";
 import {updateUserData, updateUserProfile} from "../../Redux/Slices/user";
 import lunaApi from "../../Axios/lunaApi";

@@ -2,7 +2,7 @@ import React from 'react';
 import RestaurantsComponent from "./RestaurantsComponent";
 import {Title, Container, ReviewsTitleDateDiv} from "../Reviews/ReviewStyles";
 import OrangeButton from "../../../Components/Button";
-import {RestaurantButtonDiv} from "./RestaurantsComponent/RestaurantComponent.style";
+import {RestaurantButtonDiv} from "./RestaurantsComponent/RestaurantStyles";
 import { NavLink } from 'react-router-dom';
 
 const Restaurant = () => {
