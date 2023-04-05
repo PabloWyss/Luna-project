@@ -8,6 +8,7 @@ const BannerTextWrapper = styled.div`
   left: 300px; 
   top: 15%;
   z-index: 5;
+  color: white;
 
   div.name {
     font-family: Roboto;
@@ -17,6 +18,7 @@ const BannerTextWrapper = styled.div`
     text-align: left;
     margin-bottom: 10px;
     line-height: 100%;
+    color: white;
   }
 `;
 

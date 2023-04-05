@@ -32,3 +32,4 @@ export const TextGreyBold = styled.p`
   font-weight: 700;
   color: #4C4C4C;
 `
+

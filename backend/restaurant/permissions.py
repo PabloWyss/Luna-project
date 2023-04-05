@@ -16,4 +16,4 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
-        return obj == request.user
+        return obj.created_by_user == request.user
