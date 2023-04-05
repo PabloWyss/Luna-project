@@ -14,7 +14,7 @@ import { ReactComponent as RestaurantIcon } from '../../Assets/restaurant.svg';
 import { ReactComponent as EditIcon } from '../../Assets/edit.svg';
 import { ReactComponent as StarIcon } from '../../Assets/star.svg';
 import BannerText from "./BannerText";
-import Reviews from './Reviews/Reviews';
+import Reviews from './Reviews/ReviewsList';
 import Comments from './Comments/CommentsStyles';
 import RestaurantStyles from "./Restaurants/RestaurantStyles";
 import EditUserProfile from "./EditUserProfile/EditUserProfie";

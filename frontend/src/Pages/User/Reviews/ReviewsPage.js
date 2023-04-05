@@ -3,7 +3,7 @@ import {
     Container,
     ReviewsTitleDateDiv,
     Title,
-} from './ReviewStyles';
+} from './ReviewPageStyles';
 import ReviewComponent from "./ReviewComponent";
 
 const Reviews = () => {
