@@ -4,6 +4,7 @@ import { Grid, Main, MainMenu, SearchBar, SearchBarContainer, SearchCategory, Ta
 import { useEffect, useState } from "react";
 import lunaAPI from "../../Axios/lunaApi";
 import SearchFilterComponent from "../../Components/SearchFilterComponent";
+import CategoryList from "./CategoryList";
 
 const Search = () => {
 
@@ -18,6 +19,14 @@ const Search = () => {
   // Reviews
   const [listOfReviews, setListOfReviews] = useState([])
   const [listOfReviewsFiltered, setListOfReviewsFiltered] = useState([])
+
+    //Click on Category
+    const [categoryClicked, setCategoryClicked] = useState(false)
+
+    const handleCategoryClicked = () => {
+        setCategoryClicked(!categoryClicked)
+    }
+
 
   const searchHandler = (e) => {
     e.preventDefault()
@@ -79,10 +88,13 @@ const Search = () => {
         <SearchBar>
           <input placeholder="Search..." onChange={searchHandler} />
         </SearchBar>
-        <SearchCategory>
+        <SearchCategory onClick={handleCategoryClicked}>
           <p>Select a category...</p>
           <img src={arrow}></img>
         </SearchCategory>
+          {categoryClicked ?
+          <CategoryList/>:
+          ""}
       </SearchBarContainer>
       <Main>
         <MainMenu>

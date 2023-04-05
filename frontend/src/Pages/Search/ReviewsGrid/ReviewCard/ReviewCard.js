@@ -51,8 +51,8 @@ const ReviewCard = (props) => {
         </ ReviewTextDiv>
         <LikeCommentButtons idReview={props.review.id} likedByLoginUser={likedByLoginUser} likesCount={props.review.liked_by_user.length} commentsCount={props.review.comments.length}/>
         <LatestComments>Latest comments</LatestComments>
-        {firstTwoComents?.map((comment,index)=>{
-          return <CommentReview key={index} comment={comment}/>
+        {firstTwoComents?.map((comment)=>{
+          return <CommentReview key={comment.id} commentText={comment.text_content} user={comment.comment_by_user}/>
         })}
       </CardBody>
     </Card >
