@@ -10,6 +10,8 @@ const StarsContainer = styled.div`
 const RatingStars = ({ rating, isVoting }) => {
   const [votingRating, setVotingRating] = useState(0);
 
+  const ratingRoundUp = Math.ceil(rating);
+
   if (isVoting) {
     return (
       <StarsContainer>
@@ -31,7 +33,7 @@ const RatingStars = ({ rating, isVoting }) => {
       {[1, 2, 3, 4, 5].map((value) => (
         <Star
           key={value}
-          filled={value <= rating}
+          filled={value <= ratingRoundUp}
         />
       ))}
     </StarsContainer>

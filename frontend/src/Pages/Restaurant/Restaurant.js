@@ -41,7 +41,6 @@ const Restaurant = () => {
   }, []);
 
 
-
   return (
     <div>
       <HeaderContainer img={restaurantData?.image}>
@@ -49,7 +48,7 @@ const Restaurant = () => {
           <Name>{restaurantData?.name}</Name>
           <Category>{restaurantData?.category}</Category>
           <RatingContainer>
-            <RatingStars />
+            <RatingStars rating={restaurantData?.average_rating} isVoting={false} />
             <p>{restaurantData?.reviews?.length} reviews</p>
           </RatingContainer>
         </TitleContainer>
