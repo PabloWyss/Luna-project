@@ -42,12 +42,11 @@ class CreateRestaurantSerializer(serializers.ModelSerializer):
 
 class PatchRestaurantSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)
-    average_rating = serializers.SerializerMethodField()
 
     class Meta:
         model = Restaurant
         fields = ['name', 'reviews', 'category', 'street', 'city', 'zip_code', 'website', 'phone', 'email', 'opening_hours',
-                  'price_range', 'image', 'average_rating']
+                  'price_range', 'image']
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)

@@ -19,10 +19,7 @@ class User(AbstractUser):
     join_date = models.DateTimeField(auto_now_add=True)
     profile_picture = models.ImageField(upload_to=user_directory_path, blank=True)
     things_i_love = models.CharField(max_length=50, blank=True)
-    # restaurants_love_by_user = models.ManyToManyField('self', symmetrical=False, related_name="loved_by_user")
-    # reviewed_on = models.ForeignKey('self', related_name='reviewed_by_user', null=True, blank=True, on_delete=models.CASCADE)
-    # commented_on = models.ForeignKey('self', related_name='comment_by_user', null=True, blank=True, on_delete=models.CASCADE)
-    # liked_review = models.ManyToManyField('self', symmetrical=False, related_name="liked_by_user")
+    background_image = models.ImageField(upload_to=user_directory_path, blank=True)
 
     def __str__(self):
         return self.username
