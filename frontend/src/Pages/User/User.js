@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Container,
   Background,
-  Avatar,
+  ProfilePicture,
   ProfileNav,
   ProfileNavButtons,
   About,
-  svg,
   AboutTitle
 } from './UserStyles';
 import { ReactComponent as CommentIcon } from '../../Assets/comment.svg';
@@ -14,48 +14,87 @@ import { ReactComponent as RestaurantIcon } from '../../Assets/restaurant.svg';
 import { ReactComponent as EditIcon } from '../../Assets/edit.svg';
 import { ReactComponent as StarIcon } from '../../Assets/star.svg';
 import BannerText from "./BannerText";
-import Reviews from './Reviews/Reviews';
-import Comments from './Comments/CommentsStyles';
+import Reviews from './Reviews/Review';
+import Comments from './Comments/Comments';
 import RestaurantStyles from "./Restaurants/RestaurantStyles";
 import EditUserProfile from "./EditUserProfile/EditUserProfie";
-import lunaAPI, { saveUserProfile } from "../../Axios/lunaApi";
+import {updateUserData, updateUserProfile} from "../../Redux/Slices/user";
+import lunaApi from "../../Axios/lunaApi";
+
+
 
 const UserProfile = () => {
-  const [avatarImage, setAvatarImage] = useState('');
-  const [backgroundImage, setBackgroundImage] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [location, setLocation] = useState('');
-  const [thingsILove, setThingsILove] = useState('');
-  const [description, setDescription] = useState('');
+  const dispatch = useDispatch();
+
+
+  const currentUser = useSelector(store => store.user.userData);
+  const [user, setUser] = useState(currentUser || []);
+
+  console.log(user)
+  const [profilePicture, setProfilePicture] = useState(currentUser?.profile_picture || '');
+  const [backgroundImage, setBackgroundImage] = useState(currentUser?.background_image || '');
+  const [firstName, setFirstName] = useState(currentUser?.first_name || '');
+  const [lastName, setLastName] = useState(currentUser?.last_name || '');
+  const [location, setLocation] = useState(currentUser?.location || '');
+  const [thingsILove, setThingsILove] = useState(currentUser?.things_i_love || '');
+  const [description, setDescription] = useState(currentUser?.description || '');
   const [showReviews, setShowReviews] = useState(true);
   const [showComments, setShowComments] = useState(false);
   const [showRestaurants, setShowRestaurants] = useState(false);
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [bannerText, setBannerText] = useState('');
   const [activeView, setActiveView] = useState('reviews');
-  const [backgroundEditable, setBackgroundEditable] = useState(false);
+  const [backgroundEditable, setBackgroundEditable] = useState(true);
 
-  const handleAvatarChange = (event) => {
+  const handleProfilePictureChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
-    reader.onload = (e) => {
-      setAvatarImage(e.target.result);
+    reader.onload = async (e) => {
+      setProfilePicture(e.target.result);
+
+      //
+      // upload avatar
+      //
+      console.log(e)
+      const newProfileData = {
+        profile_picture: e.target.result
+      }
+
+      const response2 = await lunaApi.patch("/users/me/", newProfileData,
+      {
+          headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`,
+'             Content-Type': 'application/json'
+          }
+      })
+      try {
+        dispatch(updateUserData(response2.data))
+        // setUser(user);
+      } catch (error) {
+          throw error.response.data;
+          // console.log(error)
+      }
+      //
+      // upload avatar
+      //
     };
     reader.readAsDataURL(file);
+
   };
 
-const handleBackgroundChange = (event) => {
-  if ( backgroundEditable) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setBackgroundImage(e.target.result);
-    };
-    reader.readAsDataURL(file);
-  }
-};
-
+  const handleBackgroundChange = (event) => {
+    console.log(backgroundEditable)
+    if (backgroundEditable) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        console.log(e.target.result)
+        setBackgroundImage(e.target.result);
+        // upload bg image
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleReviewsClick = () => {
     setShowReviews(true);
@@ -88,59 +127,70 @@ const handleBackgroundChange = (event) => {
       setShowEditProfile(true);
       setBackgroundEditable(true);
     }
-  };
 
-    const handleProfileUpdate = (newProfileData) => {
-      setFirstName(newProfileData.firstName);
-      setLastName(newProfileData.lastName);
-      setLocation(newProfileData.location);
-      setThingsILove(newProfileData.thingsILove);
-      setDescription(newProfileData.description);
-      saveUserProfile(newProfileData);
-    };
-    return (
-        <div>
-          <Container>
+  };
+  useEffect(() => {
+    console.log("use effect")
+
+
+
+
+    /* setFirstName(currentUser?.first_name || '');
+    setLastName(currentUser?.last_name || '');
+    setLocation(currentUser?.location || '');
+    setThingsILove(currentUser?.things_i_love || '');
+    setDescription(currentUser?.description || '');
+    */
+    setUser(currentUser)
+    const isDev = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
+    let baseUrl = isDev ? 'http://localhost:8001' : 'https://luna-team4.propulsion-learn.ch'
+
+    setProfilePicture(baseUrl + currentUser.profile_picture)
+    setBackgroundImage(currentUser.background_image ? baseUrl + currentUser.background_image : 'http://localhost:3000/static/media/homepage.51b269f18a4e07566511.jpeg')
+  }, [currentUser]);
+
+  return (
+    <div>
+      <Container>
             <Background image={backgroundImage}>
               {activeView === 'edit'? <input id="background-image" type="file" accept="image/*" onChange={handleBackgroundChange}/> : ""}
             </Background>
-            <Avatar image={avatarImage}>
-              {activeView === 'edit'? <input id="avatar-image" type="file" accept="image/*" onChange={handleAvatarChange}/>: ""}
-            </Avatar>
-            <BannerText firstName={firstName} lastName={lastName} location={location}/>
-            <ProfileNav>
-              <p>{firstName}'s Profile</p>
-              <ProfileNavButtons>
-                <ProfileNavButtons>
-                  <button onClick={() => {setActiveView("reviews")}}><StarIcon/>Reviews</button>
-                  <button onClick={() => {setActiveView("comments")}}><CommentIcon/>Comments
-                  </button>
-                  <button onClick={() => {setActiveView("restaurants")}}><RestaurantIcon/>Restaurants
-                  </button>
-                  <button onClick={() => {setActiveView("edit")}}><EditIcon/>Edit Profile</button>
-                </ProfileNavButtons>
+            <ProfilePicture image={profilePicture}>
+              {activeView === 'edit'? <input id="profile-image" type="file" accept="image/*" onChange={handleProfilePictureChange}/>: ""}
+            </ProfilePicture>
+        <BannerText firstName={firstName} lastName={lastName} location={location}/>
+        <ProfileNav>
+          <p>{firstName}'s Profile</p>
+          <ProfileNavButtons>
+            <ProfileNavButtons>
+              <button onClick={() => {setActiveView("reviews")}}><StarIcon/>Reviews</button>
+              <button onClick={() => {setActiveView("comments")}}><CommentIcon/>Comments
+              </button>
+              <button onClick={() => {setActiveView("restaurants")}}><RestaurantIcon/>Restaurants
+              </button>
+              <button onClick={() => {setActiveView("edit")}}><EditIcon/>Edit Profile</button>
+            </ProfileNavButtons>
 
-              </ProfileNavButtons>
-            </ProfileNav>
-            {activeView === "reviews" ? <Reviews/> : ""}
-            {activeView === "comments" ?<Comments/>: ""}
-            {activeView === "restaurants" ?<RestaurantStyles/>: ""}
-            {activeView === "edit" ?<EditUserProfile onSave={handleProfileUpdate}/>: ""}
-            <About>
-              <AboutTitle>About {firstName}</AboutTitle>
-              <h3>Location</h3>
-              <p>{location}</p>
-              <h3>Luna Member Since</h3>
-              <p> date! </p>
-              <h3>Things I love</h3>
-              <p>{thingsILove}</p>
-              <h3>Description</h3>
-              <p>{description}</p>
-            </About>
-          </Container>
-        </div>
-    );
-  };
-
+          </ProfileNavButtons>
+        </ProfileNav>
+        {activeView === "reviews" ? <Reviews/> : ""}
+        {activeView === "comments" ?<Comments/>: ""}
+        {activeView === "restaurants" ?<RestaurantStyles/>: ""}
+        {activeView === "edit" ?<EditUserProfile/>: ""}
+        <About>
+          <AboutTitle>About {firstName}</AboutTitle>
+          <h3>Location</h3>
+          <p>{location}</p>
+          <h3>Luna Member Since</h3>
+          <p> {new Date(user.join_date).toLocaleDateString('en-GB')}</p>
+          <h3>Things I love</h3>
+          <p>{thingsILove}</p>
+          <h3>Description</h3>
+          <p>{description}</p>
+        </About>
+      </Container>
+    </div>
+);
+};
 
 export default UserProfile;
