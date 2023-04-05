@@ -1,12 +1,12 @@
 import {Comment, TextOrangeSmall} from "../ReviewCardStyles";
 
-const CommentReview = ({comment}) => {
+const CommentReview = ({commentText,user}) => {
 
     return (
-        <>
-            <TextOrangeSmall>{comment.comment_by_user}</TextOrangeSmall>
-            <Comment>{comment.text_content}</Comment>
-        </>
+        <div>
+            <TextOrangeSmall>{user.username}</TextOrangeSmall>
+            <Comment>{commentText}</Comment>
+        </div>
     )
 
 
