@@ -5,6 +5,7 @@ export const Card = styled.div`
   border-radius: 3px;
   border-top: 8px solid #E47D31;
   background-color: #FFFFFF;
+  height: 200px;
 `
 
 export const CardHeader = styled.div`
