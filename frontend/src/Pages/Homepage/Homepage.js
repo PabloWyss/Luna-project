@@ -26,6 +26,7 @@ const Homepage = () => {
   console.log(topFourList);
 
   return (
+
     <Main>
       <HomeBanner>
         <div>SearchBar</div>
