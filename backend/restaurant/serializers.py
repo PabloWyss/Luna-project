@@ -3,6 +3,11 @@ from restaurant.models import Restaurant
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
+    average_rating = serializers.SerializerMethodField()
+
+    def get_average_rating(self, obj):
+        return obj.get_average_rating()
+
     class Meta:
         model = Restaurant
         fields = '__all__'
@@ -17,7 +22,8 @@ class RestaurantCategorySerializer(serializers.ModelSerializer):
 class CreateRestaurantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
-        fields = ['name', 'category', 'street', 'city', 'zip_code', 'website', 'phone', 'email', 'image']
+        fields = ['name', 'category', 'street', 'city', 'zip_code', 'website', 'phone', 'email', 'image',
+                  'opening_hours', 'price_range']
 
     def create(self, validated_data):
         validated_data['created_by_user'] = self.context['request'].user
@@ -28,6 +34,7 @@ class CreateRestaurantSerializer(serializers.ModelSerializer):
 
 class PatchRestaurantSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)
+    average_rating = serializers.SerializerMethodField()
 
     class Meta:
         model = Restaurant
