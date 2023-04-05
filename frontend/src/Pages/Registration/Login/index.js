@@ -48,14 +48,17 @@ const Login = () => {
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      '             Content-Type': 'application/json'
+                    'Content-Type': 'application/json'
                 }
-            })
+            }
+            )
         try {
+            localStorage.setItem("id", response2.data.id);
             dispatch(updateUserData(response2.data))
             navigate("/profile");
         } catch (error) {
             console.log(error)
+            alert("Please check your username or password")
         }
     }
 

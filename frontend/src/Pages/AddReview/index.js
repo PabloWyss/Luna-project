@@ -1,12 +1,16 @@
-import {HeaderContainer} from './AddReviewStyles'
+import {ParentContainer, HeaderContainer, BackgroundImage, FormContainer} from './AddReviewStyles'
 
 const AddReview = () => {
 
     return (
         <div>
-        <HeaderContainer>
-            <h1>TEST TEST TEST</h1>
-        </HeaderContainer>
+            <ParentContainer>
+            <HeaderContainer>
+                {/* <BackgroundImage src='../../Assets/homepage.jpg'/> */}
+            </HeaderContainer>
+            <FormContainer>
+            </FormContainer>
+        </ParentContainer>
         </div>
     )
 }
