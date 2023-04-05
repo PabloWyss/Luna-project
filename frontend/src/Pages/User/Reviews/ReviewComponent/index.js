@@ -1,30 +1,38 @@
-import {ReviewsDateP, ReviewsDescriptionDiv, ReviewsDiv, ReviewsTitleDiv} from "../ReviewStyles";
+import { useState, useEffect } from "react";
+import { ReviewsDateP, ReviewsDescriptionDiv, ReviewsDiv, ReviewsTitleDiv } from "../ReviewStyles";
 import RatingStars from "../../../../Components/RatingStars/RatingStars";
-import React from "react";
-
+import lunaAPI from "../../../../Axios/lunaApi";
 
 const ReviewComponent = ({ review }) => {
+  const [restaurant, setRestaurant] = useState(null);
 
-    return (
-        <ReviewsDiv >
-            <ReviewsTitleDiv>
-                <p>
-                    RestaurantsName
-                </p>
-                <ReviewsDateP>
-                {review?.date_created}
-                </ReviewsDateP>
-            </ReviewsTitleDiv>
-            <div>
-                <RatingStars />
-            </div>
-            <ReviewsDescriptionDiv>
-                <p>
-                    {review?.text_content}
-                </p>
-            </ReviewsDescriptionDiv>
-        </ReviewsDiv >
-    )
-}
+  useEffect(() => {
+    const fetchRestaurant = async () => {
+      try {
+        const response = await lunaAPI.get(`/restaurants/${review.restaurant}`);
+        setRestaurant(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-export default ReviewComponent
+    fetchRestaurant();
+  }, [review.restaurant]);
+
+  return (
+    <ReviewsDiv>
+      <ReviewsTitleDiv>
+        <p>{restaurant?.name}</p>
+        <ReviewsDateP>{review?.date_created}</ReviewsDateP>
+      </ReviewsTitleDiv>
+      <div>
+        <RatingStars />
+      </div>
+      <ReviewsDescriptionDiv>
+        <p>{review?.text_content}</p>
+      </ReviewsDescriptionDiv>
+    </ReviewsDiv>
+  );
+};
+
+export default ReviewComponent;

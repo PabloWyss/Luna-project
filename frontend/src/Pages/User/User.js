@@ -20,6 +20,7 @@ import Restaurant from "./Restaurants/Restaurant";
 import EditUserProfile from "./EditUserProfile/EditUserProfie";
 import {updateUserData, updateUserProfile} from "../../Redux/Slices/user";
 import lunaApi from "../../Axios/lunaApi";
+import CommentsList from "./Comments/Comments";
 
 
 
@@ -46,41 +47,40 @@ const UserProfile = () => {
   const [activeView, setActiveView] = useState('reviews');
   const [backgroundEditable, setBackgroundEditable] = useState(true);
 
-  const handleProfilePictureChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      setProfilePicture(e.target.result);
+const handleProfilePictureChange = async (event) => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    setProfilePicture(file);
 
-      //
-      // upload avatar
-      //
-      console.log(e)
-      const newProfileData = {
-        profile_picture: e.target.result
+    const formData = new FormData();
+    formData.append('profile_picture', event.target.files[0]);
+
+    console.log(formData);
+
+    try {
+      const response = await lunaApi.patch("/users/me/", formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      dispatch(updateUserData(response.data));
+    } catch (error) {
+      if (error.response) {
+        console.error(error.response.data);
+        throw error.response.data;
+      } else {
+        console.error(error);
+        throw error;
       }
-
-      const response2 = await lunaApi.patch("/users/me/", newProfileData,
-      {
-          headers: {
-              'Authorization': `Bearer ${localStorage.getItem('token')}`,
-'             Content-Type': 'application/json'
-          }
-      })
-      try {
-        dispatch(updateUserData(response2.data))
-        // setUser(user);
-      } catch (error) {
-          throw error.response.data;
-          // console.log(error)
-      }
-      //
-      // upload avatar
-      //
-    };
-    reader.readAsDataURL(file);
-
+    }
   };
+  reader.readAsDataURL(file);
+};
+
+
+
 
   const handleBackgroundChange = (event) => {
     console.log(backgroundEditable)
@@ -172,7 +172,7 @@ const UserProfile = () => {
           </ProfileNavButtons>
         </ProfileNav>
         {activeView === "reviews" ? <Reviews/> : ""}
-        {activeView === "comments" ?<Comments/>: ""}
+        {activeView === "comments" ?<CommentsList/>: ""}
         {activeView === "restaurants" ?<Restaurant/>: ""}
         {activeView === "edit" ?<EditUserProfile/>: ""}
         <About>
