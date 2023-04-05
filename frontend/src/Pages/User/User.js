@@ -14,16 +14,23 @@ import { ReactComponent as RestaurantIcon } from '../../Assets/restaurant.svg';
 import { ReactComponent as EditIcon } from '../../Assets/edit.svg';
 import { ReactComponent as StarIcon } from '../../Assets/star.svg';
 import BannerText from "./BannerText";
-import Reviews from './Reviews/ReviewsList';
-import Comments from './Comments/CommentsStyles';
+import Reviews from './Reviews/Review';
+import Comments from './Comments/Comments';
 import RestaurantStyles from "./Restaurants/RestaurantStyles";
 import EditUserProfile from "./EditUserProfile/EditUserProfie";
-import { updateUserProfile } from "../../Redux/Slices/user";
+import {updateUserData, updateUserProfile} from "../../Redux/Slices/user";
+import lunaApi from "../../Axios/lunaApi";
+
 
 
 const UserProfile = () => {
   const dispatch = useDispatch();
+
+
   const currentUser = useSelector(store => store.user.userData);
+  const [user, setUser] = useState(currentUser || []);
+
+  console.log(user)
   const [avatarPicture, setAvatarPicture] = useState(currentUser?.avatar || '');
   const [backgroundImage, setBackgroundImage] = useState(currentUser?.background_image || '');
   const [firstName, setFirstName] = useState(currentUser?.first_name || '');
@@ -42,10 +49,37 @@ const UserProfile = () => {
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       setAvatarPicture(e.target.result);
+
+      //
+      // upload avatar
+      //
+      console.log(e)
+      const newProfileData = {
+        avatar: e.target.result
+      }
+
+      const response2 = await lunaApi.patch("/users/me/", newProfileData,
+      {
+          headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`,
+'             Content-Type': 'application/json'
+          }
+      })
+      try {
+        dispatch(updateUserData(response2.data))
+        // setUser(user);
+      } catch (error) {
+          throw error.response.data;
+          // console.log(error)
+      }
+      //
+      // upload avatar
+      //
     };
     reader.readAsDataURL(file);
+
   };
 
   const handleBackgroundChange = (event) => {
@@ -56,6 +90,7 @@ const UserProfile = () => {
       reader.onload = (e) => {
         console.log(e.target.result)
         setBackgroundImage(e.target.result);
+        // upload bg image
       };
       reader.readAsDataURL(file);
     }
@@ -96,14 +131,25 @@ const UserProfile = () => {
   };
   useEffect(() => {
     console.log("use effect")
-    setFirstName(currentUser?.first_name || '');
+
+
+
+
+    /* setFirstName(currentUser?.first_name || '');
     setLastName(currentUser?.last_name || '');
     setLocation(currentUser?.location || '');
     setThingsILove(currentUser?.things_i_love || '');
     setDescription(currentUser?.description || '');
+    */
+    setUser(currentUser)
+    const isDev = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
+    let baseUrl = isDev ? 'http://localhost:8001' : 'https://luna-team4.propulsion-learn.ch'
+
+    setAvatarPicture(baseUrl + currentUser.avatar)
+    setBackgroundImage(currentUser.background_image ? baseUrl + currentUser.background_image : 'http://localhost:3000/static/media/homepage.51b269f18a4e07566511.jpeg')
   }, [currentUser]);
 
- return (
+  return (
     <div>
       <Container>
             <Background image={backgroundImage}>
@@ -136,7 +182,7 @@ const UserProfile = () => {
           <h3>Location</h3>
           <p>{location}</p>
           <h3>Luna Member Since</h3>
-          <p> date! </p>
+          <p> {new Date(user.join_date).toLocaleDateString('en-GB')}</p>
           <h3>Things I love</h3>
           <p>{thingsILove}</p>
           <h3>Description</h3>

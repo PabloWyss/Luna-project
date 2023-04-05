@@ -15,7 +15,7 @@ export const Avatar = styled.div`
   left: 100px;
   top: 13%;
   z-index: 5;
-  background-image: url(${props => props.image});
+  background-image: url(${props => props.image });
   background-size: cover;
   background-position: center;
   &:hover {
@@ -49,6 +49,16 @@ export const Background = styled.div`
 
   & input[type="file"] {
 
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #00000060;
   }
 `;
 

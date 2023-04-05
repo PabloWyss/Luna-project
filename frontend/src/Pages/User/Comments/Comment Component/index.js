@@ -1,23 +1,25 @@
-import {ReviewsDateP, ReviewsDescriptionDiv, ReviewsDiv, ReviewsTitleDiv} from "../../Reviews/ReviewStyles";
+import {CommentsDateP, CommentsDescriptionDiv , CommentsDiv, CommentsTitleDiv} from "../Styles";
+import React from "react";
 
-const CommentComponent = () => {
+const CommentComponent = ({comment}) => {
+
 
     return (
-        <ReviewsDiv>
-            <ReviewsTitleDiv>
+        <CommentsDiv >
+            <CommentsTitleDiv>
                 <p>
-                    Review 1
+                    Comments
                 </p>
-                <ReviewsDateP>
-                    01.01.2018 15:22
-                </ReviewsDateP>
-            </ReviewsTitleDiv>
-            <ReviewsDescriptionDiv>
+                <CommentsDateP>
+                {comment?.date_created}
+                </CommentsDateP>
+            </CommentsTitleDiv>
+            <CommentsDescriptionDiv >
                 <p>
-                    This is horrible!
+                    {comment?.text_content}
                 </p>
-            </ReviewsDescriptionDiv>
-        </ReviewsDiv>
+            </CommentsDescriptionDiv >
+        </CommentsDiv >
     )
 }
 

@@ -30,7 +30,7 @@ const EditUserProfile = () => {
       location: location,
       phone: phone,
       things_i_love: thingsILove,
-      description: description
+      description: description,
     }
 
     const response2 = await lunaApi.patch("/users/me/", newProfileData,

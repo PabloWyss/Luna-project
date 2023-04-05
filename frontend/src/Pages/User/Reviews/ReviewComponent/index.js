@@ -3,7 +3,7 @@ import RatingStars from "../../../../Components/RatingStars/RatingStars";
 import React from "react";
 
 
-const ReviewComponent = () => {
+const ReviewComponent = ({ review }) => {
 
     return (
         <ReviewsDiv >
