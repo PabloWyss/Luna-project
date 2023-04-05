@@ -156,7 +156,7 @@ const handleProfilePictureChange = async (event) => {
             <ProfilePicture image={profilePicture}>
               {activeView === 'edit'? <input id="profile-image" type="file" accept="image/*" onChange={handleProfilePictureChange}/>: ""}
             </ProfilePicture>
-        <BannerText firstName={firstName} lastName={lastName} location={location}/>
+        <BannerText firstName={user.first_name} lastName={user.last_name} location={user.location}/>
         <ProfileNav>
           <p>{firstName}'s Profile</p>
           <ProfileNavButtons>
@@ -176,15 +176,15 @@ const handleProfilePictureChange = async (event) => {
         {activeView === "restaurants" ?<Restaurant/>: ""}
         {activeView === "edit" ?<EditUserProfile/>: ""}
         <About>
-          <AboutTitle>About {firstName}</AboutTitle>
+          <AboutTitle>About {user.first_name}</AboutTitle>
           <h3>Location</h3>
-          <p>{location}</p>
+          <p>{user.location}</p>
           <h3>Luna Member Since</h3>
           <p> {new Date(user.join_date).toLocaleDateString('en-GB')}</p>
           <h3>Things I love</h3>
-          <p>{thingsILove}</p>
+          <p>{user.things_i_love}</p>
           <h3>Description</h3>
-          <p>{description}</p>
+          <p>{user.description}</p>
         </About>
       </Container>
     </div>
