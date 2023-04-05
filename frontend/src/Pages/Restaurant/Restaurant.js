@@ -33,7 +33,6 @@ const Restaurant = () => {
         };
 
         const response = await lunaAPI.get(`restaurants/${restaurantID}/`, config);
-        console.log(response.data)
         setRestaurantData(response.data)
       } catch (error) {
         console.log(error);
@@ -43,7 +42,6 @@ const Restaurant = () => {
   }, []);
 
   const handleWriteReviewClick = () => {
-    console.log('click')
     navigate('/addreview')
   }
 
