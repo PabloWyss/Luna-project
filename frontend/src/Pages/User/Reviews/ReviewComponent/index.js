@@ -2,16 +2,17 @@ import {ReviewsDateP, ReviewsDescriptionDiv, ReviewsDiv, ReviewsTitleDiv} from "
 import RatingStars from "../../../../Components/RatingStars/RatingStars";
 import React from "react";
 
-const ReviewComponent = () => {
+
+const ReviewComponent = ({ review }) => {
 
     return (
         <ReviewsDiv >
             <ReviewsTitleDiv>
                 <p>
-                    Läderach Chocolatier Suisse
+                    RestaurantsName
                 </p>
                 <ReviewsDateP>
-                01.01.2018 15:22
+                {review?.date_created}
                 </ReviewsDateP>
             </ReviewsTitleDiv>
             <div>
@@ -19,7 +20,7 @@ const ReviewComponent = () => {
             </div>
             <ReviewsDescriptionDiv>
                 <p>
-                    This location at the Bahnhofstrasse is quite friendly and easily located across the street from the train station. The people there seem to be quite good and helpful in their service.
+                    {review?.text_content}
                 </p>
             </ReviewsDescriptionDiv>
         </ReviewsDiv >

@@ -1,29 +1,67 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { EditTitle, Container, Form, Label, Input, TextArea, SaveButton } from './EditUserProfileStyles';
 import OrangeButton from "../../../Components/Button";
-const EditUserProfile = ({ onSave }) => {
-  const [username, setUsername] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [location, setLocation] = useState('');
-  const [phone, setPhone] = useState('');
-  const [thingsILove, setThingsILove] = useState('');
-  const [description, setDescription] = useState('');
+import {updateUserData} from "../../../Redux/Slices/user";
+import lunaApi from "../../../Axios/lunaApi";
 
-  const handleSubmit = (event) => {
+
+const EditUserProfile = () => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector(store => store.user.userData)
+  const [username, setUsername] = useState(currentUser.username);
+  const [firstName, setFirstName] = useState(currentUser.first_name);
+  const [lastName, setLastName] = useState(currentUser.last_name);
+  const [email, setEmail] = useState(currentUser.email);
+  const [location, setLocation] = useState(currentUser.location);
+  const [phone, setPhone] = useState(currentUser.phone);
+  const [thingsILove, setThingsILove] = useState(currentUser.things_i_love);
+  const [description, setDescription] = useState(currentUser.description);
+
+  const [user, setUser] = useState(currentUser);
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    onSave({
+
+    const newProfileData = {
       username: username,
-      firstName: firstName,
-      lastName: lastName,
+      first_name: firstName,
+      last_name: lastName,
       email: email,
       location: location,
       phone: phone,
-      thingsILove: thingsILove,
-      description: description
-    });
+      things_i_love: thingsILove,
+      description: description,
+    }
+
+    const response2 = await lunaApi.patch("/users/me/", newProfileData,
+      {
+          headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`,
+'             Content-Type': 'application/json'
+          }
+      })
+    try {
+      dispatch(updateUserData(response2.data))
+      // setUser(user);
+    } catch (error) {
+        throw error.response.data;
+        // console.log(error)
+    }
+
   };
+
+  /*
+useEffect(() => {
+        setUsername(user.username);
+        setFirstName(user.first_name);
+        setLastName(user.last_name);
+        setEmail(user.email);
+        setLocation(user.location);
+        setPhone(user.phone);
+        setThingsILove(user.things_i_love);
+        setDescription(user.description);
+      }, [user]);
+*/
 
   return (
     <Container>
@@ -78,12 +116,12 @@ const EditUserProfile = ({ onSave }) => {
         />
 
         <Label htmlFor="things-i-love">Things I love</Label>
-        <Input
-          type="text"
-          id="things-i-love"
-          value ={thingsILove}
-          onChange={(e) => setThingsILove(e.target.value)}
-        />
+          <Input
+            type="text"
+            id="things-i-love"
+            defaultValue={currentUser.things_i_love || ''}
+            onChange={(e) => setThingsILove(e.target.value)}/>
+
 
         <Label htmlFor="description">Description</Label>
         <TextArea
@@ -100,3 +138,4 @@ const EditUserProfile = ({ onSave }) => {
 };
 
 export default EditUserProfile;
+
