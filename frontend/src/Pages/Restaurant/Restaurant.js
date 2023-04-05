@@ -10,10 +10,11 @@ import { BodyContainer, ButtonsContainer, ButtonWraper, ButtonWraperSmall, Categ
 import ReviewsList from './ReviewsList/ReviewsList.js';
 import lunaAPI from '../../Axios/lunaApi.js';
 import { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const Restaurant = () => {
+  const navigate = useNavigate();
   const { restaurantID } = useParams();
   const [restaurantData, setRestaurantData] = useState({})
 
@@ -32,6 +33,7 @@ const Restaurant = () => {
         };
 
         const response = await lunaAPI.get(`restaurants/${restaurantID}/`, config);
+        console.log(response.data)
         setRestaurantData(response.data)
       } catch (error) {
         console.log(error);
@@ -40,6 +42,10 @@ const Restaurant = () => {
     getRestaurantByID();
   }, []);
 
+  const handleWriteReviewClick = () => {
+    console.log('click')
+    navigate('/addreview')
+  }
 
   return (
     <div>
@@ -99,7 +105,7 @@ const Restaurant = () => {
           </IconTextContainer>
           <ButtonsContainer>
             <ButtonWraper>
-              <Button textInput={'WRITE A REVIEW'} />
+              <Button textInput={'WRITE A REVIEW'} onClickAction={handleWriteReviewClick} />
             </ButtonWraper>
             <ButtonWraper>
               <Button textInput={'EDIT DATA'} />

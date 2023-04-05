@@ -33,7 +33,7 @@ function App() {
                 <Route path="/registration-message" element={<RegistrationMessage />} />
                 <Route path="/verification" element={<Verification />} />
                 <Route path="/restaurant/:restaurantID" element={<Restaurant />} />
-                <Route path="addreview" element={<AddReview />} />
+                <Route path="/addreview" element={<AddReview />} />
             </Routes>
             <Footer />
         </div>
