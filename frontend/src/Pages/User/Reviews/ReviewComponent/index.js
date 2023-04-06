@@ -19,14 +19,29 @@ const ReviewComponent = ({ review }) => {
     fetchRestaurant();
   }, [review.restaurant]);
 
+  const formatDate = (dateString) => {
+    const options = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+    const date = new Date(dateString);
+    return date.toLocaleString('en-US', options);
+  };
+
   return (
     <ReviewsDiv>
       <ReviewsTitleDiv>
         <p>{review?.review_on_restaurant?.name}</p>
-        <ReviewsDateP>{review?.date_created}</ReviewsDateP>
+        <ReviewsDateP>{formatDate(review?.date_created)}</ReviewsDateP>
       </ReviewsTitleDiv>
-      <div>
+      <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
         <RatingStars />
+        <ReviewsDateP style={{marginLeft: 'auto', textAlign: 'right'}}>
+          {review?.rating} Stars
+        </ReviewsDateP>
       </div>
       <ReviewsDescriptionDiv>
         <p>{review?.text_content}</p>
@@ -34,5 +49,6 @@ const ReviewComponent = ({ review }) => {
     </ReviewsDiv>
   );
 };
+
 
 export default ReviewComponent;
