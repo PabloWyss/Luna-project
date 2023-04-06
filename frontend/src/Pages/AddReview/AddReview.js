@@ -4,12 +4,14 @@ import Button from '../../Components/Button'
 import { BodyContainer, HeaderContainer, TitleContainer, Name, Category, RatingContainer, ButtonWraper, TextArea } from './AddReviewStyles'
 import lunaAPI from '../../Axios/lunaApi'
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const AddReview = () => {
-    const [reviewText, setReviewText] = useState();
+    const navigate = useNavigate();
     const { restaurantID } = useParams();
     const restaurantData = useSelector(state => state.restaurant.restaurantData)
+    const [reviewText, setReviewText] = useState();
+    const [ratingValue, setRatingValue] = useState();
 
     const handleInputChange = (e) => {
         e.preventDefault();
@@ -19,8 +21,15 @@ const AddReview = () => {
     const handleSubmitClick = (e) => {
         e.preventDefault();
         postReview();
+        navigate(`/restaurant/${restaurantID}`)
     }
 
+    const handleRatingValue = (value) => {
+        setRatingValue(value)
+        //console.log(ratingValue)
+    }
+
+    //-------------------- POST REVIEW ---------------------
     const postReview = async () => {
         if (!localStorage.getItem('token')) {
             return;
@@ -28,7 +37,7 @@ const AddReview = () => {
         try {
             const data = {
                 text_content: reviewText,
-                rating: 3,
+                rating: ratingValue,
             }
             const config = {
                 headers: {
@@ -37,7 +46,6 @@ const AddReview = () => {
                 },
             };
             const response = await lunaAPI.post(`reviews/new/${restaurantID}/`, data, config)
-            console.log(response.data)
         } catch (error) {
             console.log(error)
         }
@@ -57,7 +65,7 @@ const AddReview = () => {
             </HeaderContainer>
             <BodyContainer>
                 <RatingContainer>
-                    <RatingStars isVoting={true} />
+                    <RatingStars isVoting={true} onRatingValue={handleRatingValue} />
                     <p>Select your rating</p>
                 </RatingContainer>
                 <TextArea

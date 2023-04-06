@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { updateRestaurantData } from '../../Redux/Slices/restaurant.js';
+import SearchFilterComponent from '../../Components/SearchFilterComponent/index.js';
 
 
 const Restaurant = () => {
@@ -20,12 +21,26 @@ const Restaurant = () => {
   const navigate = useNavigate();
   const { restaurantID } = useParams();
   const [restaurantData, setRestaurantData] = useState({})
+  const [listOfReviews, setListOfReviews] = useState([]);
+  const [listOfReviewsFiltered, setListOfReviewsFiltered] = useState([]);
+
+  //------------- FILTER BAR -------------
+  const handleFilterBar = (e) => {
+    e.preventDefault();
+    const searchText = e.target.value;
+    if (searchText.length >= 2) {
+      let listReviewsFiltered = SearchFilterComponent(searchText, listOfReviews);
+      setListOfReviewsFiltered(listReviewsFiltered);
+    } else {
+      setListOfReviewsFiltered(listOfReviews);
+    }
+  }
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       return;
     }
-
+    //------------ GET RESTAURANT BY ID --------------
     const getRestaurantByID = async () => {
       try {
         const config = {
@@ -43,6 +58,25 @@ const Restaurant = () => {
       }
     }
     getRestaurantByID();
+
+    //----------- GET REVIEWS BY RESTAURANT ID -------------
+    const getReviewsFromRestaurantByID = async () => {
+      try {
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        };
+
+        const response = await lunaAPI.get(`reviews/restaurant/${restaurantID}/`, config);
+        setListOfReviews(response.data)
+        setListOfReviewsFiltered(response.data)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getReviewsFromRestaurantByID();
   }, []);
 
   const handleWriteReviewClick = () => {
@@ -81,14 +115,14 @@ const Restaurant = () => {
       <BodyContainer>
         <div>
           <FilterBar>
-            <input placeholder='Filter list...'></input>
+            <input placeholder='Filter list...' onChange={handleFilterBar}></input>
             <ButtonWraperSmall>
               <Button textInput={'FILTER'} />
             </ButtonWraperSmall>
           </FilterBar>
           {
             restaurantData.reviews?.length !== 0 ?
-              <ReviewsList restaurantID={restaurantID} />
+              <ReviewsList restaurantID={restaurantID} reviews={listOfReviewsFiltered} />
               :
               <NoReviewsText>
                 No reviews yet

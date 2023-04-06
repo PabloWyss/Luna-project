@@ -1,32 +1,14 @@
-import styled from "styled-components";
+import { formatDate } from "../../../../../helpers";
+import { DateText, Main, UserName } from "./CommentStyles";
 
-const Main = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border-top: 1px solid #EBEBEB;
-  padding: 10px;
-  font-weight: 300;
-`
-
-const UserName = styled.p`
-  font-weight: 700;
-  color: #E47D31;
-  margin-bottom: 4px;
-`
-
-const DateText = styled.p`
-  font-size: 12px;
-`
-
-const Comment = () => {
+const Comment = ({ comment }) => {
   return (
     <Main>
       <div>
-        <UserName>User name</UserName>
-        <p>Comment</p>
+        <UserName>{comment?.comment_by_user.username}</UserName>
+        <p>{comment?.text_content}</p>
       </div>
-      <DateText>12.04.2023 13:32</DateText>
+      <DateText>{formatDate(comment?.created_date)}</DateText>
     </Main>
   );
 }
