@@ -25,14 +25,13 @@ export const Title = styled.h2`
 export const CommentsDiv = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #EBEBEB;
+  padding: 20px;
   background: white;
-  gap: 15px;
-  position: relative;
-  width: 95%;
+  width: 600px;
+  height: 50px;
+  border: 1px solid #EBEBEB;
 `
 export const CommentsTitleDiv = styled.div`
   font-weight: 400;

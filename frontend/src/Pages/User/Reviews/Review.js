@@ -65,9 +65,9 @@ const Reviews = () => {
         <ReviewsTitleDateDiv>
             <Title>Reviews</Title>
         </ReviewsTitleDateDiv>
-        <div>
-           <ReviewsList userID={currentUser.id} />
-        </div>
+      <div>
+         <ReviewsList userID={currentUser.id} />
+      </div>
     </Container>
   );
 };
