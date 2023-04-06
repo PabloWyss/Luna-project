@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import LikeCommentButtons from "../../../../Components/LikeCommentButtons/LikeCommentButtons";
 import RatingStars from "../../../../Components/RatingStars/RatingStars";
 import ReviewUser from "../../../../Components/UserCardHeader/UserCardHeader";
@@ -7,16 +6,49 @@ import Button from '../../../../Components/Button'
 import Comment from "./Comment/Comment";
 import { useState } from "react";
 import { formatDate } from "../../../../helpers";
-import { getCLS } from "web-vitals";
+import lunaAPI from "../../../../Axios/lunaApi";
 
 const Review = ({ review }) => {
-  const [areAllCommentsShown, setAreAllCommentsShown] = useState(false)
+  const [areAllCommentsShown, setAreAllCommentsShown] = useState(false);
+  const [commentInput, setCommentInput] = useState('');
+
   const handleShowHideCommentsClick = () => {
     setAreAllCommentsShown(prev => !prev);
   }
 
   const commentClick = () => {
     setAreAllCommentsShown(true)
+  }
+
+  const handleCommentChange = (e) => {
+    e.preventDefault();
+    setCommentInput(e.target.value)
+  }
+
+  const handlePostClick = (e) => {
+    e.preventDefault();
+    postComment();
+  }
+
+  //------------ CREATE A NEW COMMENT IN A REVIEW ---------------
+  const postComment = async () => {
+    if (!localStorage.getItem('token')) {
+      return;
+    }
+    try {
+      const data = {
+        text_content: commentInput
+      }
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      };
+      const response = await lunaAPI.post(`comment/reviews/comments/new/${review.id}/`, data, config)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -42,9 +74,9 @@ const Review = ({ review }) => {
               <div>
                 <ReviewFooter>
                   <AddCommentWraper>
-                    <input placeholder='Add a comment...'></input>
+                    <input placeholder='Add a comment...' onChange={handleCommentChange}></input>
                     <ButtonWraperSmall>
-                      <Button textInput={'POST'} />
+                      <Button textInput={'POST'} onClickAction={handlePostClick} />
                     </ButtonWraperSmall>
                   </AddCommentWraper>
                   <ShowHideCommentBtn onClick={handleShowHideCommentsClick}>Hide</ShowHideCommentBtn>

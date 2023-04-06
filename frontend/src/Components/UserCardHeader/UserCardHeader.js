@@ -37,7 +37,7 @@ const ReviewUser = ({ avatar, userName, userID }) => {
       </UserAvatar>
       <UserInfo>
         <TextOrangeBig>{userName}</TextOrangeBig>
-        <TextGreyBold> {reviewsCountByUser}</TextGreyBold>
+        <TextGreyBold> {reviewsCountByUser} Reviews in total</TextGreyBold>
       </UserInfo>
     </CardHeader>
   );
