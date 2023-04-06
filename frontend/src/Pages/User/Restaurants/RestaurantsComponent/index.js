@@ -13,26 +13,19 @@ const RestaurantsComponent = () => {
       try {
         const response = await lunaAPI.get("/restaurants");
         setRestaurants(response.data);
+
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchRestaurants();
+    console.log(restaurants);
   }, []);
 
-  const formatDate = (dateString) => {
-    const options = {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    };
-    const timestamp = Date.parse(dateString);
-    const date = new Date(timestamp);
-    return date.toLocaleString("en-US", options);
-  };
 
 
+console.log(restaurants)
 
   return (
     <>
@@ -41,7 +34,7 @@ const RestaurantsComponent = () => {
           <ReviewsDiv>
             <ReviewsTitleDiv>
               <p>{restaurant.name}</p>
-              <ReviewsDateP>{formatDate(restaurant.date_created)}</ReviewsDateP>
+              <ReviewsDateP>04/05/2023</ReviewsDateP>
             </ReviewsTitleDiv>
             <div>
               <RatingStars rating={restaurant.average_rating} isVoting={false} />
