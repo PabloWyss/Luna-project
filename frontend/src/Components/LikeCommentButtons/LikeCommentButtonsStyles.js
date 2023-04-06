@@ -21,6 +21,11 @@ export const LikeButton = styled.div`
   border-right: 1px solid #FFFFFF;
   padding: 13px;
   gap: 11px;
+
+  :hover{
+    cursor: pointer;
+    color: grey;
+  }
 `
 
 export const CommentButton = styled.div`
@@ -29,4 +34,9 @@ export const CommentButton = styled.div`
   align-items: center;
   padding: 13px;
   gap: 11px;
+
+  :hover{
+    cursor: pointer;
+    color: grey;
+  }
 `
