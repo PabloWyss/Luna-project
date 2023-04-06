@@ -42,13 +42,11 @@ export const CommentsTitleDiv = styled.div`
   width: 100%;
   color: #4C4C4C;
 `
-
 export const CommentsDescriptionDiv = styled.div`
   font-weight: 300;
   font-size: 16px;
   color: #303030;
 `
-
 export const CommentsTitleDateDiv = styled.div`
   display: flex;
   justify-content: space-between;
