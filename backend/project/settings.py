@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-qm)4tr5ha%dg111*$ip@6235s+$)j27@r+t7b@3+e^s_nx19tw
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ["https://motion-team4.propulsion-learn.ch", 'http://127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ["https://luna-team4.propulsion-learn.ch", 'http://127.0.0.1']
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
