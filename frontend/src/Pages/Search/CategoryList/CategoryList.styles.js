@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const CategoryUL = styled.ul`
   position: absolute;
-  right: 100px;
+  right:6vw;
   top: 13vh;
   color: black;
   background: white;

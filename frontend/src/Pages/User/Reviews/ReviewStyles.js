@@ -22,19 +22,18 @@ export const Title = styled.h2`
   background: white;
   color: #303030;
 `;
-
 export const ReviewsDiv = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #EBEBEB;
+  padding: 20px;
   background: white;
-  gap: 15px;
-  position: relative;
-  width: 95%;
+  width: 600px;
+  height: 100px;
+  border: 1px solid #EBEBEB;
 `
+
 export const ReviewsTitleDiv = styled.div`
   font-weight: 400;
   font-size: 20px;
@@ -42,7 +41,7 @@ export const ReviewsTitleDiv = styled.div`
   justify-content: space-between;
   width: 100%;
   color: #4C4C4C;
-`
+`;
 
 export const ReviewsDescriptionDiv = styled.div`
   font-weight: 300;
