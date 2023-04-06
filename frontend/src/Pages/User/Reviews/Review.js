@@ -39,9 +39,13 @@ const ReviewsList = ({ userID }) => {
         console.log(error);
       }
     }
-    getReviewsFromUserByID();
-  }, [userID]);
+    getReviewsFromUserByID().then(() => {
+      console.log('Reviews fetched successfully');
+    }).catch((error) => {
+      console.log('Error fetching reviews:', error);
+    });
 
+  }, [userID]);
   return (
     <List>
       {
@@ -61,11 +65,9 @@ const Reviews = () => {
         <ReviewsTitleDateDiv>
             <Title>Reviews</Title>
         </ReviewsTitleDateDiv>
-         <ReviewsList userID={currentUser.id} />
-        <ReviewComponent/>
-        <ReviewComponent/>
-        <ReviewComponent/>
-        <ReviewComponent/>
+        <div>
+           <ReviewsList userID={currentUser.id} />
+        </div>
     </Container>
   );
 };
