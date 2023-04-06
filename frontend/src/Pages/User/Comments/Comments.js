@@ -39,8 +39,8 @@ const CommentsList = ({ userID }) => {
   return (
     <div>
         {Array.isArray(commentsList) &&
-          commentsList?.map((comment) => (
-            <CommentComponent key={comment.id} comment={comment} />
+          commentsList?.map((comment,index) => (
+            <CommentComponent key={comment.id} comment={comment} index={index} />
           ))}
 
     </div>
