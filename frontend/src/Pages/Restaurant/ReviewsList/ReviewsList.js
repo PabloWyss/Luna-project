@@ -7,13 +7,13 @@ const List = styled.div`
   gap: 15px; 
 `
 
-const ReviewsList = ({ reviews }) => {
+const ReviewsList = ({ reviews, onNewComment }) => {
   console.log(reviews)
   return (
     <List>
       {
         reviews?.map(review => {
-          return <Review key={review.id} review={review} />
+          return <Review key={review.id} review={review} onNewComment={onNewComment} />
         })
       }
     </List>
