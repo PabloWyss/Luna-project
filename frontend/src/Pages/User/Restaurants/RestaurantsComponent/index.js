@@ -1,30 +1,49 @@
-import {ReviewsDateP, ReviewsDescriptionDiv, ReviewsDiv, ReviewsTitleDiv} from "../../Reviews/ReviewStyles";
+import React, { useState, useEffect } from "react";
+import { ReviewsDateP, ReviewsDiv, ReviewsTitleDiv } from "../../Reviews/ReviewStyles";
 import RatingStars from "../../../../Components/RatingStars/RatingStars";
-import React from "react";
+import lunaAPI from "../../../../Axios/lunaApi";
+import { NavLink } from "react-router-dom";
+import { RestaurantLink } from "./RestaurantStyles";
 
 const RestaurantsComponent = () => {
+  const [restaurants, setRestaurants] = useState([]);
 
-    return (
-        <ReviewsDiv >
+  useEffect(() => {
+    const fetchRestaurants = async () => {
+      try {
+        const response = await lunaAPI.get("/restaurants");
+        setRestaurants(response.data);
+
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchRestaurants();
+    console.log(restaurants);
+  }, []);
+
+
+
+console.log(restaurants)
+
+  return (
+    <>
+      {restaurants.map((restaurant) => (
+        <RestaurantLink to={`/restaurant/${restaurant.id}`} key={restaurant.id}>
+          <ReviewsDiv>
             <ReviewsTitleDiv>
-                <p>
-                    Laurentio Gelato Store
-                </p>
-                <ReviewsDateP>
-                01.01.2018 15:22
-                </ReviewsDateP>
+              <p>{restaurant.name}</p>
+              <ReviewsDateP>04/05/2023</ReviewsDateP>
             </ReviewsTitleDiv>
             <div>
-                <RatingStars />
+              <RatingStars rating={restaurant.average_rating} isVoting={false} />
             </div>
-            <ReviewsDescriptionDiv>
-                <p>
-                    This location at the Bahnhofstrasse is quite friendly and easily located across the street from the train station. The people there seem to be quite good and helpful in their service.
-                </p>
-            </ReviewsDescriptionDiv>
-        </ReviewsDiv >
-    )
+          </ReviewsDiv>
+        </RestaurantLink>
+      ))}
+    </>
+  );
+};
 
-}
-
-export default RestaurantsComponent
+export default RestaurantsComponent;

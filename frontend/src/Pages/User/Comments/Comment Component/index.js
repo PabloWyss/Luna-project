@@ -1,11 +1,28 @@
-import {CommentsDateP, CommentsDescriptionDiv , CommentsDiv, CommentsTitleDiv} from "../CommentsStyles"
-import React from "react";
+import React from 'react';
+import {
+  CommentsDateP,
+  CommentsDescriptionDiv,
+  CommentsDiv,
+  CommentsTitleDiv,
+} from '../CommentsStyles'
 
-const CommentComponent = ({ comment }) => {
+  const formatDate = (dateString) => {
+    const options = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+    const date = new Date(dateString);
+    return date.toLocaleString('en-US', options);
+  };
+const CommentComponent = ({ comment, index }) => {
   return (
     <CommentsDiv>
       <CommentsTitleDiv>
-        <CommentsDateP>{comment?.created_date}</CommentsDateP>
+        <p>Review {index + 1}</p>
+        <CommentsDateP>{formatDate(comment?.created_date)}</CommentsDateP>
       </CommentsTitleDiv>
       <CommentsDescriptionDiv>
         <p>{comment?.text_content}</p>
@@ -13,4 +30,5 @@ const CommentComponent = ({ comment }) => {
     </CommentsDiv>
   );
 };
+
 export default CommentComponent;
