@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 import RestaurantsComponent from "./RestaurantsComponent";
-import {Title, Container, ReviewsTitleDateDiv} from "../Reviews/ReviewStyles";
+import { Title, Container, ReviewsTitleDateDiv } from "../Reviews/ReviewStyles";
 import OrangeButton from "../../../Components/Button";
-import {RestaurantButtonDiv} from "./RestaurantsComponent/RestaurantStyles";
-import { NavLink } from 'react-router-dom';
+import { RestaurantButtonDiv } from "./RestaurantsComponent/RestaurantStyles";
+import { NavLink } from "react-router-dom";
 
 const Restaurant = () => {
   return (
@@ -13,16 +13,14 @@ const Restaurant = () => {
           <Title>Restaurants</Title>
         </ReviewsTitleDateDiv>
         <RestaurantsComponent />
-        <RestaurantsComponent />
         <RestaurantButtonDiv>
           <NavLink to="/AddRestaurant/">
-            <OrangeButton textInput={'Create Restaurant'} />
+            <OrangeButton textInput={"Create Restaurant"} />
           </NavLink>
         </RestaurantButtonDiv>
       </Container>
     </div>
   );
 };
-
 
 export default Restaurant;
