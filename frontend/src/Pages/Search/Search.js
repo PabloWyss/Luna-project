@@ -22,6 +22,9 @@ const Search = () => {
 
     //Click on Category
     const [categoryClicked, setCategoryClicked] = useState(false)
+    const [category, setCategory] = useState("Select Category")
+
+    const [qtyReviews, setQtyReviews] = useState({})
 
     const handleCategoryClicked = () => {
         setCategoryClicked(!categoryClicked)
@@ -61,37 +64,60 @@ const Search = () => {
         try {
             setListOfUsers(response.data)
             setListOfUsersFiltered(response.data)
+
         } catch (error) {
             console.log(error)
         }
     }
 
   const obtainAllReviews = async () => {
-    let response = await lunaAPI.get(`/search/?search_string=&type=reviews`)
+      let response = await lunaAPI.get(`/search/?search_string=&type=reviews`)
         try {
             setListOfReviews(response.data)
             setListOfReviewsFiltered(response.data)
+            setReviewsByUser(await Promise.all(response.data))
         } catch (error) {
             console.log(error)
         }
+
     }
 
     const filterByCategory = (category) =>{
-
-        let toSearch = category.toLowerCase()
-        let listFiltered = []
-        for(let i=0; i<listOfRestaurants.length; i++) {
-            if(String(listOfRestaurants[i]['category']).toLowerCase().includes(toSearch)) {
-              listFiltered.push(listOfRestaurants[i]);
+        if (category == "ALL"){
+            setListOfRestaurantsFiltered(listOfRestaurants)
+            setCategory("Select Category")
+        } else {
+            let toSearch = category.toLowerCase()
+            setCategory(category)
+            let listFiltered = []
+            for(let i=0; i<listOfRestaurants.length; i++) {
+                if(String(listOfRestaurants[i]['category']).toLowerCase().includes(toSearch)) {
+                  listFiltered.push(listOfRestaurants[i]);
             }
         }
         setListOfRestaurantsFiltered(listFiltered)
+        }
+
+    }
+
+    const setReviewsByUser = (list) => {
+        const reviewsByUser = {
+        }
+        for (let i = 0; i <= list.length -1;i++){
+            if (reviewsByUser.hasOwnProperty(list[i].reviewed_by_user.id)){
+                reviewsByUser[list[i].reviewed_by_user.id] += 1
+            } else {
+                reviewsByUser[list[i].reviewed_by_user.id] = 1
+            }
+        }
+        setQtyReviews(reviewsByUser)
     }
 
   useEffect(() => {
     obtainAllRestaurants()
     obtainAllUsers()
     obtainAllReviews()
+
   }, [])
 
   return (
@@ -101,7 +127,7 @@ const Search = () => {
           <input placeholder="Search..." onChange={searchHandler} />
         </SearchBar>
         <SearchCategory onClick={handleCategoryClicked}>
-          <p>Select a category...</p>
+          <p>{category}</p>
           <img src={arrow}></img>
         </SearchCategory>
           {categoryClicked ?
@@ -115,7 +141,7 @@ const Search = () => {
           <Tab to='users'>Users</Tab>
         </MainMenu>
         <Grid>
-          <Outlet context={[listOfRestaurantFiltered, listOfUsersFiltered, listOfReviewsFiltered]} />
+          <Outlet context={[listOfRestaurantFiltered, listOfUsersFiltered, listOfReviewsFiltered, qtyReviews]} />
         </Grid >
       </Main >
     </div >
