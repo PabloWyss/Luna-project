@@ -13,7 +13,7 @@ import Verification from "./Pages/Registration/Verification";
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Restaurant from './Pages/Restaurant/Restaurant';
-import AddReview from './Pages/AddReview';
+import AddReview from './Pages/AddReview/AddReview';
 import AddRestaurant from './Pages/AddRestaurant/AddRestaurant';
 
 function App() {
