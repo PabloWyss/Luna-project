@@ -31,7 +31,7 @@ export const CommentsDiv = styled.div`
   background: white;
   width: 600px;
   height: 50px;
-  border: 1px solid #EBEBEB;
+  border: 1px solid #EBEBEB;;
 `
 export const CommentsTitleDiv = styled.div`
   font-weight: 400;
@@ -58,4 +58,4 @@ export const CommentsDateP = styled.p`
   font-weight: 300;
   font-size: 12px;
   color: #303030;
-`
+`;
