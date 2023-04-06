@@ -20,23 +20,25 @@ function App() {
     return (
         <div>
             <Header />
-            <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/search" element={<Search />}>
-                    <Route index element={<Navigate to="/search/restaurants" replace />} />
-                    <Route path="restaurants" element={<RestaurantsGrid />} />
-                    <Route path="reviews" element={<ReviewsGrid />} />
-                    <Route path="users" element={<UsersGrid />} />
-                </Route>
-                <Route path="/profile" element={<UserProfile />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/registration" element={<Registration />} />
-                <Route path="/registration-message" element={<RegistrationMessage />} />
-                <Route path="/verification" element={<Verification />} />
-                <Route path="/restaurant/:restaurantID" element={<Restaurant />} />
-                <Route path="/addreview/:restaurantID" element={<AddReview />} />
-                <Route path="/addRestaurant/new" element={<AddRestaurant />} />
-            </Routes>
+            <div className='main-body'>
+                <Routes>
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="/search" element={<Search />}>
+                        <Route index element={<Navigate to="/search/restaurants" replace />} />
+                        <Route path="restaurants" element={<RestaurantsGrid />} />
+                        <Route path="reviews" element={<ReviewsGrid />} />
+                        <Route path="users" element={<UsersGrid />} />
+                    </Route>
+                    <Route path="/profile" element={<UserProfile />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/registration" element={<Registration />} />
+                    <Route path="/registration-message" element={<RegistrationMessage />} />
+                    <Route path="/verification" element={<Verification />} />
+                    <Route path="/restaurant/:restaurantID" element={<Restaurant />} />
+                    <Route path="/addreview/:restaurantID" element={<AddReview />} />
+                    <Route path="/addRestaurant/new" element={<AddRestaurant />} />
+                </Routes>
+            </div>
             <Footer />
         </div>
     );
