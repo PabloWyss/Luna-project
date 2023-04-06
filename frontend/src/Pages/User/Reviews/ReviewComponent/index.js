@@ -22,7 +22,7 @@ const ReviewComponent = ({ review }) => {
   return (
     <ReviewsDiv>
       <ReviewsTitleDiv>
-        <p>{restaurant?.name}</p>
+        <p>{review?.review_on_restaurant?.name}</p>
         <ReviewsDateP>{review?.date_created}</ReviewsDateP>
       </ReviewsTitleDiv>
       <div>
