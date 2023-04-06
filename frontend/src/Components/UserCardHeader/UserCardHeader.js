@@ -21,7 +21,6 @@ const ReviewUser = ({ avatar, userName, userID }) => {
 
         const response = await lunaAPI.get(`reviews/user/${userID}/`, config);
         setReviewsCountByUser(response.data.length)
-        console.log(response.data)
       } catch (error) {
         console.log(error);
       }

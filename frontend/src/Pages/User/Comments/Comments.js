@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import CommentComponent from "./Comment Component";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import lunaAPI from "../../../Axios/lunaApi";
-import  { Container, Title, CommentsTitleDateDiv} from "./CommentsStyles";
+import { Container, Title, CommentsTitleDateDiv } from "./CommentsStyles";
 const CommentsList = ({ userID }) => {
- console.log(userID)
   const [commentsList, setCommentsList] = useState([]);
 
   useEffect(() => {
@@ -38,10 +37,10 @@ const CommentsList = ({ userID }) => {
 
   return (
     <div>
-        {Array.isArray(commentsList) &&
-          commentsList?.map((comment) => (
-            <CommentComponent key={comment.id} comment={comment} />
-          ))}
+      {Array.isArray(commentsList) &&
+        commentsList?.map((comment) => (
+          <CommentComponent key={comment.id} comment={comment} />
+        ))}
 
     </div>
   );
