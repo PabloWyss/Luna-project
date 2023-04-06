@@ -47,7 +47,7 @@ export const ButtonWraperSmall = styled.div`
 export const ReviewContent = styled.p`
   font-size: 16px;
   font-weight: 300;
-  padding: 10px 10px 0 10px;
+  padding: 10px;
 `
 
 export const ShowHideCommentBtn = styled.div`
@@ -68,5 +68,12 @@ export const ReviewFooter = styled.div`
 `
 
 export const CommentList = styled.div`
-  margin-top: 10px;
+  margin: 10px 0 20px 0;
+
+  >p{
+  font-size: 16px;
+  font-weight: 300;
+  padding: 0 10px;
+  }
+
 `

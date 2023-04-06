@@ -12,7 +12,7 @@ export const FooterDiv = styled.div`
   width: 100%;
   background: white;
   border-top: 1px solid #D8D8D8;
-  color: #646363
+  color: #646363;
 `
 
 export const FooterUpperDiv = styled.div`
