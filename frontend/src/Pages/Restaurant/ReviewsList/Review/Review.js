@@ -7,7 +7,7 @@ import Button from '../../../../Components/Button'
 import Comment from "./Comment/Comment";
 import { useState } from "react";
 import { formatDate } from "../../../../helpers";
-import {getCLS} from "web-vitals";
+import { getCLS } from "web-vitals";
 
 const Review = ({ review }) => {
   const [areAllCommentsShown, setAreAllCommentsShown] = useState(false)
@@ -23,7 +23,11 @@ const Review = ({ review }) => {
     <ReviewContainer>
       <ReviewHeader>
         <HeaderRight>
-          <ReviewUser userName={review?.reviewed_by_user.username} />
+          <ReviewUser
+            avatar={review?.reviewed_by_user.profile_image}
+            userName={review?.reviewed_by_user.username}
+            userID={review?.reviewed_by_user.id}
+          />
           <RatingStars rating={review.rating} />
         </HeaderRight>
         <DateContainer>
@@ -46,10 +50,14 @@ const Review = ({ review }) => {
                   <ShowHideCommentBtn onClick={handleShowHideCommentsClick}>Hide</ShowHideCommentBtn>
                 </ReviewFooter>
                 <CommentList>
-                  <Comment></Comment>
-                  <Comment></Comment>
-                  <Comment></Comment>
-                  <Comment></Comment>
+                  {
+                    review?.comments.length !== 0 ?
+                      review.comments.map(comment => {
+                        return <Comment key={comment.id} comment={comment} />
+                      })
+                      :
+                      <p>No comments</p>
+                  }
                 </CommentList>
               </div>
               :
