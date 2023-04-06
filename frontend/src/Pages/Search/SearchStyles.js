@@ -9,6 +9,7 @@ export const SearchBarContainer = styled.div`
   font-size: 20px;
   font-weight: 700;
   border: 1px solid #D8D8D8;
+  background-color: white;
 `
 export const SearchBar = styled.div`
   width: 77%;
@@ -42,7 +43,7 @@ export const SearchCategory = styled.div`
 `
 
 export const Main = styled.div`
-  background: #F2F2F2;
+  background-color: #F2F2F2;
   padding: 9px;
   display: flex;
   flex-direction: column;
