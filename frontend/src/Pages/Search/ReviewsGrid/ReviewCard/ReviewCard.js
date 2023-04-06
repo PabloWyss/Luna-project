@@ -24,6 +24,16 @@ const ReviewCard = (props) => {
   const firstTwoComents = props.review.comments.slice(0, 2);
   let commentLength = 130
 
+  let numberOfReviews = 0
+    const userReviews = () => {
+        if(props.qtyReviews[props.review.reviewed_by_user.id]){
+            numberOfReviews = props.qtyReviews[props.review.reviewed_by_user.id]
+        }
+
+    }
+    userReviews()
+
+
   return (
     <Card>
       <CardHeader>
@@ -32,7 +42,7 @@ const ReviewCard = (props) => {
         </UserAvatar>
         <UserInfo>
           <TextOrangeBig>{props.review.reviewed_by_user.username}</TextOrangeBig>
-          <TextGreyBold> 10 Reviews in total</TextGreyBold>
+          <TextGreyBold> {`${numberOfReviews} Reviews in total`}</TextGreyBold>
         </UserInfo>
       </CardHeader>
       <CardBody>

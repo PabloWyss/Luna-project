@@ -4,12 +4,12 @@ import UserCard from "../UsersGrid/UserCard/UserCard";
 
 const ReviewssGrid = () => {
 
-    const [listOfRestaurantFiltered,listOfUsersFiltered,listOfReviewsFiltered] = useOutletContext();
+    const [listOfRestaurantFiltered, listOfUsersFiltered, listOfReviewsFiltered, qtyReviews] = useOutletContext();
 
   return (
     <>
         {listOfReviewsFiltered.map((review,index)=>{
-            return <ReviewCard review={review} key={index}/>
+            return <ReviewCard review={review} key={index} qtyReviews={qtyReviews}/>
         })}
     </>
   );
