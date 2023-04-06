@@ -18,6 +18,7 @@ import {updateRestaurantData} from "../../Redux/Slices/restaurant";
 import {useDispatch} from "react-redux";
 function CreateRestaurant() {
 
+   const [errorEntry, setErrorEntry] = useState("");
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
@@ -81,9 +82,76 @@ function CreateRestaurant() {
     };
 
   const handleImage = (e) => {
-    setImage(e.target.value);
+    setImage(e.target.files[0]);
   };
 
+  const handleCreateClick_Fetch= async (e) => {
+      e.preventDefault();
+
+
+    if (!name ||
+        !category ||
+        !country ||
+        !street ||
+        !city ||
+        !phone ||
+        !openingHours || !image
+      )
+    {
+      setShowRequired(true);
+      return;
+    }
+
+
+  setErrorEntry("");
+
+
+      const myHeaders = new Headers();
+myHeaders.append(  'Authorization', `Bearer ${localStorage.getItem('token')}`,);
+
+const formdata = new FormData();
+formdata.append("image", image);
+   console.log(image)
+formdata.append("name", name);
+formdata.append("category", category);
+formdata.append("street", street);
+formdata.append("city", city);
+formdata.append("zip_code", zip);
+formdata.append("website", website);
+formdata.append("phone", phone);
+formdata.append("email", email);
+formdata.append("opening_hours", openingHours);
+formdata.append("price_range", priceLevel);
+
+
+const requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: formdata,
+  redirect: 'follow'
+};
+
+   fetch(baseURL+"/restaurants/new/", requestOptions)
+  .then(response => response.json())
+  .then(result => dispatch(updateRestaurantData(result.data)),
+  ).catch(error => setErrorEntry(error));
+
+
+  console.log(errorEntry)
+
+if (errorEntry===""){
+         navigate("/search/restaurants")
+        }
+
+
+
+
+
+
+
+  }
+  const isDev = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
+const baseURL = isDev ? 'http://127.0.0.1:8001/backend/api' : 'https://luna-team4.propulsion-learn.ch/backend/api'
   const handleCreateClick = async (e) => {
          e.preventDefault();
 
@@ -102,7 +170,6 @@ function CreateRestaurant() {
 
 
 
-
        const newRestaurantData = {
        "name": name,
       "category": category,
@@ -114,14 +181,18 @@ function CreateRestaurant() {
       "phone": phone,
       "email": email,
       "opening_hours": openingHours,
-      "price_range": priceLevel
-    }
+      "price_range": priceLevel,
+           "image":   image
 
+
+    }
+ console.log(image)
     //localStorage.setItem("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgxMTMzMzY4LCJpYXQiOjE2ODA3MDEzNjgsImp0aSI6IjMxMDczMzc4NzM5MzQyZTI5NjE0MTZjYTM0ZTNhZGI2IiwidXNlcl9pZCI6MX0.kp6XUKFh1ENG4yPuu2_P0WfenQ-6nRrBM6bTrMUwy3k")
 
 
     const response2 = await lunaApi.post("/restaurants/new/", newRestaurantData,
       {
+
           headers: {
               'Authorization': `Bearer ${localStorage.getItem('token')}`,
 '             Content-Type': 'application/json'
@@ -152,7 +223,8 @@ function CreateRestaurant() {
 
           <InputText id="nameInput" onChange={handleName}/>
           <InputSelect id="categoryInput" onChange={handleCategory}>
-            <option value="" disabled defaultValue>Select a value...</option>
+            <option value="" enabled defaultValue>Select a value...</option>
+
             <option value="US">American</option>
              <option value="CH">Swiss</option>
                <option value="IT">Italian</option>
@@ -162,7 +234,8 @@ function CreateRestaurant() {
              <option value="SRB">Serbian</option>
           </InputSelect>
           <InputSelect id="countryInput" onChange={handleCountry}>
-            <option value="" disabled defaultValue>Select a value...</option>
+            <option value="" enabled defaultValue>Select a value...</option>
+              <option value="Tr">Turkey</option>
             <option value="AT">Austria</option>
             <option value="DE">Germany</option>
             <option value="CH">Switzerland</option>
@@ -218,12 +291,12 @@ function CreateRestaurant() {
 
           <InputText id="openingInput" onChange={handleOpeningHours}/>
           <InputSelect id="priceInput" onChange={handlePriceLevel} >
-            <option value="" disabled defaultValue hidden>Select a value...</option>
+            <option value="" enabled defaultValue hidden>Select a value...</option>
             <option value="$">$</option>
             <option value="$$">$$</option>
             <option value="$$$">$$$</option>
           </InputSelect>
-          <InputSelect id="imageInput" onChange={handleCountry}/>
+          <input type="file"  id="imageInput" onChange={handleImage}/>
 
           { showRequired ? <RequiredField>This field is required</RequiredField> : <></>}
           { showRequired ? <RequiredField>This field is required</RequiredField> : <></>}
@@ -232,7 +305,7 @@ function CreateRestaurant() {
 
         </Basic>
           <div>
-              <OrangeButton onClickAction={handleCreateClick} textInput={'Create'} type={"submit"}/>
+              <OrangeButton onClickAction={handleCreateClick_Fetch} textInput={'Create'} type={"submit"}/>
 
           </div>
 
