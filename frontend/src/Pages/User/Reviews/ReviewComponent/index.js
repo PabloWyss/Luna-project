@@ -38,7 +38,7 @@ const ReviewComponent = ({ review }) => {
         <ReviewsDateP>{formatDate(review?.date_created)}</ReviewsDateP>
       </ReviewsTitleDiv>
       <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-        <RatingStars />
+        <RatingStars rating={review.rating} isVoting={false} />
         <ReviewsDateP style={{marginLeft: 'auto', textAlign: 'right'}}>
           {review?.rating} Stars
         </ReviewsDateP>
