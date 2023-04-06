@@ -10,7 +10,7 @@ const UserCard = (props) => {
     <Card>
       <CardHeader>
         <UserAvatar>
-          <img src={baseUrl + props.user.avatar}></img>
+          <img src={baseUrl + props.user.profile_picture}></img>
         </UserAvatar>
         <UserInfo>
           <TextOrangeBig>{props.user.username}</TextOrangeBig>

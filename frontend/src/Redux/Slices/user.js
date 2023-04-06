@@ -9,6 +9,8 @@ export const userSlice = createSlice({
   },
   reducers: {
     updateUserData: (state, action) => {
+      console.log('update user data')
+      console.log(action.payload)
       state.userData = action.payload;
     }
   },

@@ -7,10 +7,10 @@ import Button from '../../../../Components/Button'
 import Comment from "./Comment/Comment";
 import { useState } from "react";
 import { formatDate } from "../../../../helpers";
+import {getCLS} from "web-vitals";
 
 const Review = ({ review }) => {
   const [areAllCommentsShown, setAreAllCommentsShown] = useState(false)
-
   const handleShowHideCommentsClick = () => {
     setAreAllCommentsShown(prev => !prev);
   }

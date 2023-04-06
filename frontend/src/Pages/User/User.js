@@ -16,10 +16,11 @@ import { ReactComponent as StarIcon } from '../../Assets/star.svg';
 import BannerText from "./BannerText";
 import Reviews from './Reviews/Review';
 import Comments from './Comments/Comments';
-import RestaurantStyles from "./Restaurants/RestaurantStyles";
+import Restaurant from "./Restaurants/Restaurant";
 import EditUserProfile from "./EditUserProfile/EditUserProfie";
 import {updateUserData, updateUserProfile} from "../../Redux/Slices/user";
 import lunaApi from "../../Axios/lunaApi";
+import UserComments from "./Comments/Comments";
 
 
 
@@ -39,48 +40,47 @@ const UserProfile = () => {
   const [thingsILove, setThingsILove] = useState(currentUser?.things_i_love || '');
   const [description, setDescription] = useState(currentUser?.description || '');
   const [showReviews, setShowReviews] = useState(true);
-  const [showComments, setShowComments] = useState(false);
+  const [showUserComments, setShowUserComments] = useState(false);
   const [showRestaurants, setShowRestaurants] = useState(false);
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [bannerText, setBannerText] = useState('');
   const [activeView, setActiveView] = useState('reviews');
   const [backgroundEditable, setBackgroundEditable] = useState(true);
 
-  const handleProfilePictureChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      setProfilePicture(e.target.result);
+const handleProfilePictureChange = async (event) => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    setProfilePicture(file);
 
-      //
-      // upload avatar
-      //
-      console.log(e)
-      const newProfileData = {
-        profile_picture: e.target.result
+    const formData = new FormData();
+    formData.append('profile_picture', event.target.files[0]);
+
+    console.log(formData);
+
+    try {
+      const response = await lunaApi.patch("/users/me/", formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      dispatch(updateUserData(response.data));
+    } catch (error) {
+      if (error.response) {
+        console.error(error.response.data);
+        throw error.response.data;
+      } else {
+        console.error(error);
+        throw error;
       }
-
-      const response2 = await lunaApi.patch("/users/me/", newProfileData,
-      {
-          headers: {
-              'Authorization': `Bearer ${localStorage.getItem('token')}`,
-'             Content-Type': 'application/json'
-          }
-      })
-      try {
-        dispatch(updateUserData(response2.data))
-        // setUser(user);
-      } catch (error) {
-          throw error.response.data;
-          // console.log(error)
-      }
-      //
-      // upload avatar
-      //
-    };
-    reader.readAsDataURL(file);
-
+    }
   };
+  reader.readAsDataURL(file);
+};
+
+
+
 
   const handleBackgroundChange = (event) => {
     console.log(backgroundEditable)
@@ -98,21 +98,21 @@ const UserProfile = () => {
 
   const handleReviewsClick = () => {
     setShowReviews(true);
-    setShowComments(false);
+    setShowUserComments(false);
     setShowRestaurants(false);
     setShowEditProfile(false);
   };
 
   const handleCommentsClick = () => {
     setShowReviews(false);
-    setShowComments(true);
+    setShowUserComments(true);
     setShowRestaurants(false);
     setShowEditProfile(false);
   };
 
   const handleRestaurantsClick = () => {
     setShowReviews(false);
-    setShowComments(false);
+    setShowUserComments(false);
     setShowRestaurants(true);
     setShowEditProfile(false);
   };
@@ -122,7 +122,7 @@ const UserProfile = () => {
       setShowEditProfile(false);
     } else {
       setShowReviews(false);
-      setShowComments(false);
+      setShowUserComments(false);
       setShowRestaurants(false);
       setShowEditProfile(true);
       setBackgroundEditable(true);
@@ -131,8 +131,6 @@ const UserProfile = () => {
   };
   useEffect(() => {
     console.log("use effect")
-
-
 
 
     /* setFirstName(currentUser?.first_name || '');
@@ -158,35 +156,33 @@ const UserProfile = () => {
             <ProfilePicture image={profilePicture}>
               {activeView === 'edit'? <input id="profile-image" type="file" accept="image/*" onChange={handleProfilePictureChange}/>: ""}
             </ProfilePicture>
-        <BannerText firstName={firstName} lastName={lastName} location={location}/>
+        <BannerText firstName={user.first_name} lastName={user.last_name} location={user.location}/>
         <ProfileNav>
           <p>{firstName}'s Profile</p>
           <ProfileNavButtons>
             <ProfileNavButtons>
               <button onClick={() => {setActiveView("reviews")}}><StarIcon/>Reviews</button>
-              <button onClick={() => {setActiveView("comments")}}><CommentIcon/>Comments
-              </button>
-              <button onClick={() => {setActiveView("restaurants")}}><RestaurantIcon/>Restaurants
-              </button>
+              <button onClick={() => {setActiveView("comments")}}><CommentIcon/>Comments </button>
+              <button onClick={() => {setActiveView("restaurants")}}><RestaurantIcon/>Restaurants </button>
               <button onClick={() => {setActiveView("edit")}}><EditIcon/>Edit Profile</button>
             </ProfileNavButtons>
 
           </ProfileNavButtons>
         </ProfileNav>
         {activeView === "reviews" ? <Reviews/> : ""}
-        {activeView === "comments" ?<Comments/>: ""}
-        {activeView === "restaurants" ?<RestaurantStyles/>: ""}
+        {activeView === "comments" ? <UserComments/> : ""}
+        {activeView === "restaurants" ?<Restaurant/>: ""}
         {activeView === "edit" ?<EditUserProfile/>: ""}
         <About>
-          <AboutTitle>About {firstName}</AboutTitle>
+          <AboutTitle>About {user.first_name}</AboutTitle>
           <h3>Location</h3>
-          <p>{location}</p>
+          <p>{user.location}</p>
           <h3>Luna Member Since</h3>
           <p> {new Date(user.join_date).toLocaleDateString('en-GB')}</p>
           <h3>Things I love</h3>
-          <p>{thingsILove}</p>
+          <p>{user.things_i_love}</p>
           <h3>Description</h3>
-          <p>{description}</p>
+          <p>{user.description}</p>
         </About>
       </Container>
     </div>

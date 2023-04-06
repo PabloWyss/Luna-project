@@ -1,4 +1,4 @@
-import {ButtonRegistrationDiv, InputSignInStyle, SignUpDiv} from "../Signup/Signup.style";
+import {ButtonRegistrationDiv, ErrorP, InputSignInStyle, SignUpDiv} from "../Signup/Signup.style";
 import RegistrationTitle from "../RegistrationTitle";
 import OrangeButton from "../../../Components/Button";
 import {
@@ -19,7 +19,8 @@ const Verification = () => {
     const [verificationCode, setVerificationCode] = useState("");
     const [userLocation, setUserLocation] = useState("")
     const [repeatPassword, setRepeatPassword] = useState("");
-    const [passwordMatch, setPasswordMatch] = useState(true);
+    const [errorEntry, setErrorEntry] = useState(false);
+    const [errorMessage, serErrorMessage] = useState("")
     const navigate = useNavigate();
 
     //store typed email
@@ -58,9 +59,11 @@ const Verification = () => {
 
     const checkPasswordMatch = () => {
         if (repeatPassword !== "" && repeatPassword !== userPassword) {
-          setPasswordMatch(false);
+          setErrorEntry(true);
+          serErrorMessage("The passwords don't match")
         } else {
-          setPasswordMatch(true);
+          setErrorEntry(false);
+          serErrorMessage("")
         }
     };
 
@@ -78,12 +81,13 @@ const Verification = () => {
             "validation_code": verificationCode,
             "location": userLocation
         }
-        let response = await lunaAPI.post('/auth/registration/validation/',data)
         try {
+            let response = await lunaAPI.post('/auth/registration/validation/',data)
             navigate("/login");
-            console.log(response.data)
         } catch (error) {
             console.log(error)
+            setErrorEntry(true)
+            serErrorMessage( error.response.data['error'] ||"All fields are required")
         }
       }
 
@@ -132,9 +136,9 @@ const Verification = () => {
                                     />
                                 </VerificationRightDiv>
                             </VerificationInnerDiv>
-                            <p>
-                                {passwordMatch ? "" : "The passwords don't match"}
-                            </p>
+                            <ErrorP>
+                                {errorEntry ? errorMessage : ""}
+                            </ErrorP>
                         </VerificationDiv>
                         <ButtonRegistrationDiv>
                             <OrangeButton textInput={'Finish registration'} type={"submit"}/>

@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from .email_utils import send_update_user_email
 from .models import User
 from .permissions import IsOwnerOrReadOnly
 from .serializer import UserSerializer, CustomTokenObtainPairSerializer
@@ -25,7 +26,9 @@ class MyProfileView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        response = Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        send_update_user_email(request.user, request.user)
+        return response
 
 
 class UserListView(generics.ListAPIView):

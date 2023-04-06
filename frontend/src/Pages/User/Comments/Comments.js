@@ -2,13 +2,10 @@ import React, {useEffect, useState} from "react";
 import CommentComponent from "./Comment Component";
 import {useSelector} from "react-redux";
 import lunaAPI from "../../../Axios/lunaApi";
-import Review from "../Reviews/ReviewComponent";
-import styled from 'styled-components';
-import  { Container, Title, CommentsTitleDateDiv} from "./Styles";
-
-
+import  { Container, Title, CommentsTitleDateDiv} from "./CommentsStyles";
 const CommentsList = ({ userID }) => {
-  const [commentsList, setReviewsList] = useState([])
+ console.log(userID)
+  const [commentsList, setCommentsList] = useState([]);
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -24,40 +21,43 @@ const CommentsList = ({ userID }) => {
           },
         };
 
-        const response = await lunaAPI.get(`/comment/${userID}/`, config);
-        setReviewsList(response.data)
+        const response = await lunaAPI.get(`/comment/reviews/comments/1/`, config);
+        setCommentsList(response.data);
       } catch (error) {
         console.log(error);
       }
-    }
-    getCommentsFromUserByID();
+    };
+
+    getCommentsFromUserByID().then(() => {
+      console.log('Comments fetched successfully');
+    }).catch((error) => {
+      console.log('Error fetching comments:', error);
+    });
+
   }, [userID]);
-return (
+
+  return (
     <div>
-      {
-        commentsList.map(comment => {
-          return <Review key={comment.id} review={comment} />
-        })
-      }
+        {Array.isArray(commentsList) &&
+          commentsList?.map((comment) => (
+            <CommentComponent key={comment.id} comment={comment} />
+          ))}
+
     </div>
-  );
-}
-
-
-const Comments = () => {
-    const currentUser = useSelector(store => store.user.userData);
-
-    return (
-    <Container>
-        <CommentsTitleDateDiv>
-            <Title>Comments</Title>
-        </CommentsTitleDateDiv>
-        <CommentsList userID={currentUser.id} />
-        <CommentComponent/>
-        <CommentComponent/>
-        <CommentComponent/>
-    </Container>
   );
 };
 
-export default Comments;
+const UserComments = () => {
+  const currentUser = useSelector((store) => store.user.userData);
+
+  return (
+    <Container>
+      <CommentsTitleDateDiv>
+        <Title>Comments</Title>
+      </CommentsTitleDateDiv>
+      <CommentsList userID={currentUser.id} />
+    </Container>
+  );
+};
+export default UserComments;
+
