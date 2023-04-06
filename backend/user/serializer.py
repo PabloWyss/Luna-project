@@ -25,3 +25,9 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['refresh'] = str(refresh)
         data['access'] = str(refresh.access_token)
         return data
+
+
+class UserPasswordResetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('password',)

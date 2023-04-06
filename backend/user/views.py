@@ -8,7 +8,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .email_utils import send_update_user_email
 from .models import User
 from .permissions import IsOwnerOrReadOnly
-from .serializer import UserSerializer, CustomTokenObtainPairSerializer
+from .serializer import UserSerializer, CustomTokenObtainPairSerializer, UserPasswordResetSerializer
 
 
 class MyProfileView(APIView):
@@ -101,3 +101,18 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     API endpoint to retrieve a JWT token for a user.
     """
     serializer_class = CustomTokenObtainPairSerializer
+
+
+class UserResetPasswordView(APIView):
+    """
+    API endpoint to reset a user's password.
+    """
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UserPasswordResetSerializer
+
+    def post(self, request):
+        serializer = UserPasswordResetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(f'Password reset failed: {serializer.errors}')
