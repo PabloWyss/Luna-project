@@ -8,10 +8,22 @@ import {
 } from "./Header.style";
 import logo from "../../Assets/logo.svg"
 import {NavLink, useNavigate} from "react-router-dom"
+import {useEffect, useState} from "react";
+import {ErrorP} from "../../Pages/Registration/Signup/Signup.style";
 
 const Header = () => {
 
     const navigate = useNavigate()
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const getToken = () =>{
+        const userToken = localStorage.getItem('token')
+        if (userToken){
+            setIsLoggedIn(true)
+        } else {
+            setIsLoggedIn(false)
+        }
+    }
+
 
     const handleClickSignUp = () => {
         navigate(`/registration`)
@@ -19,6 +31,17 @@ const Header = () => {
     const handleClickLogin = () => {
         navigate(`/login`)
     }
+
+    const handleClickLogout = () => {
+        localStorage.removeItem('token')
+        localStorage.removeItem('id')
+        setIsLoggedIn(false)
+        navigate(`/login`)
+    }
+
+    useEffect(()=>{
+        getToken()
+    },[localStorage.getItem('token')])
 
     return (
         <HeaderDiv>
@@ -101,8 +124,10 @@ const Header = () => {
                     <HeaderButtonLeft onClick={handleClickSignUp}>
                         SIGNUP
                     </HeaderButtonLeft>
-                    <HeaderButtonRight onClick={handleClickLogin}>
-                        LOGIN
+                    <HeaderButtonRight>
+                        {isLoggedIn ?
+                            <p onClick={handleClickLogout}>{"LOGOUT"}</p>:
+                            <p onClick={handleClickLogin}>{"LOGIN"}</p>}
                     </HeaderButtonRight>
                 </HeaderButtonsDiv>
             </HeaderRightDiv>
