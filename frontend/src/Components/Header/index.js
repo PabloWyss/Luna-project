@@ -41,7 +41,7 @@ const Header = () => {
 
     useEffect(()=>{
         getToken()
-    },[localStorage.getItem('token')])
+    },[localStorage.getItem('token'),isLoggedIn])
 
     return (
         <HeaderDiv>
