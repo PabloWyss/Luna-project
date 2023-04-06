@@ -5,7 +5,6 @@ let baseUrl = isDev ? 'http://localhost:8001' : 'https://luna-team4.propulsion-l
 
 const UserCard = (props) => {
 
-    console.log(props.user.profile_picture)
   return (
     <Card>
       <CardHeader>

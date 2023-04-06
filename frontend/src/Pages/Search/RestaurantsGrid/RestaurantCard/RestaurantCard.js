@@ -20,7 +20,7 @@ const RestaurantCard = (prop) => {
     e.preventDefault()
     navigate(`/restaurant/${prop.restaurant.id}/`)
   }
-  console.log(prop.restaurant?.image)
+
   return (
     <Card onClick={handleClickDivRestaurantCard}>
       <Details>
