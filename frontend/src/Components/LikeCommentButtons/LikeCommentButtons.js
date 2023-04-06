@@ -1,42 +1,40 @@
 import { FaRegThumbsUp } from 'react-icons/fa';
 import { Buttons, CommentButton, LikeButton } from './LikeCommentButtonsStyles';
 import lunaAPI from "../../Axios/lunaApi";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 
 const LikeCommentButtons = ({ likesCount, commentsCount, idReview, likedByLoginUser }) => {
 
-    const [likesSumRest, setLikesSumRest] = useState(likesCount)
-    const [likedByUser,setlikedByUser] = useState(likedByLoginUser)
+  const [likesSumRest, setLikesSumRest] = useState(likesCount)
+  const [likedByUser, setlikedByUser] = useState(likedByLoginUser)
 
-    const handleClickLike = (e) => {
-        e.preventDefault()
-        addSubLike()
-        updateLike()
+  const handleClickLike = (e) => {
+    e.preventDefault()
+    addSubLike()
+    updateLike()
+  }
 
+  const addSubLike = () => {
+    if (likedByUser) {
+      setLikesSumRest(likesSumRest - 1)
+    } else {
+      setLikesSumRest(likesSumRest + 1)
     }
+    setlikedByUser(!likedByUser)
+  }
 
-    const addSubLike = () => {
-        if (likedByUser){
-            setLikesSumRest(likesSumRest-1)
-        } else {
-            setLikesSumRest(likesSumRest+1)
-        }
-        setlikedByUser(!likedByUser)
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
     }
+  }
+  const bodyParameters = {
+    key: "value"
+  };
 
-     const config = {
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-    }
-
-    const bodyParameters = {
-        key: "value"
-    };
-
-    const updateLike = async () => {
-    let response = await lunaAPI.post(`/reviews/like/${idReview}/`,bodyParameters, config)
+  const updateLike = async () => {
+    let response = await lunaAPI.post(`/reviews/like/${idReview}/`, bodyParameters, config)
     try {
     } catch (error) {
       console.log(error)
@@ -44,17 +42,16 @@ const LikeCommentButtons = ({ likesCount, commentsCount, idReview, likedByLoginU
     }
   }
 
-
   return (
     <Buttons>
-      <LikeButton onClick={handleClickLike}>
+      <LikeButton>
         <FaRegThumbsUp></FaRegThumbsUp>
         <p>Like</p>
         <p>{likesSumRest}</p>
       </LikeButton>
       <CommentButton>
-        <p>Comments</p>
-        <p>{commentsCount}</p>
+        <p>Comment</p>
+        <p>24</p>
       </CommentButton>
     </Buttons>
   );
