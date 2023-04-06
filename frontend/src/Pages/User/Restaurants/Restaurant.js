@@ -15,7 +15,7 @@ const Restaurant = () => {
         <RestaurantsComponent />
         <RestaurantsComponent />
         <RestaurantButtonDiv>
-          <NavLink to="/restaurants/new/">
+          <NavLink to="/AddRestaurant/">
             <OrangeButton textInput={'Create Restaurant'} />
           </NavLink>
         </RestaurantButtonDiv>
