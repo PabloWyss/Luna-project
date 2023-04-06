@@ -64,7 +64,7 @@ const Login = () => {
         } catch (error) {
             console.log(error)
         }
-        if (errorEntry){
+        if (!errorEntry){
             navigate("/profile");
         }
     }
