@@ -2,6 +2,7 @@ import { Card, CardHeader, CardBody, TextGreyBold, TextOrangeBig, TextOrangeSmal
 
 const isDev = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development');
 let baseUrl = isDev ? 'http://localhost:8001' : 'https://luna-team4.propulsion-learn.ch'
+
 const UserCard = (props) => {
 
     console.log(props.user.profile_picture)

@@ -8,13 +8,14 @@ const CategoryList = ({categoryFunction}) =>{
 
     return (
         <CategoryUL >
-            <CategoryLi onClick={handleCategoryClick} id={"CH"}>CH</CategoryLi>
-            <CategoryLi onClick={handleCategoryClick} id={"US"}>US</CategoryLi>
-            <CategoryLi onClick={handleCategoryClick} id={"IT"}>IT</CategoryLi>
-            <CategoryLi onClick={handleCategoryClick} id={"SP"}>SP</CategoryLi>
-            <CategoryLi onClick={handleCategoryClick} id={"KR"}>KR</CategoryLi>
-            <CategoryLi onClick={handleCategoryClick} id={"TH"}>TH</CategoryLi>
-            <CategoryLi onClick={handleCategoryClick} id={"SRB"}>SRB</CategoryLi>
+            <CategoryLi onClick={handleCategoryClick} id={"ALL"}>All Categories</CategoryLi>
+            <CategoryLi onClick={handleCategoryClick} id={"CH"}>Switzerland</CategoryLi>
+            <CategoryLi onClick={handleCategoryClick} id={"US"}>USA</CategoryLi>
+            <CategoryLi onClick={handleCategoryClick} id={"IT"}>Italy</CategoryLi>
+            <CategoryLi onClick={handleCategoryClick} id={"SP"}>Spain</CategoryLi>
+            <CategoryLi onClick={handleCategoryClick} id={"KR"}>Korea</CategoryLi>
+            <CategoryLi onClick={handleCategoryClick} id={"TH"}>Thailand</CategoryLi>
+            <CategoryLi onClick={handleCategoryClick} id={"SRB"}>Serbia</CategoryLi>
         </CategoryUL >
     )
 }

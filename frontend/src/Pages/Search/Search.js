@@ -22,6 +22,7 @@ const Search = () => {
 
     //Click on Category
     const [categoryClicked, setCategoryClicked] = useState(false)
+    const [category, setCategory] = useState("Select Category")
 
     const handleCategoryClicked = () => {
         setCategoryClicked(!categoryClicked)
@@ -77,15 +78,21 @@ const Search = () => {
     }
 
     const filterByCategory = (category) =>{
-
-        let toSearch = category.toLowerCase()
-        let listFiltered = []
-        for(let i=0; i<listOfRestaurants.length; i++) {
-            if(String(listOfRestaurants[i]['category']).toLowerCase().includes(toSearch)) {
-              listFiltered.push(listOfRestaurants[i]);
+        if (category == "ALL"){
+            setListOfRestaurantsFiltered(listOfRestaurants)
+            setCategory("Select Category")
+        } else {
+            let toSearch = category.toLowerCase()
+            setCategory(category)
+            let listFiltered = []
+            for(let i=0; i<listOfRestaurants.length; i++) {
+                if(String(listOfRestaurants[i]['category']).toLowerCase().includes(toSearch)) {
+                  listFiltered.push(listOfRestaurants[i]);
             }
         }
         setListOfRestaurantsFiltered(listFiltered)
+        }
+
     }
 
   useEffect(() => {
@@ -101,7 +108,7 @@ const Search = () => {
           <input placeholder="Search..." onChange={searchHandler} />
         </SearchBar>
         <SearchCategory onClick={handleCategoryClicked}>
-          <p>Select a category...</p>
+          <p>{category}</p>
           <img src={arrow}></img>
         </SearchCategory>
           {categoryClicked ?
