@@ -7,10 +7,14 @@ const StarsContainer = styled.div`
   flex-direction: row;
 `
 
-const RatingStars = ({ rating, isVoting }) => {
+const RatingStars = ({ rating, isVoting, onRatingValue }) => {
   const [votingRating, setVotingRating] = useState(0);
-
   const ratingRoundUp = Math.ceil(rating);
+
+  const handleClick = () => {
+    onRatingValue(votingRating);
+    console.log(votingRating)
+  }
 
   if (isVoting) {
     return (
@@ -20,7 +24,8 @@ const RatingStars = ({ rating, isVoting }) => {
             key={value}
             filled={value <= votingRating}
             onClick={() => {
-              setVotingRating(value)
+              setVotingRating(value);
+              handleClick();
             }}
           />
         ))}
