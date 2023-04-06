@@ -11,7 +11,7 @@ const AddReview = () => {
     const { restaurantID } = useParams();
     const restaurantData = useSelector(state => state.restaurant.restaurantData)
     const [reviewText, setReviewText] = useState();
-    const [ratingValue, setRatingValue] = useState();
+    const [ratingValue, setRatingValue] = useState(0);
 
     const handleInputChange = (e) => {
         e.preventDefault();
@@ -21,12 +21,10 @@ const AddReview = () => {
     const handleSubmitClick = (e) => {
         e.preventDefault();
         postReview();
-        navigate(`/restaurant/${restaurantID}`)
     }
 
     const handleRatingValue = (value) => {
-        setRatingValue(value)
-        //console.log(ratingValue)
+        setRatingValue(value);
     }
 
     //-------------------- POST REVIEW ---------------------
@@ -46,6 +44,7 @@ const AddReview = () => {
                 },
             };
             const response = await lunaAPI.post(`reviews/new/${restaurantID}/`, data, config)
+            navigate(`/restaurant/${restaurantID}`)
         } catch (error) {
             console.log(error)
         }
@@ -65,7 +64,11 @@ const AddReview = () => {
             </HeaderContainer>
             <BodyContainer>
                 <RatingContainer>
-                    <RatingStars isVoting={true} onRatingValue={handleRatingValue} />
+                    <RatingStars
+                        isVoting
+                        rating={ratingValue}
+                        onRatingValue={handleRatingValue}
+                    />
                     <p>Select your rating</p>
                 </RatingContainer>
                 <TextArea

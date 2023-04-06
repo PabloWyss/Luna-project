@@ -8,7 +8,7 @@ import { useState } from "react";
 import { formatDate } from "../../../../helpers";
 import lunaAPI from "../../../../Axios/lunaApi";
 
-const Review = ({ review }) => {
+const Review = ({ review, onNewComment }) => {
   const [areAllCommentsShown, setAreAllCommentsShown] = useState(false);
   const [commentInput, setCommentInput] = useState('');
 
@@ -32,20 +32,24 @@ const Review = ({ review }) => {
 
   //------------ CREATE A NEW COMMENT IN A REVIEW ---------------
   const postComment = async () => {
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('token') || commentInput === '') {
       return;
     }
     try {
       const data = {
         text_content: commentInput
       }
+      setCommentInput('');
+
       const config = {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
       };
-      const response = await lunaAPI.post(`comment/reviews/comments/new/${review.id}/`, data, config)
+
+      await lunaAPI.post(`comment/reviews/comments/new/${review.id}/`, data, config);
+      onNewComment();
     } catch (error) {
       console.log(error)
     }
@@ -74,7 +78,7 @@ const Review = ({ review }) => {
               <div>
                 <ReviewFooter>
                   <AddCommentWraper>
-                    <input placeholder='Add a comment...' onChange={handleCommentChange}></input>
+                    <input placeholder='Add a comment...' onChange={handleCommentChange} value={commentInput}></input>
                     <ButtonWraperSmall>
                       <Button textInput={'POST'} onClickAction={handlePostClick} />
                     </ButtonWraperSmall>

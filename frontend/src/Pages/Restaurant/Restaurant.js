@@ -23,6 +23,7 @@ const Restaurant = () => {
   const [restaurantData, setRestaurantData] = useState({})
   const [listOfReviews, setListOfReviews] = useState([]);
   const [listOfReviewsFiltered, setListOfReviewsFiltered] = useState([]);
+  const [counter, setCounter] = useState(0);
 
   //------------- FILTER BAR -------------
   const handleFilterBar = (e) => {
@@ -77,7 +78,11 @@ const Restaurant = () => {
       }
     }
     getReviewsFromRestaurantByID();
-  }, []);
+  }, [counter]);
+
+  const handleNewReviewComment = () => {
+    setCounter((prev) => prev + 1);
+  }
 
   const handleWriteReviewClick = () => {
     navigate(`/addreview/${restaurantData.id}/`)
@@ -122,7 +127,7 @@ const Restaurant = () => {
           </FilterBar>
           {
             restaurantData.reviews?.length !== 0 ?
-              <ReviewsList restaurantID={restaurantID} reviews={listOfReviewsFiltered} />
+              <ReviewsList restaurantID={restaurantID} reviews={listOfReviewsFiltered} onNewComment={handleNewReviewComment} />
               :
               <NoReviewsText>
                 No reviews yet
