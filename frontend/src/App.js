@@ -35,7 +35,7 @@ function App() {
                 <Route path="/verification" element={<Verification />} />
                 <Route path="/restaurant/:restaurantID" element={<Restaurant />} />
                 <Route path="addreview/:restaurantID" element={<AddReview />} />
-                <Route path="AddRestaurant" element={<AddRestaurant />} />
+                <Route path="/addRestaurant/new" element={<AddRestaurant />} />
             </Routes>
             <Footer />
         </div>
