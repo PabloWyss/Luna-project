@@ -24,9 +24,6 @@ export const DateContainer = styled.div`
   padding: 13px 9px;
 `
 
-
-
-
 export const AddCommentWraper = styled.div`
   display: flex;
   flex-direction: row;
@@ -45,4 +42,31 @@ export const AddCommentWraper = styled.div`
 export const ButtonWraperSmall = styled.div`
   width: 120px;
   flex-shrink: 0;
+`
+
+export const ReviewContent = styled.p`
+  font-size: 16px;
+  font-weight: 300;
+  padding: 10px 10px 0 10px;
+`
+
+export const ShowHideCommentBtn = styled.div`
+  font-size: 16px;
+  color: #E47D31;
+
+  :hover{
+    cursor: pointer;
+  }
+`
+
+export const ReviewFooter = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px 0 10px;
+`
+
+export const CommentList = styled.div`
+  margin-top: 10px;
 `
