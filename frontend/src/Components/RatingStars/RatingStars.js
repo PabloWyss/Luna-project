@@ -13,6 +13,7 @@ const RatingStars = ({ rating, isVoting, onRatingValue }) => {
 
   const handleClick = () => {
     onRatingValue(votingRating);
+    //console.log(votingRating)
   }
 
   if (isVoting) {

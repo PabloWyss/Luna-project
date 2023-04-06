@@ -26,6 +26,7 @@ const AddReview = () => {
 
     const handleRatingValue = (value) => {
         setRatingValue(value)
+        //console.log(ratingValue)
     }
 
     //-------------------- POST REVIEW ---------------------
