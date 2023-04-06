@@ -41,6 +41,7 @@ const EditUserProfile = () => {
           }
       })
     try {
+      console.log(response2.data)
       dispatch(updateUserData(response2.data))
       // setUser(user);
     } catch (error) {
