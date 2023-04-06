@@ -11,9 +11,12 @@ import ReviewsList from './ReviewsList/ReviewsList.js';
 import lunaAPI from '../../Axios/lunaApi.js';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { updateRestaurantData } from '../../Redux/Slices/restaurant.js';
 
 
 const Restaurant = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { restaurantID } = useParams();
   const [restaurantData, setRestaurantData] = useState({})
@@ -34,6 +37,7 @@ const Restaurant = () => {
 
         const response = await lunaAPI.get(`restaurants/${restaurantID}/`, config);
         setRestaurantData(response.data)
+        dispatch(updateRestaurantData(response.data))
       } catch (error) {
         console.log(error);
       }
@@ -42,7 +46,7 @@ const Restaurant = () => {
   }, []);
 
   const handleWriteReviewClick = () => {
-    navigate('/addreview')
+    navigate(`/addreview/${restaurantData.id}/`)
   }
 
   return (
