@@ -24,6 +24,8 @@ const Search = () => {
     const [categoryClicked, setCategoryClicked] = useState(false)
     const [category, setCategory] = useState("Select Category")
 
+    const [qtyReviews, setQtyReviews] = useState({})
+
     const handleCategoryClicked = () => {
         setCategoryClicked(!categoryClicked)
     }
@@ -62,19 +64,22 @@ const Search = () => {
         try {
             setListOfUsers(response.data)
             setListOfUsersFiltered(response.data)
+
         } catch (error) {
             console.log(error)
         }
     }
 
   const obtainAllReviews = async () => {
-    let response = await lunaAPI.get(`/search/?search_string=&type=reviews`)
+      let response = await lunaAPI.get(`/search/?search_string=&type=reviews`)
         try {
             setListOfReviews(response.data)
             setListOfReviewsFiltered(response.data)
+            setReviewsByUser(await Promise.all(response.data))
         } catch (error) {
             console.log(error)
         }
+
     }
 
     const filterByCategory = (category) =>{
@@ -95,10 +100,24 @@ const Search = () => {
 
     }
 
+    const setReviewsByUser = (list) => {
+        const reviewsByUser = {
+        }
+        for (let i = 0; i <= list.length -1;i++){
+            if (reviewsByUser.hasOwnProperty(list[i].reviewed_by_user.id)){
+                reviewsByUser[list[i].reviewed_by_user.id] += 1
+            } else {
+                reviewsByUser[list[i].reviewed_by_user.id] = 1
+            }
+        }
+        setQtyReviews(reviewsByUser)
+    }
+
   useEffect(() => {
     obtainAllRestaurants()
     obtainAllUsers()
     obtainAllReviews()
+
   }, [])
 
   return (
@@ -122,7 +141,7 @@ const Search = () => {
           <Tab to='users'>Users</Tab>
         </MainMenu>
         <Grid>
-          <Outlet context={[listOfRestaurantFiltered, listOfUsersFiltered, listOfReviewsFiltered]} />
+          <Outlet context={[listOfRestaurantFiltered, listOfUsersFiltered, listOfReviewsFiltered, qtyReviews]} />
         </Grid >
       </Main >
     </div >

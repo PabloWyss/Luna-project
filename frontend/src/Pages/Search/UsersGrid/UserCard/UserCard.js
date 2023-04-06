@@ -5,6 +5,15 @@ let baseUrl = isDev ? 'http://localhost:8001' : 'https://luna-team4.propulsion-l
 
 const UserCard = (props) => {
 
+    let numberOfReviews = 0
+    const userReviews = () => {
+        if(props.qtyReviews[props.user.id]){
+            numberOfReviews = props.qtyReviews[props.user.id]
+        }
+
+    }
+    userReviews()
+
   return (
     <Card>
       <CardHeader>
@@ -13,7 +22,7 @@ const UserCard = (props) => {
         </UserAvatar>
         <UserInfo>
           <TextOrangeBig>{props.user.username}</TextOrangeBig>
-          <TextGreyBold> 5 Reviews in total</TextGreyBold>
+          <TextGreyBold> {`${numberOfReviews} Reviews in total`}</TextGreyBold>
         </UserInfo>
       </CardHeader>
       <CardBody>
